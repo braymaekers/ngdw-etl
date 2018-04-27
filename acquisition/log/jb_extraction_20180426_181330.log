@@ -1,0 +1,10 @@
+2018/04/26 18:13:30 - jb-main_job - Using run configuration [Pentaho local]
+2018/04/26 18:13:30 - jb_extraction - Starting entry [Write To Log]
+2018/04/26 18:13:30 - VARIABLES - P_PROJECT_NAME: acquisition
+P_BUS_AREA: 
+P_JOB_NAME: jb_extraction
+V_JOB_NAME: jb_extraction
+V_DUMMY: itsworking
+2018/04/26 18:13:30 - jb_extraction - Starting entry [DUMMY]
+2018/04/26 18:13:30 - jb_extraction - Finished job entry [DUMMY] (result=[true])
+2018/04/26 18:13:30 - jb_extraction - Finished job entry [Write To Log] (result=[true])
