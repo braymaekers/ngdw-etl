@@ -24,7 +24,7 @@ COMMIT;
 ```
 *Because of the Begin and Commit we sent the sql script as a single transaction so no other database transaction can change the table.*
 
-* __One core load might have multiple “processing” tables as input__
+* `__One core load might have multiple “processing” tables as input__`
 	* If this table(s) still exists, the last load failed. 
 	* If this table(s) does not exists, the last load was successful
 	* The same info (previous load = success or not) is also be present in the job_control table (checkpoint = error or finished) unless there was a system crash which avoided the ETL from updating the job_control table
@@ -34,18 +34,16 @@ COMMIT;
 * __If the last load was successful__
 	* We rename the current acquisition table to *name*_*processing*
 	* We associate the job’s batch id with the data inserted into the core table(s), so there is only 1 batch id per core load, even if there are multiple output tables in core
-	`
-	* TO BE DISCUSSED WITH STEPHEN
-		* What does a core load look like? Multiple inputs, multiple outputs? Will there be sequential stages? (requiring restartability)
-		* effective_from (part of input data) & effective_to
-		* Do we only insert records into core, or do we also update existing records' effective_to date? (this can be handled by DB2)
-	`
+	* `TO BE DISCUSSED WITH STEPHEN`
+		* `What does a core load look like? Multiple inputs, multiple outputs? Will there be sequential stages? (requiring restartability)`
+		* `effective_from (part of input data) & effective_to`
+		* `Do we only insert records into core, or do we also update existing records' effective_to date? (this can be handled by DB2)`
 * __If the last load was not successful__
 	* We delete the last load’s batch_id from the core table(s)
-	* WHAT IN CASE OF THE EFFECTIVE_FROM AND TO UPDATES?
-		* The updates that happened, do we need to roll them back or can they stay there, since the new load will redo the same updates
-			* Or will DB2 also roll this back?
-		* We reprocess the processing tables and assign a new batch_id (the one from the current load) to the records getting loaded in the core table(s)
+	* `WHAT IN CASE OF THE EFFECTIVE_FROM AND TO UPDATES?`
+		* `The updates that happened, do we need to roll them back or can they stay there, since the new load will redo the same updates`
+			* `Or will DB2 also roll this back?`
+		* `e reprocess the processing tables and assign a new batch_id (the one from the current load) to the records getting loaded in the core table(s)`
 * __How do we know the last load’s batch_id?__
 	* Retrieve from job_control
 	* Contains the last batch_id per main job
@@ -58,7 +56,7 @@ COMMIT;
 ## Services loads
 * We need to keep track of the last batch_id that we processed from the core tables
 * Next load: we take all batch_id > last batch_id to process into services tables
-* We don’t yet know how errored loads need to be reprocessed here
+* `We don’t yet know how errored loads need to be reprocessed here`
 
 ## What does restartability look like?
 * If we have separate main jobs/schedules for the core and services load, we will not need Diethard’s solution
