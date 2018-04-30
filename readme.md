@@ -24,7 +24,7 @@ COMMIT;
 ```
 *Because of the Begin and Commit we sent the sql script as a single transaction so no other database transaction can change the table.*
 
-* `__One core load might have multiple “processing” tables as input__`
+* __`One core load might have multiple “processing” tables as input`__
 	* If this table(s) still exists, the last load failed. 
 	* If this table(s) does not exists, the last load was successful
 	* The same info (previous load = success or not) is also be present in the job_control table (checkpoint = error or finished) unless there was a system crash which avoided the ETL from updating the job_control table
@@ -48,10 +48,11 @@ COMMIT;
 	* Retrieve from job_control
 	* Contains the last batch_id per main job
 	* This can work since the core load (even when multiple output tables involved) will be driven by one job (using the same batch_id for all tables involved)
-* Audit columns
-	* *ngdw_id*: If there are multiple sources, we need to decide on master
-	* *batch_id*: coming from PDI job
-* Simple example: When load 114 starts > last load (113) failed > remove 113 from core table and load processing table again into core table with new batch id (114)
+* __Audit columns__
+	* _ngdw_id_: If there are multiple sources, we need to decide on master
+	* _batch_id_: coming from PDI job
+* __Simple example__
+	* _When load 114 starts > last load (113) failed > remove 113 from core table and load processing table again into core table with new batch id (114)_
 
 ## Services loads
 * We need to keep track of the last batch_id that we processed from the core tables
