@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>jb_launcher</name>
+  <name>jb_unit_of_work_wrapper</name>
   <description/>
   <extended_description/>
   <job_version/>
   <job_status>0</job_status>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2018/04/18 09:06:18.666</created_date>
-  <modified_user>admin</modified_user>
-  <modified_date>2018/04/20 09:34:34.789</modified_date>
+  <created_date>2018/04/30 13:49:50.063</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2018/04/30 13:49:50.063</modified_date>
   <parameters>
     <parameter>
-      <name>P_BUS_AREA_NAME</name>
-      <default_value>product-instrument</default_value>
-      <description/>
+      <name>P_UNIT_OF_WORK_DIRECTORY</name>
+      <default_value/>
+      <description>Directory of the transformation or job to be executed</description>
     </parameter>
     <parameter>
-      <name>P_JOB_NAME</name>
-      <default_value>jb_product-instrument_acquisition</default_value>
-      <description/>
+      <name>P_UNIT_OF_WORK_NAME</name>
+      <default_value/>
+      <description>File name of the transformation or job to be executed</description>
     </parameter>
     <parameter>
-      <name>P_PROJECT_NAME</name>
-      <default_value>acquisition</default_value>
-      <description/>
-    </parameter>
-    <parameter>
-      <name>P_SCALE_UP</name>
-      <default_value>false</default_value>
-      <description>true | false</description>
+      <name>P_UNIT_OF_WORK_TYPE</name>
+      <default_value/>
+      <description>job | transformation</description>
     </parameter>
   </parameters>
   <connection>
@@ -84,215 +79,7 @@
     </attributes>
   </connection>
   <slaveservers>
-    <slaveserver>
-      <name>carte-slave</name>
-      <hostname>192.168.56.101</hostname>
-      <port>8083</port>
-      <webAppName/>
-      <username>admin</username>
-      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>DI Server</name>
-      <hostname>localhost</hostname>
-      <port>9080</port>
-      <webAppName>pentaho-di</webAppName>
-      <username>joe</username>
-      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>Y</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>DI Server 5.0</name>
-      <hostname>localhost</hostname>
-      <port>9080</port>
-      <webAppName>pentaho-di</webAppName>
-      <username>admin</username>
-      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>Y</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>di-slave</name>
-      <hostname>di-slave</hostname>
-      <port>8080</port>
-      <webAppName>pentaho</webAppName>
-      <username>admin</username>
-      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>Y</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>Master</name>
-      <hostname>localhost</hostname>
-      <port>8081</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>Y</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>slave-8081</name>
-      <hostname>localhost</hostname>
-      <port>8081</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>slave-8082</name>
-      <hostname>localhost</hostname>
-      <port>8082</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>slave-8083</name>
-      <hostname>localhost</hostname>
-      <port>8083</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>Slave1</name>
-      <hostname>localhost</hostname>
-      <port>8082</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>Slave2</name>
-      <hostname>localhost</hostname>
-      <port>8083</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>Slave3</name>
-      <hostname>localhost</hostname>
-      <port>8084</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>Slave4</name>
-      <hostname>localhost</hostname>
-      <port>8085</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>Slave5</name>
-      <hostname>localhost</hostname>
-      <port>8086</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>YarnCluster - sandbox.hortonworks.com:30301</name>
-      <hostname>sandbox.hortonworks.com</hostname>
-      <port>30301</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>Y</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>YarnCluster - sandbox.hortonworks.com:30302</name>
-      <hostname>sandbox.hortonworks.com</hostname>
-      <port>30302</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>YarnCluster - sandbox.hortonworks.com:30303</name>
-      <hostname>sandbox.hortonworks.com</hostname>
-      <port>30303</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-  </slaveservers>
+    </slaveservers>
   <job-log-table>
     <connection/>
     <schema/>
@@ -650,81 +437,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
+      <xloc>64</xloc>
       <yloc>64</yloc>
     </entry>
     <entry>
-      <name>se-scale-up</name>
-      <description/>
-      <type>SIMPLE_EVAL</type>
-      <valuetype>variable</valuetype>
-      <fieldname/>
-      <variablename>${P_SCALE_UP}</variablename>
-      <fieldtype>string</fieldtype>
-      <mask/>
-      <comparevalue>true</comparevalue>
-      <minvalue/>
-      <maxvalue/>
-      <successcondition>equal</successcondition>
-      <successnumbercondition>equal</successnumbercondition>
-      <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>64</yloc>
-    </entry>
-    <entry>
-      <name>wtl-execution</name>
-      <description/>
-      <type>WRITE_TO_LOG</type>
-      <logmessage>P_PROJECT_NAME: ${P_PROJECT_NAME}
-P_BUS_AREA_NAME: ${P_BUS_AREA_NAME}
-P_JOB_NAME: ${P_JOB_NAME}
-P_SCALE_UP: ${P_SCALE_UP}</logmessage>
-      <loglevel>Basic</loglevel>
-      <logsubject>LAUNCHER-EXECUTION</logsubject>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>256</xloc>
-      <yloc>64</yloc>
-    </entry>
-    <entry>
-      <name>ss-scale-up</name>
-      <description/>
-      <type>SHELL</type>
-      <filename>${CONFIG_DIR}/kitchen.bat</filename>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script/>
-      <loglevel>Basic</loglevel>
-      <argument0>-file=${COMMON_HOME}/etl-framework/jb_env_wrapper.kjb</argument0>
-      <argument1>-param:P_JOB_NAME=${P_JOB_NAME}</argument1>
-      <argument2>-param:P_PROJECT_NAME=${P_PROJECT_NAME}</argument2>
-      <argument3>-param:P_BUS_AREA_NAME=${P_BUS_AREA_NAME}</argument3>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>64</yloc>
-    </entry>
-    <entry>
-      <name>jb-jb_env_wrapper</name>
+      <name>jb-job</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${COMMON_HOME}/etl-framework/jb_env_wrapper.kjb</filename>
+      <filename>${P_UNIT_OF_WORK_DIRECTORY}/${P_UNIT_OF_WORK_NAME}</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -744,60 +466,269 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>P_JOB_NAME</name>
-          <stream_name/>
-          <value>${P_JOB_NAME}</value>
-        </parameter>
-        <parameter>
-          <name>P_PROJECT_NAME</name>
-          <stream_name/>
-          <value>${P_PROJECT_NAME}</value>
-        </parameter>
-        <parameter>
-          <name>P_BUS_AREA_NAME</name>
-          <stream_name/>
-          <value>${P_BUS_AREA_NAME}</value>
-        </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>192</yloc>
+      <xloc>544</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
-      <name>ab-message</name>
+      <name>tr-transformation</name>
       <description/>
-      <type>ABORT</type>
-      <message>Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME} - P_BUS_AREA_NAME: ${P_BUS_AREA_NAME} - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${P_UNIT_OF_WORK_DIRECTORY}/${P_UNIT_OF_WORK_NAME}</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>192</yloc>
+      <xloc>544</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
-      <name>sv-common</name>
+      <name>tr-tr_upd_job_control_success</name>
       <description/>
-      <type>SET_VARIABLES</type>
-      <replacevars>Y</replacevars>
-      <filename>${CONFIG_DIR}/properties/common.properties</filename>
-      <file_variable_type>ROOT_JOB</file_variable_type>
-      <fields>
-      </fields>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${COMMON_HOME}/etl-framework/tr_upd_job_control.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_CHECKPOINT</name>
+          <stream_name/>
+          <value>finished</value>
+        </parameter>
+        <parameter>
+          <name>P_STATUS</name>
+          <stream_name/>
+          <value>success</value>
+        </parameter>
+      </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>704</xloc>
+      <yloc>64</yloc>
+    </entry>
+    <entry>
+      <name>se-is-job?</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${P_UNIT_OF_WORK_TYPE}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>job</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>64</yloc>
+    </entry>
+    <entry>
+      <name>tr-tr_upd_job_control_error</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${COMMON_HOME}/etl-framework/tr_upd_job_control_error.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_CHECKPOINT</name>
+          <stream_name/>
+          <value>error</value>
+        </parameter>
+        <parameter>
+          <name>P_STATUS</name>
+          <stream_name/>
+          <value>error</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>160</yloc>
+    </entry>
+    <entry>
+      <name>tr-tr_upd_job_control_running</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${COMMON_HOME}/etl-framework/tr_upd_job_control.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_CHECKPOINT</name>
+          <stream_name/>
+          <value>start</value>
+        </parameter>
+        <parameter>
+          <name>P_STATUS</name>
+          <stream_name/>
+          <value>running</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>224</xloc>
       <yloc>64</yloc>
     </entry>
   </entries>
   <hops>
     <hop>
+      <from>se-is-job?</from>
+      <to>jb-job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-is-job?</from>
+      <to>tr-transformation</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb-job</from>
+      <to>tr-tr_upd_job_control_success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>tr-transformation</from>
+      <to>tr-tr_upd_job_control_success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb-job</from>
+      <to>tr-tr_upd_job_control_error</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>tr-transformation</from>
+      <to>tr-tr_upd_job_control_error</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>START</from>
-      <to>wtl-execution</to>
+      <to>tr-tr_upd_job_control_running</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -805,53 +736,8 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>se-scale-up</from>
-      <to>jb-jb_env_wrapper</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>jb-jb_env_wrapper</from>
-      <to>ab-message</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>se-scale-up</from>
-      <to>ss-scale-up</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>ss-scale-up</from>
-      <to>ab-message</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>wtl-execution</from>
-      <to>sv-common</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>sv-common</from>
-      <to>se-scale-up</to>
+      <from>tr-tr_upd_job_control_running</from>
+      <to>se-is-job?</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
