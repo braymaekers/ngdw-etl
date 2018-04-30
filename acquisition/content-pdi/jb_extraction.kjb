@@ -448,11 +448,14 @@
       <name>Write To Log</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>P_PROJECT_NAME: ${P_PROJECT_NAME}
-P_BUS_AREA_NAME: ${P_BUS_AREA_NAME}
-P_JOB_NAME: ${P_JOB_NAME}
-V_JOB_NAME: ${V_JOB_NAME}
-V_DUMMY: ${V_DUMMY}</logmessage>
+      <logmessage>P_PROJECT_NAME: ${P_PROJECT_NAME} 
+P_BUS_AREA_NAME: ${P_BUS_AREA_NAME} 
+P_JOB_NAME: ${P_JOB_NAME} 
+V_JOB_NAME: ${V_JOB_NAME} 
+V_DUMMY: ${V_DUMMY} 
+CONTENT_HOME: ${CONTENT_HOME} 
+V_TEST: ${V_TEST}
+${CONFIG_DIR}/properties/${P_BUS_AREA_NAME}.properties</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>VARIABLES</logsubject>
       <parallel>N</parallel>

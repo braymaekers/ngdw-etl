@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>jb_wrapper</name>
+  <name>jb_env_wrapper</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -493,7 +493,7 @@
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/common.properties</filename>
-      <file_variable_type>JVM</file_variable_type>
+      <file_variable_type>ROOT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
@@ -508,7 +508,7 @@
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/${P_PROJECT_NAME}.properties</filename>
-      <file_variable_type>JVM</file_variable_type>
+      <file_variable_type>ROOT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
@@ -523,7 +523,7 @@
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/${P_PROJECT_NAME}_${P_JOB_NAME}.properties</filename>
-      <file_variable_type>JVM</file_variable_type>
+      <file_variable_type>ROOT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
@@ -538,12 +538,12 @@
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename/>
-      <file_variable_type>JVM</file_variable_type>
+      <file_variable_type>ROOT_JOB</file_variable_type>
       <fields>
         <field>
           <variable_name>V_JOB_NAME</variable_name>
           <variable_value>${P_JOB_NAME}</variable_value>
-          <variable_type>JVM</variable_type>
+          <variable_type>ROOT_JOB</variable_type>
         </field>
       </fields>
       <parallel>N</parallel>
@@ -551,21 +551,6 @@
       <nr>0</nr>
       <xloc>864</xloc>
       <yloc>64</yloc>
-    </entry>
-    <entry>
-      <name>sv-business_area</name>
-      <description/>
-      <type>SET_VARIABLES</type>
-      <replacevars>Y</replacevars>
-      <filename>${CONFIG_DIR}/properties/${P_BUS_AREA_NAME}.properties</filename>
-      <file_variable_type>JVM</file_variable_type>
-      <fields>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>704</xloc>
-      <yloc>192</yloc>
     </entry>
     <entry>
       <name>fe-job</name>
@@ -599,6 +584,21 @@
       <nr>0</nr>
       <xloc>704</xloc>
       <yloc>64</yloc>
+    </entry>
+    <entry>
+      <name>sv-business_area</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>${CONFIG_DIR}/properties/${P_BUS_AREA_NAME}.properties</filename>
+      <file_variable_type>ROOT_JOB</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>192</yloc>
     </entry>
   </entries>
   <hops>
@@ -648,13 +648,13 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>fe-business_area</from>
-      <to>sv-V_JOB_NAME</to>
+      <from>fe-job</from>
+      <to>sv-job</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>fe-business_area</from>
@@ -664,6 +664,15 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fe-business_area</from>
+      <to>sv-V_JOB_NAME</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>sv-V_JOB_NAME</from>
@@ -683,22 +692,13 @@
       <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
     </hop>
-    <hop>
-      <from>fe-job</from>
-      <to>sv-job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
   </hops>
   <notepads>
     <notepad>
       <note>Sets V_JOB_NAME
 jb_main_${P_JOB_NAME}</note>
       <xloc>800</xloc>
-      <yloc>128</yloc>
+      <yloc>160</yloc>
       <width>142</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
@@ -725,6 +725,27 @@ P_JOB_NAME=extraction</note>
       <yloc>128</yloc>
       <width>230</width>
       <heigth>74</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Logging configuration</note>
+      <xloc>1152</xloc>
+      <yloc>128</yloc>
+      <width>129</width>
+      <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>

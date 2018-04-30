@@ -672,7 +672,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>576</xloc>
       <yloc>64</yloc>
     </entry>
     <entry>
@@ -708,24 +708,23 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
-      <argument0>-file=${COMMON_HOME}/etl-framework/jb_wrapper.kjb</argument0>
+      <argument0>-file=${COMMON_HOME}/etl-framework/jb_env_wrapper.kjb</argument0>
       <argument1>-param:P_JOB_NAME=${P_JOB_NAME}</argument1>
-      <argument2>-level=Minimal</argument2>
-      <argument3>-param:P_PROJECT_NAME=${P_PROJECT_NAME}</argument3>
-      <argument4>-param:P_BUS_AREA_NAME=${P_BUS_AREA_NAME}</argument4>
+      <argument2>-param:P_PROJECT_NAME=${P_PROJECT_NAME}</argument2>
+      <argument3>-param:P_BUS_AREA_NAME=${P_BUS_AREA_NAME}</argument3>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
+      <xloc>736</xloc>
       <yloc>64</yloc>
     </entry>
     <entry>
-      <name>jb-wrapper</name>
+      <name>jb-jb_env_wrapper</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${COMMON_HOME}/etl-framework/jb_wrapper.kjb</filename>
+      <filename>${COMMON_HOME}/etl-framework/jb_env_wrapper.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -765,19 +764,34 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>576</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
-      <name>ab-ba-server</name>
+      <name>ab-message</name>
       <description/>
       <type>ABORT</type>
-      <message>Unable to Execute - type ${P_EXECUTION_TYPE} mode ${P_EXECUTION_MODE} </message>
+      <message>Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME} - P_BUS_AREA_NAME: ${P_BUS_AREA_NAME} - P_JOB_NAME: ${P_JOB_NAME} </message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
+      <xloc>736</xloc>
       <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>sv-common</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>${CONFIG_DIR}/properties/common.properties</filename>
+      <file_variable_type>ROOT_JOB</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>416</xloc>
+      <yloc>64</yloc>
     </entry>
   </entries>
   <hops>
@@ -791,17 +805,8 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>wtl-execution</from>
-      <to>se-scale-up</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>se-scale-up</from>
-      <to>jb-wrapper</to>
+      <to>jb-jb_env_wrapper</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -809,8 +814,8 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>jb-wrapper</from>
-      <to>ab-ba-server</to>
+      <from>jb-jb_env_wrapper</from>
+      <to>ab-message</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -820,6 +825,33 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
     <hop>
       <from>se-scale-up</from>
       <to>ss-scale-up</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>ss-scale-up</from>
+      <to>ab-message</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-execution</from>
+      <to>sv-common</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>sv-common</from>
+      <to>se-scale-up</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
