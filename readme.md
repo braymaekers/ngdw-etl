@@ -10,10 +10,10 @@
 # ETL Framework Processing Rules
 * 3 processing layers: Acquisition, Core, Service
 * Referential data will flow all the way through: business wants to see updates ASAP
-* Transaction data will have a schedule stage by stage
-* Although some business domains might have a single scheduled workflow, it will be required to design them as if all processing layers could have an independent schedule
-	* Eg. For the Service load, still check which batch_id's you have left processing (although for a single workflow this should only be 1)
-	* With this in mind: having restartability on the unit (job or transformation) might be enough
+* Transaction data will have a schedule stage by stage (A, C, S)
+* Although some business domains might have a single scheduled workflow, it will be required to design them as if all processing layers would have an independent schedule
+	* Eg. For the Service load, still check which batch_id's you have left for processing (although for a single workflow this should only be a single batch_id)
+	* With this in mind: having restartability on the unit might be enough (did the previous load failed > clean up first)
 
 ## Acquisition loads: 
 * Taken care of by Customer
@@ -25,13 +25,13 @@
 	* File transfer (non-DB2 sources)
 	* DB2 Load Utility (DB2 ingest)
 	* DB2 Replication
-* No history is being kept: data gets discarded once processed
+* No history is being kept: data gets discarded once successfully loaded into Core
 * Frequency:
 	* Mostly once a day
 	* RM might be every 15 minutes
-	* Still no decision on business user maintained data
+	* Still no decision on business-user maintained data
 * Audit columns
-	* *ngdw_id*: records get a unique ID assigned from sequence (no use for this number at this point beyond lineage)
+	* *ngdw_id*: records get a unique ID assigned from a DB sequence (no use for this number at this point beyond lineage)
 	* *batch_id*: only when the DB2 scripts would get orchestrated with PDI
 
 ## Core loads: 
@@ -41,7 +41,7 @@
 		* Deletes, Inserts, Updates into A all becomes inserts into C
 		* effective_from and \_to will be driven by a business date that is part of the input
 		* The ETL will take care of the history processing
-		* `effective to from active record will have a date in PDI, problem?`
+		* `effective_to column from active/latest record will have a date in PDI, problem?`
 	* No validation of data: still garbage-in, garbage-out
 	* Mostly 1 A table to 1 C table
 	* In case there are mutliple A sources for a C table
@@ -57,6 +57,7 @@
 	* Since the acquisition tables could be continuously loaded (eg. hourly), we need to process the current snapshot of it while the core load starts. 
 	* This snapshot needs to be untouched while the core load runs (and potentially needs to restart due to failure)
 	* Therefore we would rename the current acquisition table to name_processing and create an empty name table (existing acquisition table). We do this as part of a transaction, making this table immutable to any other process.
+	* This would create the abstraction that we need
 
 *Eg.*
 ```sql 
@@ -67,7 +68,7 @@ COMMIT;
 ```
 *Because of the Begin and Commit we sent the sql script as a single transaction so no other database transaction can change the table.*
 
-* __`One core load will have a single A table as input`__
+* __`One core load will have a single Acquisition table as input`__
 	* If this table still exists, the last load failed. 
 	* If this table does not exists, the last load was successful
 	* The same info (previous load = success or not) is also be present in the job_control table (checkpoint = error or finished) unless there was a system crash which avoided the ETL from updating the job_control table
@@ -75,7 +76,7 @@ COMMIT;
 			* The next time the core load starts, it checks the status. If it is still running and the run time exceeds the normal limit (will be configurable) the current process would be killed (to make sure it is actually no longer running) (Pentaho server: stop job REST API; Kitchen: kill PID)
 			* When the administrators need to restart the server (virtual or Pentaho server) after a server failure, they need use a special parameter that tells the ETL to ignore the previous status (we know all jobs have been killed by server failure anyway). Eg. P_FORCE_LOAD
 * __If the last load was successful__
-	* We rename the current acquisition table to *name*_*processing*
+	* We rename the current acquisition table to *name*\_*processing*
 	* We associate the job’s batch id with the data inserted into the core table(s), so there is only 1 batch id per core load, even if there are multiple output tables in core
 * __If the last load was not successful__
 	* We delete the last load’s batch_id from the core table(s)
