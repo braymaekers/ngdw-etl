@@ -38,7 +38,7 @@ COMMIT;
 	* TO BE DISCUSSED WITH STEPHEN
 		* What does a core load look like? Multiple inputs, multiple outputs? Will there be sequential stages? (requiring restartability)
 		* effective_from (part of input data) & effective_to
-		* Do we only insert records into core, or do we also update existing records’ effective_to date? (this can be handled by DB2)
+		* Do we only insert records into core, or do we also update existing records' effective_to date? (this can be handled by DB2)
 
 * __If the last load was not successful__
 	* We delete the last load’s batch_id from the core table(s)
