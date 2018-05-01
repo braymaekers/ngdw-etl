@@ -698,7 +698,7 @@
       <note>Sets V_JOB_NAME
 jb_main_${P_JOB_NAME}</note>
       <xloc>800</xloc>
-      <yloc>160</yloc>
+      <yloc>128</yloc>
       <width>142</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>

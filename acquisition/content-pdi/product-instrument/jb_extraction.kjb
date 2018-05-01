@@ -441,7 +441,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
+      <xloc>608</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -463,6 +463,18 @@ ${CONFIG_DIR}/properties/${P_BUS_AREA_NAME}.properties</logmessage>
       <xloc>288</xloc>
       <yloc>96</yloc>
     </entry>
+    <entry>
+      <name>Wait for</name>
+      <description/>
+      <type>DELAY</type>
+      <maximumTimeout>5</maximumTimeout>
+      <scaletime>0</scaletime>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>448</xloc>
+      <yloc>96</yloc>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -476,6 +488,15 @@ ${CONFIG_DIR}/properties/${P_BUS_AREA_NAME}.properties</logmessage>
     </hop>
     <hop>
       <from>Write To Log</from>
+      <to>Wait for</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for</from>
       <to>DUMMY</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

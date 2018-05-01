@@ -489,11 +489,11 @@
   <order>
     <hop>
       <from>Get System Info</from>
-      <to>Set V_BATCH_ID</to>
+      <to>Set V_BATCH_ID and V_PID</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Set V_BATCH_ID</from>
+      <from>Set V_BATCH_ID and V_PID</from>
       <to>Write to log</to>
       <enabled>Y</enabled>
     </hop>
@@ -522,6 +522,10 @@
         <name>hostname</name>
         <type>Hostname real</type>
       </field>
+      <field>
+        <name>pid</name>
+        <type>Current PID</type>
+      </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -537,7 +541,7 @@
     </GUI>
   </step>
   <step>
-    <name>Set V_BATCH_ID</name>
+    <name>Set V_BATCH_ID and V_PID</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -563,6 +567,12 @@
       <field>
         <field_name>hostname</field_name>
         <variable_name>V_HOSTNAME</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value/>
+      </field>
+      <field>
+        <field_name>pid</field_name>
+        <variable_name>V_PID</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value/>
       </field>
@@ -606,6 +616,9 @@
       </field>
       <field>
         <name>ip_address</name>
+      </field>
+      <field>
+        <name>pid</name>
       </field>
     </fields>
     <cluster_schema/>
