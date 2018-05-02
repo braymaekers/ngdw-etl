@@ -18,12 +18,12 @@
     </parameter>
     <parameter>
       <name>P_JOB_NAME</name>
-      <default_value>jb_product-instrument_acquisition</default_value>
+      <default_value>jb_product-instrument_core</default_value>
       <description/>
     </parameter>
     <parameter>
       <name>P_PROJECT_NAME</name>
-      <default_value>acquisition</default_value>
+      <default_value>core</default_value>
       <description/>
     </parameter>
     <parameter>

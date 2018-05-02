@@ -12,14 +12,9 @@
   <modified_date>2018/04/30 13:49:50.063</modified_date>
   <parameters>
     <parameter>
-      <name>P_SCHEMA_NAME</name>
-      <default_value/>
-      <description>Acquisition input table schema name</description>
-    </parameter>
-    <parameter>
       <name>P_TABLE_NAME</name>
       <default_value/>
-      <description>Acquisition input table name</description>
+      <description>Input Acquisition table name</description>
     </parameter>
     <parameter>
       <name>P_UNIT_OF_WORK_DIRECTORY</name>
@@ -481,7 +476,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>864</xloc>
+      <xloc>960</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -517,7 +512,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>864</xloc>
+      <xloc>960</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
@@ -563,7 +558,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1184</xloc>
+      <xloc>1440</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -585,7 +580,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>800</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -631,7 +626,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1184</xloc>
+      <xloc>1440</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
@@ -703,12 +698,12 @@
       <yloc>96</yloc>
     </entry>
     <entry>
-      <name>jb-jb_create_snapshot_table</name>
+      <name>jb-jb_create_snapshot_table_core</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${COMMON_HOME}/etl-framework/jb_create_snapshot_table.kjb</filename>
+      <filename>${COMMON_HOME}/etl-framework/jb_create_snapshot_table_core.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -729,10 +724,44 @@
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
         <parameter>
-          <name>P_SCHEMA_NAME</name>
+          <name>P_TABLE_NAME</name>
           <stream_name/>
-          <value>${P_SCHEMA_NAME}</value>
+          <value>${P_TABLE_NAME}</value>
         </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>jb-jb_drop_snapshot_table_core</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${COMMON_HOME}/etl-framework/jb_drop_snapshot_table_core.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
         <parameter>
           <name>P_TABLE_NAME</name>
           <stream_name/>
@@ -740,6 +769,32 @@
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1280</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>wtl-reprocess_snapshot</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>---</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>REPROCESSING EXISTING SNAPSHOT: ${CORE.SCHEMA}.${P_TABLE_NAME}</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>wtl-create_new_snapshot</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>---</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>CREATING NEW SNAPSHOT: ${CORE.SCHEMA}.${P_TABLE_NAME}</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -747,47 +802,16 @@
       <yloc>192</yloc>
     </entry>
     <entry>
-      <name>jb-jb_drop_snapshot_table</name>
+      <name>wtl-drop_snapshot</name>
       <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${COMMON_HOME}/etl-framework/jb_drop_snapshot_table.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>P_SCHEMA_NAME</name>
-          <stream_name/>
-          <value>${P_SCHEMA_NAME}</value>
-        </parameter>
-        <parameter>
-          <name>P_TABLE_NAME</name>
-          <stream_name/>
-          <value>${P_TABLE_NAME}</value>
-        </parameter>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>---</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>DROPPING SNAPSHOT: ${CORE.SCHEMA}.${P_TABLE_NAME}</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
+      <xloc>1120</xloc>
       <yloc>96</yloc>
     </entry>
   </entries>
@@ -829,44 +853,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>se-V_RESTART_FLAG=1</from>
-      <to>jb-jb_create_snapshot_table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>jb-jb_create_snapshot_table</from>
+      <from>jb-jb_create_snapshot_table_core</from>
       <to>se-is-job?</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>se-V_RESTART_FLAG=1</from>
-      <to>se-is-job?</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>jb-job</from>
-      <to>jb-jb_drop_snapshot_table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>tr-transformation</from>
-      <to>jb-jb_drop_snapshot_table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -892,8 +880,71 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>jb-jb_drop_snapshot_table</from>
+      <from>jb-jb_drop_snapshot_table_core</from>
       <to>tr-tr_upd_job_control_success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-V_RESTART_FLAG=1</from>
+      <to>wtl-reprocess_snapshot</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-reprocess_snapshot</from>
+      <to>se-is-job?</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-V_RESTART_FLAG=1</from>
+      <to>wtl-create_new_snapshot</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-create_new_snapshot</from>
+      <to>jb-jb_create_snapshot_table_core</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb-job</from>
+      <to>wtl-drop_snapshot</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-drop_snapshot</from>
+      <to>jb-jb_drop_snapshot_table_core</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>tr-transformation</from>
+      <to>wtl-drop_snapshot</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -906,7 +957,7 @@
       <note>IF V_RESTART_FLAG=1 THEN reprocess existing snapshot
 ELSE create new snapshot + process that snapshot</note>
       <xloc>64</xloc>
-      <yloc>256</yloc>
+      <yloc>32</yloc>
       <width>311</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
@@ -948,7 +999,7 @@ ELSE create new snapshot + process that snapshot</note>
     <notepad>
       <note>process ${P_TABLE_NAME}_PROCESSED table
 use ${V_BATCH_ID} for Core table</note>
-      <xloc>768</xloc>
+      <xloc>864</xloc>
       <yloc>32</yloc>
       <width>250</width>
       <heigth>42</heigth>

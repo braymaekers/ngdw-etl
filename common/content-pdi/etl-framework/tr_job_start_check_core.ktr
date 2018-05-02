@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>tr_job_start_check</name>
+    <name>tr_job_start_check_core</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -437,7 +437,7 @@
   <notepads>
     <notepad>
       <note>success + null</note>
-      <xloc>416</xloc>
+      <xloc>480</xloc>
       <yloc>32</yloc>
       <width>84</width>
       <heigth>26</heigth>
@@ -458,8 +458,8 @@
     </notepad>
     <notepad>
       <note>error</note>
-      <xloc>416</xloc>
-      <yloc>128</yloc>
+      <xloc>480</xloc>
+      <yloc>192</yloc>
       <width>36</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -479,8 +479,8 @@
     </notepad>
     <notepad>
       <note>running</note>
-      <xloc>416</xloc>
-      <yloc>256</yloc>
+      <xloc>480</xloc>
+      <yloc>352</yloc>
       <width>53</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -500,8 +500,8 @@
     </notepad>
     <notepad>
       <note>leave it running</note>
-      <xloc>603</xloc>
-      <yloc>228</yloc>
+      <xloc>672</xloc>
+      <yloc>320</yloc>
       <width>93</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -521,8 +521,8 @@
     </notepad>
     <notepad>
       <note>stop execution</note>
-      <xloc>608</xloc>
-      <yloc>320</yloc>
+      <xloc>672</xloc>
+      <yloc>416</yloc>
       <width>87</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -645,7 +645,7 @@
   </connection>
   <order>
     <hop>
-      <from>start = 1; restart = 0</from>
+      <from>success: start = 1; restart = 0</from>
       <to>V_START_FLAG + V_RESTART_FLAG</to>
       <enabled>Y</enabled>
     </hop>
@@ -655,52 +655,27 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Detect empty stream</from>
-      <to>sc-status</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>last status check</from>
-      <to>sc-status</to>
+      <from>sc-status</from>
+      <to>success: start = 1; restart = 0</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>sc-status</from>
-      <to>start = 1; restart = 0</to>
+      <to>jf-runtime>max_runtime</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sc-status</from>
-      <to>start = 1; restart = 1</to>
+      <from>jf-runtime>max_runtime</from>
+      <to>wtl-stopping_job</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>start = 1; restart = 1</from>
-      <to>V_START_FLAG + V_RESTART_FLAG</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>start = 0; restart = 0</from>
-      <to>V_START_FLAG + V_RESTART_FLAG</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sc-status</from>
-      <to>Java Filter</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Java Filter</from>
-      <to>Write to log</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Java Filter</from>
+      <from>jf-runtime>max_runtime</from>
       <to>start = 0; restart = 0</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Write to log</from>
+      <from>wtl-stopping_job</from>
       <to>select pid</to>
       <enabled>Y</enabled>
     </hop>
@@ -710,13 +685,73 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>start = 1; restart = 1 2</from>
+      <from>jf-table_exists</from>
+      <to>error: start = 1; restart = 1</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>jf-table_exists</from>
+      <to>error: start = 1; restart = 0</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>error: start = 1; restart = 1</from>
       <to>V_START_FLAG + V_RESTART_FLAG</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>error: start = 1; restart = 0</from>
+      <to>V_START_FLAG + V_RESTART_FLAG</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>start = 0; restart = 0</from>
+      <to>V_START_FLAG + V_RESTART_FLAG</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>running: start = 1; restart = 1</from>
+      <to>V_START_FLAG + V_RESTART_FLAG</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>running: start = 1; restart = 0</from>
+      <to>V_START_FLAG + V_RESTART_FLAG</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>last status check</from>
+      <to>gv-table_and_schema</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Detect empty stream</from>
+      <to>gv-table_and_schema</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>gv-table_and_schema</from>
+      <to>sc-status</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>je-jb_stop_job</from>
-      <to>start = 1; restart = 1 2</to>
+      <to>jf-table_exists 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sc-status</from>
+      <to>jf-table_exists</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>jf-table_exists 2</from>
+      <to>running: start = 1; restart = 1</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>jf-table_exists 2</from>
+      <to>running: start = 1; restart = 0</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -739,34 +774,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Java Filter</name>
-    <type>JavaFilter</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Write to log</send_true_to>
-    <send_false_to>start = 0; restart = 0</send_false_to>
-    <condition>runtime > ${V_MAX_RUNTIME}</condition>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
+      <xloc>192</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -805,14 +813,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
+      <xloc>1120</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
+    <name>error: start = 1; restart = 0</name>
+    <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -821,23 +829,30 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>---------- STOPPING PREVIOUS JOB: -------------</logmessage>
     <fields>
       <field>
-        <name>status</name>
+        <name>start</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>batch_id</name>
-      </field>
-      <field>
-        <name>runtime</name>
-      </field>
-      <field>
-        <name>pid</name>
+        <name>restart</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
       </field>
     </fields>
     <cluster_schema/>
@@ -848,8 +863,108 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>352</yloc>
+      <xloc>704</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>error: start = 1; restart = 1</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>start</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>restart</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>704</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>gv-table_and_schema</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>table_name</name>
+        <variable>${V_ACQ_TABLE_NAME}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>schema_name</name>
+        <variable>${V_ACQ_SCHEMA_NAME}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -875,7 +990,7 @@
     <parameters>
       <inherit_all_vars>Y</inherit_all_vars>
     </parameters>
-    <execution_result_target_step>start = 1; restart = 1 2</execution_result_target_step>
+    <execution_result_target_step>jf-table_exists 2</execution_result_target_step>
     <execution_time_field>ExecutionTime</execution_time_field>
     <execution_result_field>ExecutionResult</execution_result_field>
     <execution_errors_field>ExecutionNrErrors</execution_errors_field>
@@ -901,8 +1016,89 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>704</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>jf-runtime>max_runtime</name>
+    <type>JavaFilter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>wtl-stopping_job</send_true_to>
+    <send_false_to>start = 0; restart = 0</send_false_to>
+    <condition>runtime > ${V_MAX_RUNTIME}</condition>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
       <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>jf-table_exists</name>
+    <type>JavaFilter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>error: start = 1; restart = 1</send_true_to>
+    <send_false_to>error: start = 1; restart = 0</send_false_to>
+    <condition>${V_TABLE_EXISTS_FLAG}==1</condition>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>jf-table_exists 2</name>
+    <type>JavaFilter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>running: start = 1; restart = 1</send_true_to>
+    <send_false_to>running: start = 1; restart = 0</send_false_to>
+    <condition>${V_TABLE_EXISTS_FLAG}==1</condition>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -934,8 +1130,108 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>96</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>running: start = 1; restart = 0</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>start</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>restart</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>running: start = 1; restart = 1</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>start</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>restart</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -956,19 +1252,19 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
     <case_value_format/>
     <case_value_decimal/>
     <case_value_group/>
-    <default_target_step>start = 1; restart = 0</default_target_step>
+    <default_target_step>success: start = 1; restart = 0</default_target_step>
     <cases>
       <case>
         <value>success</value>
-        <target_step>start = 1; restart = 0</target_step>
+        <target_step>success: start = 1; restart = 0</target_step>
       </case>
       <case>
         <value>error</value>
-        <target_step>start = 1; restart = 1</target_step>
+        <target_step>jf-table_exists</target_step>
       </case>
       <case>
         <value>running</value>
-        <target_step>Java Filter</target_step>
+        <target_step>jf-runtime>max_runtime</target_step>
       </case>
     </cases>
     <cluster_schema/>
@@ -979,7 +1275,7 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
+      <xloc>416</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1009,8 +1305,8 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>352</yloc>
+      <xloc>832</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1059,13 +1355,13 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>256</yloc>
+      <xloc>704</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>start = 1; restart = 0</name>
+    <name>success: start = 1; restart = 0</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -1109,14 +1405,14 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
+      <xloc>576</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>start = 1; restart = 1</name>
-    <type>Constant</type>
+    <name>wtl-stopping_job</name>
+    <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1125,30 +1421,23 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>---------- STOPPING PREVIOUS JOB: -------------</logmessage>
     <fields>
       <field>
-        <name>start</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <name>status</name>
       </field>
       <field>
-        <name>restart</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <name>batch_id</name>
+      </field>
+      <field>
+        <name>runtime</name>
+      </field>
+      <field>
+        <name>pid</name>
       </field>
     </fields>
     <cluster_schema/>
@@ -1159,58 +1448,8 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>start = 1; restart = 1 2</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>start</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>restart</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>352</yloc>
+      <xloc>704</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

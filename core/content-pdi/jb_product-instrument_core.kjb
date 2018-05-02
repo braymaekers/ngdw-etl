@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>jb_product-instrument_acquisition</name>
+  <name>jb_product-instrument_core</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -495,7 +495,7 @@
         <parameter>
           <name>P_UNIT_OF_WORK_NAME</name>
           <stream_name/>
-          <value>jb_extraction.kjb</value>
+          <value>jb_product_core.kjb</value>
         </parameter>
         <parameter>
           <name>P_UNIT_OF_WORK_TYPE</name>
@@ -503,14 +503,9 @@
           <value>job</value>
         </parameter>
         <parameter>
-          <name>P_SCHEMA_NAME</name>
-          <stream_name/>
-          <value>${DWH.SCHEMA}</value>
-        </parameter>
-        <parameter>
           <name>P_TABLE_NAME</name>
           <stream_name/>
-          <value>dim_country</value>
+          <value>${V_ACQ_TABLE_NAME}</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
@@ -521,12 +516,12 @@
       <yloc>288</yloc>
     </entry>
     <entry>
-      <name>jb-jb_start_actions</name>
+      <name>jb-jb_start_actions_core</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${COMMON_HOME}\etl-framework\jb_start_actions.kjb</filename>
+      <filename>${COMMON_HOME}\etl-framework\jb_start_actions_core.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -546,21 +541,6 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>P_UNIT_OF_WORK_DIRECTORY</name>
-          <stream_name/>
-          <value>${CONTENT_HOME}/product-instrument</value>
-        </parameter>
-        <parameter>
-          <name>P_UNIT_OF_WORK_NAME</name>
-          <stream_name/>
-          <value>jb_extraction.kjb</value>
-        </parameter>
-        <parameter>
-          <name>P_UNIT_OF_WORK_TYPE</name>
-          <stream_name/>
-          <value>job</value>
-        </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
@@ -582,7 +562,7 @@
     </hop>
     <hop>
       <from>tr-tr_log_batch_id</from>
-      <to>jb-jb_start_actions</to>
+      <to>jb-jb_start_actions_core</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -590,7 +570,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>jb-jb_start_actions</from>
+      <from>jb-jb_start_actions_core</from>
       <to>jb-jb_unit_of_work_wrapper_core</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -601,11 +581,16 @@
   </hops>
   <notepads>
     <notepad>
-      <note>pointing to jb_extraction</note>
-      <xloc>512</xloc>
+      <note>Accepts 4 input params:
+
+P_UNIT_OF_WORK_DIRECTORY:		${CONTENT_HOME}/product-instrument
+P_UNIT_OF_WORK_NAME:			jb_product_core.kjb
+P_UNIT_OF_WORK_TYPE:			job
+P_TABLE_NAME:				${V_ACQ_TABLE_NAME}</note>
+      <xloc>576</xloc>
       <yloc>288</yloc>
-      <width>139</width>
-      <heigth>26</heigth>
+      <width>470</width>
+      <heigth>105</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>
@@ -622,13 +607,13 @@
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>Example main job for Core
-- Don't forget to flag PASS BATCH ID checkbox for the main job
-- First calls the tr_log_batch_id, then the jb_start_actions (always required like this)
-- Per stage, calls the jb_unit_of_work_wrapper_core</note>
+      <note>Example main job for Product Core
+- Make sure to flag Job Properties > Settings > Pass Batch ID checkbox (main job only)
+- First executes the tr_log_batch_id + jb_start_actions (always required in this sequence)
+- Per work item (job or transformation), calls the jb_unit_of_work_wrapper_core</note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>439</width>
+      <width>467</width>
       <heigth>74</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>

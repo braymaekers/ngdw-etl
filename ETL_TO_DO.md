@@ -26,25 +26,24 @@
     * status can only be: 'running', 'success' or 'error'
 	* checkpoint can be anything, only serves the purpose of indicating progress		
   * jb_start_actions will check the status of last load (and not the existence of the _processing table since this needs to be a generic solution for both CORE and SERVICE jobs)  
-	`IF status = 'success' OR null THEN V_START_FLAG=1 AND V_RESTART_FLAG=0    
-	IF status = 'error' THEN V_START_FLAG=1 AND V_RESTART_FLAG=1`    
-  __`???How far should we go? Should we check the existence of the _processing table here + the fact that the data got correctly loaded into the core table?`__  
+	`IF status = 'success' OR null THEN V_START_FLAG=1 AND V_RESTART_FLAG=0`      
+	`IF status = 'error'  THEN`  
+	  `IF snapshot table still exists (this must mean there was an error during the processing of the snapshot)
+	  THEN V_START_FLAG=1 AND V_RESTART_FLAG=1`  
+	  `IF _processing table does not exist (this must mean the rename failed (snapshot never got created) OR something failed after the drop of the snapshot) 
+	  THEN V_START_FLAG=1 AND V_RESTART_FLAG=0`    
 	`IF status = 'running' THEN`  
-      * this could mean 2 things:
+      * This could mean 2 things:
 	    * The job is actually still running
 		* The job is no longer running (eg. system failure) and the status is not correctly updated
-	  * CURRENT SOLUTION:  
-	    `IF runtime <= max_runtime THEN V_START_FLAG=0 AND V_RESTART_FLAG=0 (we leave it running)    
-		IF runtime > max_runtime THEN <kill process> + update status to 'error' + V_START_FLAG=1 AND V_RESTART_FLAG=1`
-### TO DO/IMPROVEMENT in case job is no longer running, but the status was not correctly updated
-* If that is the case, we need to check if the _processing table still exists --> this would mean we need to reprocess
-* If that table does not exist, it means it was processed correctly into core and we don't need to do a restart  
-  `we check if the _processing table still exists    
-  IF SO: we update status to error AND V_START_FLAG=1 AND V_RESTART_FLAG=1    
-  IF NOT: we update status to success AND V_START_FLAG=1 AND V_RESTART_FLAG=0`     
-* FOR SERVICE LOADS THERE MIGHT BE OTHER LOGIC WHICH WE DON'T KNOW YET
-* Where do we set max_runtime? in job.properties or job_control table? If in job_control this means we need to have a job record in this table before we can run the job (init record)
-  * job.properties used at this point (V_MAX_RUNTIME)
+	  * Solution
+	    `IF runtime <= max_runtime THEN V_START_FLAG=0 AND V_RESTART_FLAG=0 (we leave it running)`    
+		`IF runtime > max_runtime THEN <kill process> + update status to 'error'`  
+	      `IF snapshot table still exists THEN V_START_FLAG=1 AND V_RESTART_FLAG=1`  
+	      `IF snapshot table does not exist THEN V_START_FLAG=1 AND V_RESTART_FLAG=0`    
+### TO DO
+* For service jobs there might be other start checks, but we don't know those yet
+* Where do we set max_runtime of a job? in job.properties or job_control table or seperate table? If in job_control this means we need to have a job record in this table before we can run the job (init record) --> job.properties used at this point (V_MAX_RUNTIME)
 * I only tested the kitchen pid kill
   * Not yet tested the jobStop rest api on the Pentaho server
 		
@@ -70,13 +69,14 @@ NOT IMPLEMENTED YET:
 	??? Since when they are ran seperate, V_RESTART would also be set, same as for combined proces  
 
 ## Proper local environment setup
-* Linux VM per developerPentaho
+* VM per developer --> Ellis mentioned this will be a windows machine
 * Correct Pentaho version
 * DB2 database that hosts the DWH
-* Will oracle be used for pdi_logging and pdi_control?
+* Oracle be used for pdi_logging and pdi_control, Ellis mentioned the lab environment will not have Oracle
 	
-## Adding proper error handling to the ETL framework
+## Adding proper Write to log + error handling to the ETL framework
 * Making sure it leaves a good trace when something goes wrong
+* Making the log more debuggable
 	
 ## Updating ETL framework scripts to shell
 	
