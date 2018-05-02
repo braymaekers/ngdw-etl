@@ -462,12 +462,12 @@
       <yloc>160</yloc>
     </entry>
     <entry>
-      <name>jb-jb_unit_of_work_wrapper</name>
+      <name>jb-jb_unit_of_work_wrapper_core</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${COMMON_HOME}\etl-framework\jb_unit_of_work_wrapper.kjb</filename>
+      <filename>${COMMON_HOME}\etl-framework\jb_unit_of_work_wrapper_core.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -501,6 +501,16 @@
           <name>P_UNIT_OF_WORK_TYPE</name>
           <stream_name/>
           <value>job</value>
+        </parameter>
+        <parameter>
+          <name>P_SCHEMA_NAME</name>
+          <stream_name/>
+          <value>${DWH.SCHEMA}</value>
+        </parameter>
+        <parameter>
+          <name>P_TABLE_NAME</name>
+          <stream_name/>
+          <value>dim_country</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
@@ -581,7 +591,7 @@
     </hop>
     <hop>
       <from>jb-jb_start_actions</from>
-      <to>jb-jb_unit_of_work_wrapper</to>
+      <to>jb-jb_unit_of_work_wrapper_core</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -592,8 +602,8 @@
   <notepads>
     <notepad>
       <note>pointing to jb_extraction</note>
-      <xloc>384</xloc>
-      <yloc>352</yloc>
+      <xloc>512</xloc>
+      <yloc>288</yloc>
       <width>139</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -612,13 +622,13 @@
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>Example main job
-- Don't forget to flag: PASS BATCH ID here
+      <note>Example main job for Core
+- Don't forget to flag PASS BATCH ID checkbox for the main job
 - First calls the tr_log_batch_id, then the jb_start_actions (always required like this)
-- Per stage, calls the jb_unit_of_work_wrapper (no restartability implemented yet, only status updates)</note>
+- Per stage, calls the jb_unit_of_work_wrapper_core</note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>543</width>
+      <width>439</width>
       <heigth>74</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>

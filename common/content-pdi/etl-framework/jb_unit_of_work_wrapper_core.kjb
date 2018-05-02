@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>jb_unit_of_work_wrapper</name>
+  <name>jb_unit_of_work_wrapper_core</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -11,6 +11,16 @@
   <modified_user>-</modified_user>
   <modified_date>2018/04/30 13:49:50.063</modified_date>
   <parameters>
+    <parameter>
+      <name>P_SCHEMA_NAME</name>
+      <default_value/>
+      <description>Acquisition input table schema name</description>
+    </parameter>
+    <parameter>
+      <name>P_TABLE_NAME</name>
+      <default_value/>
+      <description>Acquisition input table name</description>
+    </parameter>
     <parameter>
       <name>P_UNIT_OF_WORK_DIRECTORY</name>
       <default_value/>
@@ -438,7 +448,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>64</xloc>
-      <yloc>64</yloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>jb-job</name>
@@ -471,8 +481,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>64</yloc>
+      <xloc>864</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>tr-transformation</name>
@@ -507,8 +517,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>160</yloc>
+      <xloc>864</xloc>
+      <yloc>192</yloc>
     </entry>
     <entry>
       <name>tr-tr_upd_job_control_success</name>
@@ -553,8 +563,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
-      <yloc>64</yloc>
+      <xloc>1184</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>se-is-job?</name>
@@ -575,8 +585,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>64</yloc>
+      <xloc>704</xloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>tr-tr_upd_job_control_error</name>
@@ -621,8 +631,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
-      <yloc>160</yloc>
+      <xloc>1184</xloc>
+      <yloc>192</yloc>
     </entry>
     <entry>
       <name>tr-tr_upd_job_control_running</name>
@@ -668,7 +678,117 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>224</xloc>
-      <yloc>64</yloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>se-V_RESTART_FLAG=1</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${V_RESTART_FLAG}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>1</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>jb-jb_create_snapshot_table</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${COMMON_HOME}/etl-framework/jb_create_snapshot_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SCHEMA_NAME</name>
+          <stream_name/>
+          <value>${P_SCHEMA_NAME}</value>
+        </parameter>
+        <parameter>
+          <name>P_TABLE_NAME</name>
+          <stream_name/>
+          <value>${P_TABLE_NAME}</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>jb-jb_drop_snapshot_table</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${COMMON_HOME}/etl-framework/jb_drop_snapshot_table.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_SCHEMA_NAME</name>
+          <stream_name/>
+          <value>${P_SCHEMA_NAME}</value>
+        </parameter>
+        <parameter>
+          <name>P_TABLE_NAME</name>
+          <stream_name/>
+          <value>${P_TABLE_NAME}</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1024</xloc>
+      <yloc>96</yloc>
     </entry>
   </entries>
   <hops>
@@ -691,42 +811,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>jb-job</from>
-      <to>tr-tr_upd_job_control_success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>tr-transformation</from>
-      <to>tr-tr_upd_job_control_success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>jb-job</from>
-      <to>tr-tr_upd_job_control_error</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>tr-transformation</from>
-      <to>tr-tr_upd_job_control_error</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
       <to>tr-tr_upd_job_control_running</to>
       <from_nr>0</from_nr>
@@ -737,7 +821,79 @@
     </hop>
     <hop>
       <from>tr-tr_upd_job_control_running</from>
+      <to>se-V_RESTART_FLAG=1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-V_RESTART_FLAG=1</from>
+      <to>jb-jb_create_snapshot_table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb-jb_create_snapshot_table</from>
       <to>se-is-job?</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-V_RESTART_FLAG=1</from>
+      <to>se-is-job?</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb-job</from>
+      <to>jb-jb_drop_snapshot_table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>tr-transformation</from>
+      <to>jb-jb_drop_snapshot_table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb-job</from>
+      <to>tr-tr_upd_job_control_error</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>tr-transformation</from>
+      <to>tr-tr_upd_job_control_error</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb-jb_drop_snapshot_table</from>
+      <to>tr-tr_upd_job_control_success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -746,6 +902,71 @@
     </hop>
   </hops>
   <notepads>
+    <notepad>
+      <note>IF V_RESTART_FLAG=1 THEN reprocess existing snapshot
+ELSE create new snapshot + process that snapshot</note>
+      <xloc>64</xloc>
+      <yloc>256</yloc>
+      <width>311</width>
+      <heigth>42</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>create ${P_TABLE_NAME}_PROCESSED table</note>
+      <xloc>448</xloc>
+      <yloc>256</yloc>
+      <width>242</width>
+      <heigth>26</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>process ${P_TABLE_NAME}_PROCESSED table
+use ${V_BATCH_ID} for Core table</note>
+      <xloc>768</xloc>
+      <yloc>32</yloc>
+      <width>250</width>
+      <heigth>42</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <attributes>
     <group>

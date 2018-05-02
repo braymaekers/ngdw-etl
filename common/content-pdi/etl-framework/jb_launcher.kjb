@@ -712,6 +712,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <argument1>-param:P_JOB_NAME=${P_JOB_NAME}</argument1>
       <argument2>-param:P_PROJECT_NAME=${P_PROJECT_NAME}</argument2>
       <argument3>-param:P_BUS_AREA_NAME=${P_BUS_AREA_NAME}</argument3>
+      <argument4>-param:P_SCALE_UP=${P_SCALE_UP}</argument4>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -758,6 +759,11 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
           <name>P_BUS_AREA_NAME</name>
           <stream_name/>
           <value>${P_BUS_AREA_NAME}</value>
+        </parameter>
+        <parameter>
+          <name>P_SCALE_UP</name>
+          <stream_name/>
+          <value>${P_SCALE_UP}</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
