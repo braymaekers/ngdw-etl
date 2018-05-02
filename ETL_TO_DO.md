@@ -26,22 +26,22 @@
     * status can only be: 'running', 'success' or 'error'
 	* checkpoint can be anything, only serves the purpose of indicating progress		
   * jb_start_actions will check the status of last load (and not the existence of the _processing table since this needs to be a generic solution for both CORE and SERVICE jobs)  
-	`IF status = 'success' OR null THEN V_START_FLAG=1 AND V_RESTART_FLAG=0  
-	IF status = 'error' THEN V_START_FLAG=1 AND V_RESTART_FLAG=1`  
+	`IF status = 'success' OR null THEN V_START_FLAG=1 AND V_RESTART_FLAG=0    
+	IF status = 'error' THEN V_START_FLAG=1 AND V_RESTART_FLAG=1`    
   __`???How far should we go? Should we check the existence of the _processing table here + the fact that the data got correctly loaded into the core table?`__  
 	`IF status = 'running' THEN`  
       * this could mean 2 things:
 	    * The job is actually still running
 		* The job is no longer running (eg. system failure) and the status is not correctly updated
 	  * CURRENT SOLUTION:  
-	    `IF runtime <= max_runtime THEN V_START_FLAG=0 AND V_RESTART_FLAG=0 (we leave it running)  
+	    `IF runtime <= max_runtime THEN V_START_FLAG=0 AND V_RESTART_FLAG=0 (we leave it running)    
 		IF runtime > max_runtime THEN <kill process> + update status to 'error' + V_START_FLAG=1 AND V_RESTART_FLAG=1`
 ### TO DO/IMPROVEMENT in case job is no longer running, but the status was not correctly updated
 * If that is the case, we need to check if the _processing table still exists --> this would mean we need to reprocess
 * If that table does not exist, it means it was processed correctly into core and we don't need to do a restart  
-  `we check if the _processing table still exists  
-  IF SO: we update status to error AND V_START_FLAG=1 AND V_RESTART_FLAG=1  
-  IF NOT: we update status to success AND V_START_FLAG=1 AND V_RESTART_FLAG=0`   
+  `we check if the _processing table still exists    
+  IF SO: we update status to error AND V_START_FLAG=1 AND V_RESTART_FLAG=1    
+  IF NOT: we update status to success AND V_START_FLAG=1 AND V_RESTART_FLAG=0`     
 * FOR SERVICE LOADS THERE MIGHT BE OTHER LOGIC WHICH WE DON'T KNOW YET
 * Where do we set max_runtime? in job.properties or job_control table? If in job_control this means we need to have a job record in this table before we can run the job (init record)
   * job.properties used at this point (V_MAX_RUNTIME)
@@ -65,9 +65,9 @@ NOT IMPLEMENTED YET:
   * If the scheduled job would combine the core and service load: than we could leverage the checkpoint (V_LAST_CHECKPOINT_REACHED) to tell us the last successfully reached checkpoint
   * If core completed successfully, we skip core
 		
-	??? At this point: no need for diethard's restartability feature
-	??? With the current logic, you could have seperate core and service loads, or combined into one
-	??? Since when they are ran seperate, V_RESTART would also be set, same as for combined process
+	??? At this point: no need for diethard's restartability feature  
+	??? With the current logic, you could have seperate core and service loads, or combined into one  
+	??? Since when they are ran seperate, V_RESTART would also be set, same as for combined proces  
 
 ## Proper local environment setup
 * Linux VM per developerPentaho
