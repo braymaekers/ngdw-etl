@@ -93,3 +93,21 @@ NOT IMPLEMENTED YET:
 * colored notes in the jobs and transformations
 * naming conventions
 * variable name: only the ones from the framework do not have V_, all others do --> this is how I applied it, but might not be written down in dev-guidelines
+
+
+# SAMPLE jb_product-instrument_core.kjb (core/content-pdi)
+* Core example for acquisition table product
+* Uses core/content-pdi/product-instrument/jb_product_core.kjb
+* Empty demo table product: 
+```sql
+create table sales_dwh.product (id integer, name varchar(50));
+```
+* Different scenarios
+  * First time run as usual via launcher
+  * Second time, update job_control's status to error: since there is no \_processing table, he should do a regular start, no restart
+  * Third time, update job_control's status to error and create the \_processing table, in this case he will do a restart
+  * Fourth time: 
+    * set core/content-pdi/product-instrument/jb_product_core.kjb's delay to 60 seconds
+    * run the job with P_SCALE_UP=true
+    * open a second spoon and launch the job again (10 seconds after the other started)
+    * ==> since the max_runtime is set to 10 seconds, the second run will kill the first run's kitchen, and restart the load from the existing \_processing table
