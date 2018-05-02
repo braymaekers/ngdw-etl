@@ -66,7 +66,7 @@
   <slaveservers>
     </slaveservers>
   <job-log-table>
-    <connection/>
+    <connection>pdi_logging</connection>
     <schema/>
     <table/>
     <size_limit_lines/>
@@ -423,7 +423,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>128</xloc>
-      <yloc>160</yloc>
+      <yloc>192</yloc>
     </entry>
     <entry>
       <name>tr-tr_log_batch_id</name>
@@ -431,7 +431,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}\etl-framework\tr_log_batch_id.ktr</filename>
+      <filename>${COMMON_HOME}/etl-framework/control/tr_log_batch_id.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -459,7 +459,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>288</xloc>
-      <yloc>160</yloc>
+      <yloc>192</yloc>
     </entry>
     <entry>
       <name>jb-jb_unit_of_work_wrapper_core</name>
@@ -513,7 +513,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>448</xloc>
-      <yloc>288</yloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>jb-jb_start_actions_core</name>
@@ -547,7 +547,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>448</xloc>
-      <yloc>160</yloc>
+      <yloc>192</yloc>
     </entry>
   </entries>
   <hops>
@@ -588,8 +588,8 @@ P_UNIT_OF_WORK_NAME:			jb_product_core.kjb
 P_UNIT_OF_WORK_TYPE:			job
 P_TABLE_NAME:				${V_ACQ_TABLE_NAME}</note>
       <xloc>576</xloc>
-      <yloc>288</yloc>
-      <width>470</width>
+      <yloc>384</yloc>
+      <width>480</width>
       <heigth>105</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -613,7 +613,7 @@ P_TABLE_NAME:				${V_ACQ_TABLE_NAME}</note>
 - Per work item (job or transformation), calls the jb_unit_of_work_wrapper_core</note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>467</width>
+      <width>545</width>
       <heigth>74</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>

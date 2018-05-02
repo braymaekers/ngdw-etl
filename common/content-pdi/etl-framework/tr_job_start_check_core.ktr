@@ -437,9 +437,9 @@
   <notepads>
     <notepad>
       <note>success + null</note>
-      <xloc>480</xloc>
+      <xloc>768</xloc>
       <yloc>32</yloc>
-      <width>84</width>
+      <width>97</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -460,7 +460,7 @@
       <note>error</note>
       <xloc>480</xloc>
       <yloc>192</yloc>
-      <width>36</width>
+      <width>39</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -479,9 +479,9 @@
     </notepad>
     <notepad>
       <note>running</note>
-      <xloc>480</xloc>
-      <yloc>352</yloc>
-      <width>53</width>
+      <xloc>384</xloc>
+      <yloc>416</yloc>
+      <width>58</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -500,9 +500,9 @@
     </notepad>
     <notepad>
       <note>leave it running</note>
-      <xloc>672</xloc>
+      <xloc>768</xloc>
       <yloc>320</yloc>
-      <width>93</width>
+      <width>105</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -522,8 +522,8 @@
     <notepad>
       <note>stop execution</note>
       <xloc>672</xloc>
-      <yloc>416</yloc>
-      <width>87</width>
+      <yloc>512</yloc>
+      <width>99</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -569,57 +569,6 @@
       <attribute>
         <code>PORT_NUMBER</code>
         <attribute>${PDI_CONTROL.PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>pdi_logging</name>
-    <server>${PDI_LOGGING.HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${PDI_LOGGING.DB}</database>
-    <port>${PDI_LOGGING.PORT}</port>
-    <username>${PDI_LOGGING.USER}</username>
-    <password>${PDI_LOGGING.PASS}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${PDI_LOGGING.PORT}</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -813,8 +762,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
-      <yloc>160</yloc>
+      <xloc>1344</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -863,8 +812,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>224</yloc>
+      <xloc>800</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -913,7 +862,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
+      <xloc>800</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1016,8 +965,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>544</yloc>
+      <xloc>832</xloc>
+      <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1043,8 +992,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>352</yloc>
+      <xloc>480</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1097,8 +1046,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>544</yloc>
+      <xloc>960</xloc>
+      <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1180,8 +1129,8 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
-      <yloc>544</yloc>
+      <xloc>1088</xloc>
+      <yloc>640</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1231,7 +1180,7 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
     </remotesteps>
     <GUI>
       <xloc>960</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1306,7 +1255,7 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
     </remotesteps>
     <GUI>
       <xloc>832</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1355,8 +1304,8 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>352</yloc>
+      <xloc>800</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1405,7 +1354,7 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>800</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1449,7 +1398,7 @@ WHERE JOBNAME = '${V_JOB_NAME}'</sql>
     </remotesteps>
     <GUI>
       <xloc>704</xloc>
-      <yloc>448</yloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

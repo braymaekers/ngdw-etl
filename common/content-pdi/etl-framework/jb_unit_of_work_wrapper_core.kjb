@@ -32,57 +32,6 @@
       <description>job | transformation</description>
     </parameter>
   </parameters>
-  <connection>
-    <name>pdi_logging</name>
-    <server>${PDI_LOGGING.HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${PDI_LOGGING.DB}</database>
-    <port>${PDI_LOGGING.PORT}</port>
-    <username>${PDI_LOGGING.USER}</username>
-    <password>${PDI_LOGGING.PASS}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${PDI_LOGGING.PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -476,7 +425,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>896</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -512,8 +461,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
-      <yloc>192</yloc>
+      <xloc>896</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>tr-tr_upd_job_control_success</name>
@@ -521,7 +470,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/etl-framework/tr_upd_job_control.ktr</filename>
+      <filename>${COMMON_HOME}/etl-framework/control/tr_upd_job_control.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -558,8 +507,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>96</yloc>
+      <xloc>1312</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>se-is-job?</name>
@@ -580,7 +529,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
+      <xloc>704</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -589,7 +538,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/etl-framework/tr_upd_job_control_error.ktr</filename>
+      <filename>${COMMON_HOME}/etl-framework/control/tr_upd_job_control_error.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -626,8 +575,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>192</yloc>
+      <xloc>896</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>tr-tr_upd_job_control_running</name>
@@ -635,7 +584,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/etl-framework/tr_upd_job_control.ktr</filename>
+      <filename>${COMMON_HOME}/etl-framework/control/tr_upd_job_control.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -672,7 +621,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
+      <xloc>192</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -734,7 +683,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>704</xloc>
-      <yloc>192</yloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>jb-jb_drop_snapshot_table_core</name>
@@ -772,8 +721,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1280</xloc>
-      <yloc>96</yloc>
+      <xloc>1312</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>wtl-reprocess_snapshot</name>
@@ -798,8 +747,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>192</yloc>
+      <xloc>384</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>wtl-drop_snapshot</name>
@@ -811,8 +760,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>96</yloc>
+      <xloc>1088</xloc>
+      <yloc>256</yloc>
     </entry>
   </entries>
   <hops>
@@ -958,7 +907,7 @@
 ELSE create new snapshot + process that snapshot</note>
       <xloc>64</xloc>
       <yloc>32</yloc>
-      <width>311</width>
+      <width>355</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -978,8 +927,8 @@ ELSE create new snapshot + process that snapshot</note>
     <notepad>
       <note>create ${P_TABLE_NAME}_PROCESSED table</note>
       <xloc>448</xloc>
-      <yloc>256</yloc>
-      <width>242</width>
+      <yloc>448</yloc>
+      <width>280</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -999,9 +948,9 @@ ELSE create new snapshot + process that snapshot</note>
     <notepad>
       <note>process ${P_TABLE_NAME}_PROCESSED table
 use ${V_BATCH_ID} for Core table</note>
-      <xloc>864</xloc>
+      <xloc>768</xloc>
       <yloc>32</yloc>
-      <width>250</width>
+      <width>288</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
