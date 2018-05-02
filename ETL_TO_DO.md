@@ -77,6 +77,7 @@ NOT IMPLEMENTED YET:
 ## Adding proper Write to log + error handling to the ETL framework
 * Making sure it leaves a good trace when something goes wrong
 * Making the log more debuggable
+* specific key words needed for the monitoring tool
 	
 ## Updating ETL framework scripts to shell
 	
@@ -88,6 +89,10 @@ NOT IMPLEMENTED YET:
 ## git branch strategy
 
 ## AES Password encryption
+
+## File Logging Level
+* File logging is not controlled by variable, it is set on the job entry that triggers file logging
+
 
 ## Applying all development conventions to the ETL framework
 * colored notes in the jobs and transformations
