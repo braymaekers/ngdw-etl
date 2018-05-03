@@ -32,6 +32,57 @@
       <description>job | transformation</description>
     </parameter>
   </parameters>
+  <connection>
+    <name>pdi_logging</name>
+    <server>${PDI_LOGGING.HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${PDI_LOGGING.DB}</database>
+    <port>${PDI_LOGGING.PORT}</port>
+    <username>${PDI_LOGGING.USER}</username>
+    <password>${PDI_LOGGING.PASS}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${PDI_LOGGING.PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <slaveservers>
     </slaveservers>
   <job-log-table>
@@ -392,7 +443,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>64</xloc>
-      <yloc>96</yloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>jb-job</name>
@@ -425,7 +476,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>864</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>
@@ -461,7 +512,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>864</xloc>
       <yloc>352</yloc>
     </entry>
     <entry>
@@ -507,8 +558,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1312</xloc>
-      <yloc>384</yloc>
+      <xloc>1408</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>se-is-job?</name>
@@ -530,7 +581,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>704</xloc>
-      <yloc>96</yloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>tr-tr_upd_job_control_error</name>
@@ -575,7 +626,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>864</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -622,7 +673,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>192</xloc>
-      <yloc>96</yloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>se-V_RESTART_FLAG=1</name>
@@ -644,7 +695,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>384</xloc>
-      <yloc>96</yloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>jb-jb_create_snapshot_table_core</name>
@@ -721,8 +772,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1312</xloc>
-      <yloc>256</yloc>
+      <xloc>1216</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>wtl-reprocess_snapshot</name>
@@ -735,7 +786,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>544</xloc>
-      <yloc>96</yloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>wtl-create_new_snapshot</name>
@@ -760,8 +811,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
-      <yloc>256</yloc>
+      <xloc>1024</xloc>
+      <yloc>224</yloc>
     </entry>
   </entries>
   <hops>
@@ -906,7 +957,7 @@
       <note>IF V_RESTART_FLAG=1 THEN reprocess existing snapshot
 ELSE create new snapshot + process that snapshot</note>
       <xloc>64</xloc>
-      <yloc>32</yloc>
+      <yloc>128</yloc>
       <width>355</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
@@ -926,8 +977,8 @@ ELSE create new snapshot + process that snapshot</note>
     </notepad>
     <notepad>
       <note>create ${P_TABLE_NAME}_PROCESSED table</note>
-      <xloc>448</xloc>
-      <yloc>448</yloc>
+      <xloc>512</xloc>
+      <yloc>416</yloc>
       <width>280</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -948,7 +999,7 @@ ELSE create new snapshot + process that snapshot</note>
     <notepad>
       <note>process ${P_TABLE_NAME}_PROCESSED table
 use ${V_BATCH_ID} for Core table</note>
-      <xloc>768</xloc>
+      <xloc>736</xloc>
       <yloc>32</yloc>
       <width>288</width>
       <heigth>42</heigth>
