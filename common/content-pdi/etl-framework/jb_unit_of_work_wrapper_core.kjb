@@ -558,7 +558,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1408</xloc>
+      <xloc>1376</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -772,7 +772,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
+      <xloc>1184</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -786,7 +786,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>544</xloc>
-      <yloc>224</yloc>
+      <yloc>96</yloc>
     </entry>
     <entry>
       <name>wtl-create_new_snapshot</name>
@@ -798,7 +798,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
+      <xloc>544</xloc>
       <yloc>352</yloc>
     </entry>
     <entry>
@@ -977,7 +977,7 @@ ELSE create new snapshot + process that snapshot</note>
     </notepad>
     <notepad>
       <note>create ${P_TABLE_NAME}_PROCESSED table</note>
-      <xloc>512</xloc>
+      <xloc>480</xloc>
       <yloc>416</yloc>
       <width>280</width>
       <heigth>26</heigth>

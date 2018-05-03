@@ -78,6 +78,8 @@ NOT IMPLEMENTED YET:
 * Making sure it leaves a good trace when something goes wrong
 * Making the log more debuggable
 * specific key words needed for the monitoring tool
+
+`14.	Ellis said Hitachi could use the format (e.g., keywords like ERROR, WARNING or INFORMATION) provided by HKEX to configure Pentaho so that the file log produced by PDI would conform to the syntax recognizable by BMC Patrol for monitoring.  It should be sufficient for BMC Patrol to monitor file logs (no need to monitoring PDI Logging Tables).`
 	
 ## Updating ETL framework scripts to shell
 	
@@ -92,13 +94,19 @@ NOT IMPLEMENTED YET:
 
 ## File Logging Level
 * File logging is not controlled by variable, it is set on the job entry that triggers file logging
-
+`What we can control are 2 things:
+-	For DB logging: we can say for which work units we want to do this: job, transformation, channel, step, job entry. For the ETL framework to work we need job logging. All others are optional. If the ETL Test Coverage solution will be used, at least step + channel is also required.
+-	 For File logging: we can control the level (so the verbosity) + our ETL writes custom message to the log, we can control from what level they are shown as well)
+`
 
 ## Applying all development conventions to the ETL framework
 * colored notes in the jobs and transformations
 * naming conventions
 * variable name: only the ones from the framework do not have V_, all others do --> this is how I applied it, but might not be written down in dev-guidelines
 
+## Log table housekeeping job
+* Remove logging lines older than x days
+* Check how the batch_id gets generated, if it is max+1, we cannot truncate the table, but should only delete old lines
 
 # SAMPLE jb_product-instrument_core.kjb (core/content-pdi)
 * Core example for acquisition table product
