@@ -108,6 +108,9 @@ NOT IMPLEMENTED YET:
 * Remove logging lines older than x days
 * Check how the batch_id gets generated, if it is max+1, we cannot truncate the table, but should only delete old lines
 
+## Configuring log tables for concurrent access
+https://wiki.pentaho.com/display/EAI/Configuring+log+tables+for+concurrent+access
+
 # SAMPLE jb_product-instrument_core.kjb (core/content-pdi)
 * Core example for acquisition table product
 * Uses core/content-pdi/product-instrument/jb_product_core.kjb
