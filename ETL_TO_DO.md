@@ -7,8 +7,8 @@
 * Citrix machine per developer
   * Windows VM
   * Software: Pentaho Design Tools, DB2 Express, DB2 SQL Client, Notedpad++
-  * Missing: Gitlab, data for development
-  * Will not be installed: Pentaho Server, Oracle DB (where control + pdi_logging will be sitting)
+  * Missing: Gitlab, data for development, Jira setup
+  * Will not be installed: Pentaho Server, Oracle DB (where control + pdi_logging will be sitting) --> from Citrix we can connect to these resources on D1
   * Problem at this point: VMs are very slow, not usable for development
 
 # Product-Instrument ETL demo
@@ -17,8 +17,11 @@
 * Vanessa mentioned this data should be available beginning of next week (07/05/2018)
 
 # Git Branching Strategy
+* Needs to be further discussed and fine-tuned
 
 # ETL Framework Development TO-DOs
+## Switching pdi_control and pdi_logging to Oracle
+
 ## jb_start_actions_service
 * For service jobs there might be other start checks, but we don't know those yet
 * Where do we set max_runtime of a job? in job.properties or job_control table or seperate table? If in job_control this means we need to have a job record in this table before we can run the job (init record) --> job.properties used at this point (V_MAX_RUNTIME)
@@ -36,6 +39,9 @@
 	??? At this point: no need for diethard's restartability feature  
 	??? With the current logic, you could have seperate core and service loads, or combined into one  
 	??? Since when they are ran seperate, V_RESTART would also be set, same as for combined proces  
+
+## Batching framework for transaction loads
+* This is under consideration
 
 ## Adding proper Write to log + error handling to the ETL framework
 * Making sure it leaves a good trace when something goes wrong
