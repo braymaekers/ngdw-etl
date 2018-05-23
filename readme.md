@@ -17,7 +17,7 @@
   * Eg. For the Service load, still check which batch_id's you have left for processing (although for a single workflow this should only be a single batch_id)
   * With this in mind: having restartability on the unit might be enough (did the previous load failed > clean up first)
 
-### Acquisition loads:
+### Acquisition loads
 
 * Taken care of by Customer
 * Data gets appended to tables (insert only)
@@ -37,7 +37,7 @@
   * *ngdw_id*: records get a unique ID assigned from a DB sequence (no use for this number at this point beyond lineage)
   * *batch_id*: only when the DB2 scripts would get orchestrated with PDI
 
-### Core loads:
+### Core loads
 
 * Acquisition to Core
 * Processing logic
@@ -109,9 +109,8 @@ COMMIT;
 * Since columnar DB, flattened out models might be used, ...
 * `We don’t yet know how errored loads need to be reprocessed here, but most likely similar to Core`
 
-### What does restartability look like?
+### What does restartability look like
 
-* If we have separate main jobs/schedules for the core and services load, we will not need Diethard’s solution
-* If we combine them OR if we really have many steps/units per job, we will need it
-* This will depend on how many steps there will be per processing layer
-* At this point, restartability would simply be the “delete the batch that did not process correctly and process it again”
+* We have orchestration restartbility (Diethard's solution)
+* Data restartability is still an open point
+  * restartability would simply be the “delete the batch that did not process correctly and process it again”
