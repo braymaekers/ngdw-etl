@@ -5,7 +5,7 @@
   <extended_description/>
   <job_version/>
   <job_status>0</job_status>
-  <directory>/public/hkex/etl-framework/execution</directory>
+  <directory>/</directory>
   <created_user>-</created_user>
   <created_date>2018/04/18 09:06:18.666</created_date>
   <modified_user>admin</modified_user>
@@ -80,6 +80,19 @@
   </connection>
   <slaveservers>
     <slaveserver>
+      <name>carte-slave</name>
+      <hostname>192.168.56.101</hostname>
+      <port>8083</port>
+      <webAppName/>
+      <username>admin</username>
+      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
+      <proxy_hostname/>
+      <proxy_port/>
+      <non_proxy_hosts/>
+      <master>N</master>
+      <sslMode>N</sslMode>
+    </slaveserver>
+    <slaveserver>
       <name>DI Server</name>
       <hostname>localhost</hostname>
       <port>9080</port>
@@ -106,6 +119,32 @@
       <sslMode>N</sslMode>
     </slaveserver>
     <slaveserver>
+      <name>di-slave</name>
+      <hostname>di-slave</hostname>
+      <port>8080</port>
+      <webAppName>pentaho</webAppName>
+      <username>admin</username>
+      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
+      <proxy_hostname/>
+      <proxy_port/>
+      <non_proxy_hosts/>
+      <master>Y</master>
+      <sslMode>N</sslMode>
+    </slaveserver>
+    <slaveserver>
+      <name>hkex server</name>
+      <hostname>di-server</hostname>
+      <port>8080</port>
+      <webAppName>pentaho</webAppName>
+      <username>admin</username>
+      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
+      <proxy_hostname/>
+      <proxy_port/>
+      <non_proxy_hosts/>
+      <master>Y</master>
+      <sslMode>N</sslMode>
+    </slaveserver>
+    <slaveserver>
       <name>Master</name>
       <hostname>localhost</hostname>
       <port>8081</port>
@@ -116,6 +155,45 @@
       <proxy_port/>
       <non_proxy_hosts/>
       <master>Y</master>
+      <sslMode>N</sslMode>
+    </slaveserver>
+    <slaveserver>
+      <name>slave-8081</name>
+      <hostname>localhost</hostname>
+      <port>8081</port>
+      <webAppName/>
+      <username>cluster</username>
+      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
+      <proxy_hostname/>
+      <proxy_port/>
+      <non_proxy_hosts/>
+      <master>N</master>
+      <sslMode>N</sslMode>
+    </slaveserver>
+    <slaveserver>
+      <name>slave-8082</name>
+      <hostname>localhost</hostname>
+      <port>8082</port>
+      <webAppName/>
+      <username>cluster</username>
+      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
+      <proxy_hostname/>
+      <proxy_port/>
+      <non_proxy_hosts/>
+      <master>N</master>
+      <sslMode>N</sslMode>
+    </slaveserver>
+    <slaveserver>
+      <name>slave-8083</name>
+      <hostname>localhost</hostname>
+      <port>8083</port>
+      <webAppName/>
+      <username>cluster</username>
+      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
+      <proxy_hostname/>
+      <proxy_port/>
+      <non_proxy_hosts/>
+      <master>N</master>
       <sslMode>N</sslMode>
     </slaveserver>
     <slaveserver>
@@ -213,84 +291,6 @@
       <name>YarnCluster - sandbox.hortonworks.com:30303</name>
       <hostname>sandbox.hortonworks.com</hostname>
       <port>30303</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>carte-slave</name>
-      <hostname>192.168.56.101</hostname>
-      <port>8083</port>
-      <webAppName/>
-      <username>admin</username>
-      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>di-slave</name>
-      <hostname>di-slave</hostname>
-      <port>8080</port>
-      <webAppName>pentaho</webAppName>
-      <username>admin</username>
-      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>Y</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>hkex server</name>
-      <hostname>di-server</hostname>
-      <port>8080</port>
-      <webAppName>pentaho</webAppName>
-      <username>admin</username>
-      <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>Y</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>slave-8081</name>
-      <hostname>localhost</hostname>
-      <port>8081</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>slave-8082</name>
-      <hostname>localhost</hostname>
-      <port>8082</port>
-      <webAppName/>
-      <username>cluster</username>
-      <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
-      <proxy_hostname/>
-      <proxy_port/>
-      <non_proxy_hosts/>
-      <master>N</master>
-      <sslMode>N</sslMode>
-    </slaveserver>
-    <slaveserver>
-      <name>slave-8083</name>
-      <hostname>localhost</hostname>
-      <port>8083</port>
       <webAppName/>
       <username>cluster</username>
       <password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password>
@@ -732,7 +732,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <job_object_id/>
       <filename>${CONTENT_HOME}/${P_JOB_NAME}.kjb</filename>
       <jobname/>
-      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -788,7 +787,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <job_object_id/>
       <filename>${ETL_FRAMEWORK_HOME}/utilities/jb_load_job_env.kjb</filename>
       <jobname/>
-      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -849,7 +847,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <trans_object_id/>
       <filename>${ETL_FRAMEWORK_HOME}/utilities/tr_unlock.ktr</filename>
       <transname/>
-      <directory/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -972,7 +969,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <insertScript>N</insertScript>
       <script/>
       <loglevel>Basic</loglevel>
-      <argument0>-rep=Central-Repo</argument0>
+      <argument0>-rep=${DI_SERVER.REPOSITORY}</argument0>
       <argument1>-user=${DI_SERVER.USERNAME}</argument1>
       <argument2>-pass=${V_PW_DECRYPTED}</argument2>
       <argument3>-dir=${ETL_FRAMEWORK_HOME}/execution</argument3>
