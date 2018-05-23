@@ -1,0 +1,1 @@
+Taskkill /PID %1 /F
