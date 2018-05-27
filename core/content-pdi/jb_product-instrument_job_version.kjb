@@ -431,7 +431,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${ETL_FRAMEWORK_DIR}/content-pdi/control/tr_log_batch_id.ktr</filename>
+      <filename>${ETL_FRAMEWORK_HOME}/control/tr_log_batch_id.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
