@@ -467,7 +467,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${ETL_FRAMEWORK_DIR}/content-pdi/execution/jb_work_unit.kjb</filename>
+      <filename>${ETL_FRAMEWORK_HOME}/execution/jb_work_unit.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -526,7 +526,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${ETL_FRAMEWORK_DIR}/content-pdi/execution/jb_work_unit.kjb</filename>
+      <filename>${ETL_FRAMEWORK_HOME}/execution/jb_work_unit.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
