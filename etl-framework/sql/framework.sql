@@ -2,9 +2,9 @@
 
 CREATE TABLE job_control (
 	batch_id int4 NULL,
-	jobname varchar(48) NULL,
+	jobname varchar(124) NULL,
 	status varchar(32) NULL,
-	work_unit_checkpoint varchar(32) NULL,
+	work_unit_checkpoint varchar(124) NULL,
 	logtime timestamp NULL,
 	ip_address text NULL,
 	hostname text NULL,
