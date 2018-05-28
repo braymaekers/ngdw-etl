@@ -461,7 +461,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${ETL_FRAMEWORK_DIR}/content-pdi/developer-tools/fw-jb_test_work_unit.kjb</filename>
+      <filename>${ETL_FRAMEWORK_HOME}/developer-tools/fw-jb_test_work_unit.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

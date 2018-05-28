@@ -569,7 +569,7 @@
       <name>ab-work_unit_error</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: ${V_JOB_NAME}, WORK UNIT ${P_WORK_UNIT_NAME} TERMINATED WITH ERRORS.</message>
+      <message>*** ERROR: ${V_JOB_NAME}, WORK UNIT &lt;change_to_work_unit> TERMINATED WITH ERRORS.</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
