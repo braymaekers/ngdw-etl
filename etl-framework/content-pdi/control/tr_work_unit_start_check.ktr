@@ -621,13 +621,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dtempty-work_unit_start_check</from>
-      <to>start = yes on empty</to>
+      <from>start = yes on empty</from>
+      <to>se_V_WORK_UNIT_START_FLAG</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>start = yes on empty</from>
-      <to>se_V_WORK_UNIT_START_FLAG</to>
+      <from>dtempty-work_unit_start_check</from>
+      <to>ifnull-status</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ifnull-status</from>
+      <to>start = yes on empty</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -992,6 +997,45 @@ WHERE JOBNAME = '${V_JOB_NAME}' and work_unit_checkpoint = '${P_WORK_UNIT_NAME}'
       <draw>Y</draw>
     </GUI>
   </step>
+  <step>
+    <name>ifnull-status</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>status</name>
+        <value>finished</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
@@ -1001,7 +1045,7 @@ WHERE JOBNAME = '${V_JOB_NAME}' and work_unit_checkpoint = '${P_WORK_UNIT_NAME}'
     <group>
       <name>explorerState</name>
       <attribute>
-        <key>dtempty-work_unit_start_check</key>
+        <key>ifnull-status</key>
         <value/>
       </attribute>
     </group>

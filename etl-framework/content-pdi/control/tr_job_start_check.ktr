@@ -588,7 +588,7 @@
     </hop>
     <hop>
       <from>start = no on running</from>
-      <to>se_V_START_FLAG</to>
+      <to>se-frmework_variables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -603,7 +603,7 @@
     </hop>
     <hop>
       <from>start = yes</from>
-      <to>se_V_START_FLAG</to>
+      <to>se-frmework_variables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -612,23 +612,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dtempty-job_start_check</from>
-      <to>start = yes empty stream</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>start = yes empty stream</from>
-      <to>se_V_START_FLAG</to>
+      <to>se-frmework_variables</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>select pid</from>
+      <from>sv-pid</from>
       <to>je-jb_stop_job</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>wtl-stopping_job_execution</from>
-      <to>select pid</to>
+      <to>sv-pid</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -648,7 +643,7 @@
     </hop>
     <hop>
       <from>start = yes on running too long</from>
-      <to>se_V_START_FLAG</to>
+      <to>se-frmework_variables</to>
       <enabled>N</enabled>
     </hop>
     <hop>
@@ -664,6 +659,16 @@
     <hop>
       <from>ti-check_status</from>
       <to>sc-status</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dtempty-job_start_check</from>
+      <to>ifnull-status_batch_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>ifnull-status_batch_id</from>
+      <to>start = yes empty stream</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -712,6 +717,51 @@
     <GUI>
       <xloc>448</xloc>
       <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>ifnull-status_batch_id</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>status</name>
+        <value>finished</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>batch_id</name>
+        <value>-1</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -857,7 +907,7 @@
     </GUI>
   </step>
   <step>
-    <name>se_V_START_FLAG</name>
+    <name>se-frmework_variables</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -880,6 +930,12 @@
         <variable_type>ROOT_JOB</variable_type>
         <default_value/>
       </field>
+      <field>
+        <field_name>batch_id</field_name>
+        <variable_name>V_PREVIOUS_JOB_BATCH_ID</variable_name>
+        <variable_type>ROOT_JOB</variable_type>
+        <default_value/>
+      </field>
     </fields>
     <use_formatting>Y</use_formatting>
     <cluster_schema/>
@@ -890,38 +946,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>960</xloc>
       <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>select pid</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>pid</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1184</xloc>
-      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1078,6 +1104,36 @@
     </GUI>
   </step>
   <step>
+    <name>sv-pid</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>pid</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>ti-check_status</name>
     <type>TableInput</type>
     <description/>
@@ -1164,10 +1220,6 @@ WHERE PROJECT = 'framework' and JOBNAME = '${V_JOB_NAME}' and work_unit_checkpoi
   <attributes>
     <group>
       <name>explorerState</name>
-      <attribute>
-        <key>dtempty-job_start_check</key>
-        <value/>
-      </attribute>
     </group>
   </attributes>
 </transformation>
