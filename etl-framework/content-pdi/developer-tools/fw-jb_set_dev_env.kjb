@@ -12,6 +12,11 @@
   <modified_date>2017/11/23 11:38:01.539</modified_date>
   <parameters>
     <parameter>
+      <name>P_BUS_AREA</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
       <name>P_JOB_NAME</name>
       <default_value/>
       <description/>
@@ -498,7 +503,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1280</xloc>
+      <xloc>1408</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
@@ -611,17 +616,34 @@ common.properties not available</logmessage>
       <xloc>576</xloc>
       <yloc>96</yloc>
     </entry>
+    <entry>
+      <name>fe-business_area</name>
+      <description/>
+      <type>FILE_EXISTS</type>
+      <filename>${CONFIG_DIR}/properties/${P_BUS_AREA}.properties</filename>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1248</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>sv-business_area</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>${CONFIG_DIR}/properties/${P_BUS_AREA}.properties</filename>
+      <file_variable_type>ROOT_JOB</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1248</xloc>
+      <yloc>320</yloc>
+    </entry>
   </entries>
   <hops>
-    <hop>
-      <from>fe-job</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
     <hop>
       <from>fe-job</from>
       <to>sv-job</to>
@@ -720,6 +742,33 @@ common.properties not available</logmessage>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fe-job</from>
+      <to>fe-business_area</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fe-business_area</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fe-business_area</from>
+      <to>sv-business_area</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
