@@ -840,47 +840,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>fw-tr_unlock</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${ETL_FRAMEWORK_HOME}/utilities/tr_unlock.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>P_TO_UNLOCK</name>
-          <stream_name/>
-          <value>${DI_SERVER.PASSWORD}</value>
-        </parameter>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>448</yloc>
-    </entry>
-    <entry>
       <name>sv-framework</name>
       <description/>
       <type>SET_VARIABLES</type>
@@ -938,7 +897,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>736</xloc>
       <yloc>448</yloc>
     </entry>
     <entry>
@@ -980,7 +939,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1056</xloc>
-      <yloc>544</yloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>ab-server_job_execution_failed_scale_up_ba_server</name>
@@ -991,7 +950,48 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1056</xloc>
-      <yloc>672</yloc>
+      <yloc>704</yloc>
+    </entry>
+    <entry>
+      <name>fw-tr_unlock</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${ETL_FRAMEWORK_HOME}/utilities/tr_unlock.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_TO_UNLOCK</name>
+          <stream_name/>
+          <value>${DI_SERVER.PASSWORD}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>736</xloc>
+      <yloc>576</yloc>
     </entry>
   </entries>
   <hops>
@@ -1069,15 +1069,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
     </hop>
     <hop>
       <from>sv-framework</from>
-      <to>fw-tr_unlock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>sv-framework</from>
       <to>wtl-missing_framework_properties</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1088,15 +1079,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
     <hop>
       <from>wtl-missing_framework_properties</from>
       <to>ab-scale_up_failed</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fw-tr_unlock</from>
-      <to>se-scale_up_mode</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1131,15 +1113,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>se-scale_up_mode</from>
-      <to>ss-scale_up_ba_server_mode</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>ss-scale_up_ba_server_mode</from>
       <to>Success</to>
       <from_nr>0</from_nr>
@@ -1155,6 +1128,33 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>sv-framework</from>
+      <to>se-scale_up_mode</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-scale_up_mode</from>
+      <to>fw-tr_unlock</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fw-tr_unlock</from>
+      <to>ss-scale_up_ba_server_mode</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
