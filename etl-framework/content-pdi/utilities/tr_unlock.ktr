@@ -1073,7 +1073,7 @@
     <logmessage>*** INFO</logmessage>
     <fields>
       <field>
-        <name>project_encryption_usage</name>
+        <name>project_encryption_method</name>
       </field>
       <field>
         <name>original_encrypted_password</name>
