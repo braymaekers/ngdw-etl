@@ -17,6 +17,11 @@
       <description>The project business area</description>
     </parameter>
     <parameter>
+      <name>P_CHECK_START</name>
+      <default_value>Y</default_value>
+      <description>Y|N control if framework should check Work Unit start</description>
+    </parameter>
+    <parameter>
       <name>P_IS_LAST_UNIT</name>
       <default_value/>
       <description>last work unit on job</description>
@@ -792,7 +797,8 @@ P_IS_LAST_UNIT - ${P_IS_LAST_UNIT}
 P_PROJECT_NAME - ${P_PROJECT_NAME}
 P_BUS_AREA - ${P_BUS_AREA}
 P_WORK_UNIT_NAME - ${P_WORK_UNIT_NAME}
-P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
+P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}
+P_CHECK_START: ${P_CHECK_START}</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>*** JOBNAME: ${V_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME}</logsubject>
       <parallel>N</parallel>
@@ -865,17 +871,12 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <yloc>352</yloc>
     </entry>
     <entry>
-      <name>wrt-start-execution</name>
+      <name>wrt-start-execution_check</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>EXECUTION STARTED
-
-PROJECT_NAME: ${P_PROJECT_NAME}
-CONTENT_HOME: ${CONTENT_HOME}
-V_PREVIOUS_JOB_EXECUTION_STATUS: ${V_PREVIOUS_JOB_EXECUTION_STATUS}
-V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}</logmessage>
+      <logmessage>EXECUTION STARTED - CHECK ON START</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME}</logsubject>
+      <logsubject>*** INFO: JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -888,7 +889,7 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
       <type>WRITE_TO_LOG</type>
       <logmessage>EXECUTION SKIPPED</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME}</logsubject>
+      <logsubject>*** INFO: JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -959,8 +960,8 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>256</yloc>
+      <xloc>352</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>ab-work_unit_failed</name>
@@ -1089,6 +1090,41 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
       <xloc>224</xloc>
       <yloc>1120</yloc>
     </entry>
+    <entry>
+      <name>se-check_start?</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${P_CHECK_START}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>Y</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>352</xloc>
+      <yloc>256</yloc>
+    </entry>
+    <entry>
+      <name>wrt-start-execution_no_check</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>EXECUTION STARTED - NO CHECK ON START</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>*** INFO: JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME} ***</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>256</yloc>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -1173,7 +1209,7 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>wrt-start-execution</from>
+      <from>wrt-start-execution_check</from>
       <to>fw-tr-tr_upd_job_control_work_unit_running</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -1183,7 +1219,7 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
     </hop>
     <hop>
       <from>se-start</from>
-      <to>wrt-start-execution</to>
+      <to>wrt-start-execution_check</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1238,15 +1274,6 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
     <hop>
       <from>wtl_work_unit_conditions</from>
       <to>fw-jb_load_work_unit_env</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fw-jb_load_work_unit_env</from>
-      <to>fw-tr_work_unit_start_check</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1325,12 +1352,48 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>fw-jb_load_work_unit_env</from>
+      <to>se-check_start?</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-check_start?</from>
+      <to>fw-tr_work_unit_start_check</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-check_start?</from>
+      <to>wrt-start-execution_no_check</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wrt-start-execution_no_check</from>
+      <to>fw-tr-tr_upd_job_control_work_unit_running</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
       <note>Loading Work Unit Environment Variables</note>
-      <xloc>288</xloc>
-      <yloc>256</yloc>
+      <xloc>256</xloc>
+      <yloc>128</yloc>
       <width>260</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -1361,16 +1424,17 @@ All work units are defined by the four possible status:
 
 Work Unit Parameters
 
+P_CHECK_START: - if Work Unit check on start should be performed
 P_PROJECT_NAME - the main directory name (core, acquisition or service)
 P_BUS_AREA - directory name inside content-pdi
 P_JOB_NAME - the current wrapper job name (must be unique)
 P_WORK_UNIT_NAME - the work unit name 
 P_WORK_UNIT_TYPE - the work unit type, either transformation or job
 P_IS_LAST_UNIT - is current unit is the last on the current job</note>
-      <xloc>736</xloc>
-      <yloc>32</yloc>
+      <xloc>832</xloc>
+      <yloc>0</yloc>
       <width>717</width>
-      <heigth>294</heigth>
+      <heigth>276</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>

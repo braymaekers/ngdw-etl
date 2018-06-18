@@ -13,12 +13,12 @@
   <parameters>
     <parameter>
       <name>P_JOB_NAME</name>
-      <default_value>jb_load_dim_product</default_value>
+      <default_value>jb_product-instrument</default_value>
       <description/>
     </parameter>
     <parameter>
       <name>P_PROJECT_NAME</name>
-      <default_value>service</default_value>
+      <default_value>core</default_value>
       <description/>
     </parameter>
     <parameter>
