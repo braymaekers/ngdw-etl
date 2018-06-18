@@ -902,7 +902,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <type>WRITE_TO_LOG</type>
       <logmessage>JOB FINISHED</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>**** JOBNAME: ${V_JOB_NAME}</logsubject>
+      <logsubject>*** INFO: JOBNAME: ${V_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
