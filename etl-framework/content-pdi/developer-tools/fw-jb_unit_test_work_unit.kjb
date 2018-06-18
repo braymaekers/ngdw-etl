@@ -668,10 +668,10 @@ P_WORK_UNIT_TYPE: ${P_WORK_UNIT_TYPE}</logmessage>
   </hops>
   <notepads>
     <notepad>
-      <note>Framework element - Project Job sample. Use it to start develop your own Project Jobs.</note>
+      <note>Framework element - Unit Test over Work Unit using the jb_test_work_unit to load environment but not register the execution.</note>
       <xloc>32</xloc>
       <yloc>64</yloc>
-      <width>531</width>
+      <width>772</width>
       <heigth>24</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
