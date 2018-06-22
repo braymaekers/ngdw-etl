@@ -461,7 +461,7 @@ P_BUS_AREA: ${P_BUS_AREA}</logmessage>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/${P_PROJECT_NAME}.properties</filename>
-      <file_variable_type>ROOT_JOB</file_variable_type>
+      <file_variable_type>PARENT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
@@ -498,7 +498,7 @@ P_BUS_AREA: ${P_BUS_AREA}</logmessage>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/${P_BUS_AREA}.properties</filename>
-      <file_variable_type>ROOT_JOB</file_variable_type>
+      <file_variable_type>PARENT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
@@ -536,7 +536,7 @@ P_BUS_AREA: ${P_BUS_AREA}</logmessage>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/common.properties</filename>
-      <file_variable_type>ROOT_JOB</file_variable_type>
+      <file_variable_type>PARENT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
