@@ -613,6 +613,11 @@
   <order>
     <hop>
       <from>ti-product</from>
+      <to>wtl-framework_variables</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>wtl-framework_variables</from>
       <to>to-load_dim_product</to>
       <enabled>Y</enabled>
     </hop>
@@ -708,6 +713,40 @@ from ${CORE.SCHEMA}.product;</sql>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>wtl-framework_variables</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>*** INFO tr_load_product_family ***
+V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS - ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}
+LOG_HOME - ${LOG_HOME}
+V_DELAY_WORK_UNIT - ${V_DELAY_WORK_UNIT}</logmessage>
+    <fields>
+      </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>

@@ -666,7 +666,7 @@
       <type>WRITE_TO_LOG</type>
       <logmessage>DELAY VALUE - ${V_DELAY_TIME_BETWEEN_WORK_UNITS}</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>${P_JOB_NAME} CHECK VARIABLE</logsubject>
+      <logsubject>*** INFO: ${P_JOB_NAME} CHECK VARIABLE ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

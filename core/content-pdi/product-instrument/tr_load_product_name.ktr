@@ -437,7 +437,7 @@
   <notepads>
     <notepad>
       <note>To Add error</note>
-      <xloc>256</xloc>
+      <xloc>352</xloc>
       <yloc>160</yloc>
       <width>83</width>
       <heigth>24</heigth>
@@ -606,11 +606,9 @@
     <fields>
       <field>
         <name>product_id</name>
-        <rename/>
       </field>
       <field>
         <name>product_name</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -622,7 +620,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
+      <xloc>384</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -785,7 +783,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>512</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>

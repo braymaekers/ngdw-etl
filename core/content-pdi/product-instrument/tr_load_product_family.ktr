@@ -676,19 +676,15 @@
     <fields>
       <field>
         <name>product_id</name>
-        <rename/>
       </field>
       <field>
         <name>product_family</name>
-        <rename/>
       </field>
       <field>
         <name>product_group</name>
-        <rename/>
       </field>
       <field>
         <name>product_id_length</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -910,7 +906,9 @@
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
     <logmessage>*** INFO tr_load_product_family ***
-V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS - ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}</logmessage>
+V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS - ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}
+LOG_HOME - ${LOG_HOME}
+V_DELAY_WORK_UNIT - ${V_DELAY_WORK_UNIT}</logmessage>
     <fields>
       <field>
         <name>product_family</name>
