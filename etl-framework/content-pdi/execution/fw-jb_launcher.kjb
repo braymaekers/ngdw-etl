@@ -13,12 +13,12 @@
   <parameters>
     <parameter>
       <name>P_JOB_NAME</name>
-      <default_value>jb_product-instrument</default_value>
+      <default_value>jb_main_job_testing_new_stuff</default_value>
       <description/>
     </parameter>
     <parameter>
       <name>P_PROJECT_NAME</name>
-      <default_value>core</default_value>
+      <default_value>service</default_value>
       <description/>
     </parameter>
     <parameter>
@@ -930,7 +930,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <loglevel>Basic</loglevel>
       <argument0>-rep=${DI_SERVER.REPOSITORY}</argument0>
       <argument1>-user=${DI_SERVER.USERNAME}</argument1>
-      <argument2>-pass=${V_PW_DECRYPTED}</argument2>
+      <argument2>-pass=${DI_SERVER.PASSWORD}</argument2>
       <argument3>-dir=${ETL_FRAMEWORK_HOME}/execution</argument3>
       <argument4>-job=jb_kitchen_executor</argument4>
       <argument5>-param:P_PROJECT_NAME=${P_PROJECT_NAME}</argument5>
@@ -951,47 +951,6 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <nr>0</nr>
       <xloc>1056</xloc>
       <yloc>704</yloc>
-    </entry>
-    <entry>
-      <name>fw-tr_unlock</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${ETL_FRAMEWORK_HOME}/utilities/tr_unlock.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>P_TO_UNLOCK</name>
-          <stream_name/>
-          <value>${DI_SERVER.PASSWORD}</value>
-        </parameter>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>576</yloc>
     </entry>
   </entries>
   <hops>
@@ -1141,20 +1100,11 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
     </hop>
     <hop>
       <from>se-scale_up_mode</from>
-      <to>fw-tr_unlock</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>fw-tr_unlock</from>
       <to>ss-scale_up_ba_server_mode</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
