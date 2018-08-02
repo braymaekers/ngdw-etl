@@ -2,16 +2,18 @@
 
 CREATE TABLE job_control (
 	batch_id int4 NULL,
-	jobname varchar(124) NULL,
+	scale_up varchar(32) NULL,
+	main_job_project varchar(64) NULL,
+	main_job_name varchar(256) NULL,
+	work_unit_project varchar(64) NULL,
+	work_unit varchar(256) NULL,
+	work_unit_instance varchar(124) NULL,
 	status varchar(32) NULL,
-	work_unit_checkpoint varchar(124) NULL,
+	starttime timestamp NULL,
 	logtime timestamp NULL,
 	ip_address text NULL,
 	hostname text NULL,
-	starttime timestamp NULL,
-	pid int4 NULL,
-	project varchar(64) NULL,
-	scale_up varchar(32) NULL
+	pid int4 NULL
 )
 WITH (
 	OIDS=FALSE

@@ -18,7 +18,7 @@
     </parameter>
     <parameter>
       <name>P_PROJECT_NAME</name>
-      <default_value>service</default_value>
+      <default_value>common</default_value>
       <description/>
     </parameter>
     <parameter>

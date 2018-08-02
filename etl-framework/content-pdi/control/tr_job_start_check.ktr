@@ -1145,9 +1145,9 @@
       <schema_name/>
     </partitioning>
     <connection>pdi_control</connection>
-    <sql>SELECT BATCH_ID, STATUS, PID, NULL AS RUNTIME
+    <sql>SELECT BATCH_ID, status, PID, NULL AS RUNTIME
 FROM ${PDI_CONTROL.SCHEMA}.JOB_CONTROL 
-WHERE PROJECT = 'framework' and JOBNAME = '${V_JOB_NAME}' and work_unit_checkpoint = 'job-checkpoint' </sql>
+WHERE main_job_project = '${V_MAIN_JOB_PROJECT}' and main_job_name = '${V_JOB_NAME}' and work_unit = 'job-checkpoint';</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

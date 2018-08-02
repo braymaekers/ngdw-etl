@@ -542,9 +542,9 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>P_PROJECT_NAME</name>
-        <variable>${P_PROJECT_NAME}</variable>
-        <type>String</type>
+        <name>V_WORK_UNIT</name>
+        <variable>${V_WORK_UNIT}</variable>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
@@ -557,6 +557,66 @@
         <name>P_SCALE_UP</name>
         <variable>${P_SCALE_UP}</variable>
         <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>V__WORK_UNIT_PROJECT</name>
+        <variable>${V_WORK_UNIT_PROJECT}</variable>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>V_WORK_UNIT_INSTANCE</name>
+        <variable>${V_WORK_UNIT_INSTANCE}</variable>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>V_MAIN_JOB_PROJECT</name>
+        <variable>${V_MAIN_JOB_PROJECT}</variable>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>V_JOB_NAME</name>
+        <variable>${V_JOB_NAME}</variable>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>V_WORK_UNIT_NAME</name>
+        <variable>${V_WORK_UNIT_NAME}</variable>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>

@@ -689,11 +689,6 @@ key: project-jobname-checkpoint</note>
   </connection>
   <order>
     <hop>
-      <from>gv-execution-variables</from>
-      <to>logtime</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>start</from>
       <to>iu-start_job_control</to>
       <enabled>Y</enabled>
@@ -701,21 +696,6 @@ key: project-jobname-checkpoint</note>
     <hop>
       <from>finished</from>
       <to>ac-framework_checkpoint</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>ac-framework_checkpoint</from>
-      <to>up_work_units_finished</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>success_error</from>
-      <to>Update</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>logtime</from>
-      <to>sw_status</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -739,76 +719,36 @@ key: project-jobname-checkpoint</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Update</from>
+      <from>logtime</from>
+      <to>sw_status</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>success_error</from>
+      <to>upd-work_unit_success_error</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>upd-work_unit_success_error</from>
       <to>wrt-fw_upd_job_control_work_unit</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>up_work_units_finished</from>
+      <from>ac-framework_checkpoint</from>
+      <to>upd-work_unit_finish</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>upd-work_unit_finish</from>
       <to>wrt-fw_upd_job_control_work_unit_framework_generic</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>gv-execution-variables</from>
+      <to>logtime</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>Update</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>pdi_control</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>${PDI_CONTROL.SCHEMA}</schema>
-      <table>${PDI_CONTROL.TABLE}</table>
-      <key>
-        <name>jobname</name>
-        <field>jobname</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>work_unit_checkpoint</name>
-        <field>work_unit_checkpoint</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>project_name</name>
-        <field>project</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>status</name>
-        <rename>status</rename>
-      </value>
-      <value>
-        <name>logtime</name>
-        <rename>logtime</rename>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>ac-framework_checkpoint</name>
     <type>Constant</type>
@@ -896,7 +836,19 @@ key: project-jobname-checkpoint</note>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>jobname</name>
+        <name> main_job_project</name>
+        <variable>${V_MAIN_JOB_PROJECT}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>main_job_name</name>
         <variable>${V_JOB_NAME}</variable>
         <type>String</type>
         <format/>
@@ -908,8 +860,20 @@ key: project-jobname-checkpoint</note>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>status</name>
-        <variable>${P_STATUS}</variable>
+        <name>work_unit_project</name>
+        <variable>${V_WORK_UNIT_PROJECT}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>work_unit</name>
+        <variable>${P_WORK_UNIT_CHECKPOINT}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -920,8 +884,8 @@ key: project-jobname-checkpoint</note>
         <trim_type>both</trim_type>
       </field>
       <field>
-        <name>work_unit_checkpoint</name>
-        <variable>${P_WORK_UNIT_CHECKPOINT}</variable>
+        <name>status</name>
+        <variable>${P_STATUS}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -968,8 +932,8 @@ key: project-jobname-checkpoint</note>
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>project_name</name>
-        <variable>${P_PROJECT_NAME}</variable>
+        <name>scale_up</name>
+        <variable>${V_SCALE_UP}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -977,11 +941,11 @@ key: project-jobname-checkpoint</note>
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>scale_up</name>
-        <variable>${V_SCALE_UP}</variable>
+        <name>work_unit_instance</name>
+        <variable>${V_WORK_UNIT_INSTANCE}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -1023,41 +987,58 @@ key: project-jobname-checkpoint</note>
       <schema>${PDI_CONTROL.SCHEMA}</schema>
       <table>${PDI_CONTROL.TABLE}</table>
       <key>
-        <name>project_name</name>
-        <field>project</field>
+        <name> main_job_project</name>
+        <field>main_job_project</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>jobname</name>
-        <field>jobname</field>
+        <name>main_job_name</name>
+        <field>main_job_name</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>work_unit_checkpoint</name>
-        <field>work_unit_checkpoint</field>
+        <name>work_unit_project</name>
+        <field>work_unit_project</field>
         <condition>=</condition>
         <name2/>
       </key>
-      <value>
-        <name>project</name>
-        <rename>project_name</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>jobname</name>
-        <rename>jobname</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>starttime</name>
-        <rename>logtime</rename>
-        <update>Y</update>
-      </value>
+      <key>
+        <name>work_unit</name>
+        <field>work_unit</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>work_unit_instance</name>
+        <field>work_unit_instance</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>batch_id</name>
         <rename>batch_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>main_job_project</name>
+        <rename> main_job_project</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>main_job_name</name>
+        <rename>main_job_name</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>work_unit_project</name>
+        <rename>work_unit_project</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>work_unit</name>
+        <rename>work_unit</rename>
         <update>Y</update>
       </value>
       <value>
@@ -1066,9 +1047,9 @@ key: project-jobname-checkpoint</note>
         <update>Y</update>
       </value>
       <value>
-        <name>work_unit_checkpoint</name>
-        <rename>work_unit_checkpoint</rename>
-        <update>Y</update>
+        <name>starttime</name>
+        <rename>logtime</rename>
+        <update>N</update>
       </value>
       <value>
         <name>logtime</name>
@@ -1094,6 +1075,11 @@ key: project-jobname-checkpoint</note>
         <name>scale_up</name>
         <rename>scale_up</rename>
         <update>Y</update>
+      </value>
+      <value>
+        <name>work_unit_instance</name>
+        <rename>work_unit_instance</rename>
+        <update>N</update>
       </value>
     </lookup>
     <cluster_schema/>
@@ -1229,7 +1215,7 @@ key: project-jobname-checkpoint</note>
     </GUI>
   </step>
   <step>
-    <name>up_work_units_finished</name>
+    <name>upd-work_unit_finish</name>
     <type>Update</type>
     <description/>
     <distribute>Y</distribute>
@@ -1249,14 +1235,20 @@ key: project-jobname-checkpoint</note>
       <schema>${PDI_CONTROL.SCHEMA}</schema>
       <table>${PDI_CONTROL.TABLE}</table>
       <key>
-        <name>jobname</name>
-        <field>jobname</field>
+        <name> main_job_project</name>
+        <field>main_job_project</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>main_job_name</name>
+        <field>main_job_name</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>framework-checkpoint</name>
-        <field>work_unit_checkpoint</field>
+        <field>work_unit</field>
         <condition>&lt;></condition>
         <name2/>
       </key>
@@ -1279,6 +1271,78 @@ key: project-jobname-checkpoint</note>
     </GUI>
   </step>
   <step>
+    <name>upd-work_unit_success_error</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>pdi_control</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>${PDI_CONTROL.SCHEMA}</schema>
+      <table>${PDI_CONTROL.TABLE}</table>
+      <key>
+        <name> main_job_project</name>
+        <field>main_job_project</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>main_job_name</name>
+        <field>main_job_name</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>work_unit_project</name>
+        <field>work_unit_project</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>work_unit</name>
+        <field>work_unit</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>work_unit_instance</name>
+        <field>work_unit_instance</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>status</name>
+        <rename>status</rename>
+      </value>
+      <value>
+        <name>logtime</name>
+        <rename>logtime</rename>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>wrt-fw_upd_job_control_work_unit</name>
     <type>WriteToLog</type>
     <description/>
@@ -1293,7 +1357,7 @@ key: project-jobname-checkpoint</note>
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE ETL_CONTROL TABLE</logmessage>
+    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE JOB_CONTROL TABLE ***</logmessage>
     <fields>
       </fields>
     <cluster_schema/>
@@ -1324,7 +1388,7 @@ key: project-jobname-checkpoint</note>
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE ETL_CONTROL TABLE</logmessage>
+    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE JOB_CONTROL TABLE ***</logmessage>
     <fields>
       </fields>
     <cluster_schema/>
@@ -1342,18 +1406,6 @@ key: project-jobname-checkpoint</note>
   </step>
   <step_error_handling>
     <error>
-      <source_step>Update</source_step>
-      <target_step>wrt-fw_upd_job_control_work_unit</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
-    <error>
       <source_step>iu-start_job_control</source_step>
       <target_step>wrt-fw_upd_job_control_work_unit</target_step>
       <is_enabled>Y</is_enabled>
@@ -1366,8 +1418,20 @@ key: project-jobname-checkpoint</note>
       <min_pct_rows/>
     </error>
     <error>
-      <source_step>up_work_units_finished</source_step>
+      <source_step>upd-work_unit_finish</source_step>
       <target_step>wrt-fw_upd_job_control_work_unit_framework_generic</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
+    <error>
+      <source_step>upd-work_unit_success_error</source_step>
+      <target_step>wrt-fw_upd_job_control_work_unit</target_step>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>

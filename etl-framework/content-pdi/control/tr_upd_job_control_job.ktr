@@ -733,7 +733,7 @@ no update to starttime</note>
     </partitioning>
     <fields>
       <field>
-        <name>work_unit_checkpoint</name>
+        <name>work_unit</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -745,13 +745,25 @@ no update to starttime</note>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>project_name</name>
+        <name>work_unit_project</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>framework</nullif>
+        <nullif>not-applicable</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>work_unit_instance</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>not_applicable</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -878,6 +890,18 @@ no update to starttime</note>
         <variable>${V_BATCH_ID}</variable>
         <type>Integer</type>
         <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>main_job_project</name>
+        <variable>${V_MAIN_JOB_PROJECT}</variable>
+        <type>String</type>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -1097,30 +1121,30 @@ no update to starttime</note>
       <schema>${PDI_CONTROL.SCHEMA}</schema>
       <table>${PDI_CONTROL.TABLE}</table>
       <key>
-        <name>project_name</name>
-        <field>project</field>
+        <name>main_job_project</name>
+        <field>main_job_project</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>jobname</name>
-        <field>jobname</field>
+        <field>main_job_name</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>work_unit_checkpoint</name>
-        <field>work_unit_checkpoint</field>
+        <name>work_unit</name>
+        <field>work_unit</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>project</name>
-        <rename>project_name</rename>
+        <name>main_job_project</name>
+        <rename>main_job_project</rename>
         <update>N</update>
       </value>
       <value>
-        <name>jobname</name>
+        <name>main_job_name</name>
         <rename>jobname</rename>
         <update>N</update>
       </value>
@@ -1140,9 +1164,14 @@ no update to starttime</note>
         <update>Y</update>
       </value>
       <value>
-        <name>work_unit_checkpoint</name>
-        <rename>work_unit_checkpoint</rename>
-        <update>Y</update>
+        <name>work_unit_project</name>
+        <rename>work_unit_project</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>work_unit</name>
+        <rename>work_unit</rename>
+        <update>N</update>
       </value>
       <value>
         <name>logtime</name>
@@ -1168,6 +1197,11 @@ no update to starttime</note>
         <name>scale_up</name>
         <rename>scale_up</rename>
         <update>Y</update>
+      </value>
+      <value>
+        <name>work_unit_instance</name>
+        <rename>work_unit_instance</rename>
+        <update>N</update>
       </value>
     </lookup>
     <cluster_schema/>
@@ -1401,20 +1435,20 @@ no update to starttime</note>
       <schema>${PDI_CONTROL.SCHEMA}</schema>
       <table>${PDI_CONTROL.TABLE}</table>
       <key>
-        <name>project_name</name>
-        <field>project</field>
+        <name>main_job_project</name>
+        <field>main_job_project</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
         <name>jobname</name>
-        <field>jobname</field>
+        <field>main_job_name</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>work_unit_checkpoint</name>
-        <field>work_unit_checkpoint</field>
+        <name>work_unit</name>
+        <field>work_unit</field>
         <condition>=</condition>
         <name2/>
       </key>

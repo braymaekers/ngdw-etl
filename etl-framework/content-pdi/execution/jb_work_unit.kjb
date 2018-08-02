@@ -32,6 +32,11 @@
       <description>acquisition|core|service</description>
     </parameter>
     <parameter>
+      <name>P_WORK_UNIT_INSTANCE</name>
+      <default_value>not-applicable</default_value>
+      <description>The instance role of this work unit</description>
+    </parameter>
+    <parameter>
       <name>P_WORK_UNIT_NAME</name>
       <default_value/>
       <description>File name of the transformation or job to be executed</description>
@@ -955,6 +960,11 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
           <stream_name/>
           <value>${P_WORK_UNIT_NAME}</value>
         </parameter>
+        <parameter>
+          <name>P_WORK_UNIT_INSTANCE</name>
+          <stream_name/>
+          <value>${P_WORK_UNIT_INSTANCE}</value>
+        </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
@@ -1014,18 +1024,6 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <nr>0</nr>
       <xloc>960</xloc>
       <yloc>608</yloc>
-    </entry>
-    <entry>
-      <name>wf-test_logtime</name>
-      <description/>
-      <type>DELAY</type>
-      <maximumTimeout>${V_DELAY_WORK_UNIT}</maximumTimeout>
-      <scaletime>0</scaletime>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>672</yloc>
     </entry>
     <entry>
       <name>fw-tr_upd_job_control_finished</name>
@@ -1299,24 +1297,6 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>tr-execute-transformation</from>
-      <to>wf-test_logtime</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>wf-test_logtime</from>
-      <to>fw-tr_upd_job_control_work_unit_success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>tr-tr_upd_job_control_work_unit_finished</from>
       <to>fw-tr_upd_job_control_finished</to>
       <from_nr>0</from_nr>
@@ -1388,6 +1368,15 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>tr-execute-transformation</from>
+      <to>fw-tr_upd_job_control_work_unit_success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -1445,27 +1434,6 @@ P_IS_LAST_UNIT - is current unit is the last on the current job</note>
       <backgroundcolorred>255</backgroundcolorred>
       <backgroundcolorgreen>205</backgroundcolorgreen>
       <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>THIS WAIT SHOULD BE REMOVED</note>
-      <xloc>576</xloc>
-      <yloc>672</yloc>
-      <width>211</width>
-      <heigth>26</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>0</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
       <bordercolorred>100</bordercolorred>
       <bordercolorgreen>100</bordercolorgreen>
       <bordercolorblue>100</bordercolorblue>

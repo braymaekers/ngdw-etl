@@ -447,11 +447,11 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
+      <xloc>1312</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>sv-V_JOB_NAME_and_V_SCALE_UP</name>
+      <name>sv-V_JOB_NAME_and_V_SCALE_UP_and_V_MAIN_JOB_PROJECT</name>
       <description/>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
@@ -468,11 +468,16 @@
           <variable_value>${P_SCALE_UP}</variable_value>
           <variable_type>ROOT_JOB</variable_type>
         </field>
+        <field>
+          <variable_name>V_MAIN_JOB_PROJECT</variable_name>
+          <variable_value>${P_PROJECT_NAME}</variable_value>
+          <variable_type>ROOT_JOB</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>512</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -487,7 +492,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>992</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -513,7 +518,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>992</xloc>
       <yloc>256</yloc>
     </entry>
     <entry>
@@ -521,25 +526,25 @@
       <description/>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
-      <filename>${CONFIG_DIR}/properties/${V_JOB_NAME}.properties</filename>
+      <filename>${CONFIG_DIR}/properties/${V_MAIN_JOB_PROJECT}/${V_JOB_NAME}.properties</filename>
       <file_variable_type>PARENT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>992</xloc>
+      <xloc>1152</xloc>
       <yloc>256</yloc>
     </entry>
     <entry>
       <name>fe-job</name>
       <description/>
       <type>FILE_EXISTS</type>
-      <filename>${CONFIG_DIR}/properties/${V_JOB_NAME}.properties</filename>
+      <filename>${CONFIG_DIR}/properties/${V_MAIN_JOB_PROJECT}/${V_JOB_NAME}.properties</filename>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>992</xloc>
+      <xloc>1152</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -554,7 +559,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>768</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -567,7 +572,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>768</xloc>
       <yloc>256</yloc>
     </entry>
   </entries>
@@ -583,7 +588,7 @@
     </hop>
     <hop>
       <from>wtl-load_project_environment</from>
-      <to>sv-V_JOB_NAME_and_V_SCALE_UP</to>
+      <to>sv-V_JOB_NAME_and_V_SCALE_UP_and_V_MAIN_JOB_PROJECT</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -627,7 +632,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>sv-V_JOB_NAME_and_V_SCALE_UP</from>
+      <from>sv-V_JOB_NAME_and_V_SCALE_UP_and_V_MAIN_JOB_PROJECT</from>
       <to>sv-framework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
