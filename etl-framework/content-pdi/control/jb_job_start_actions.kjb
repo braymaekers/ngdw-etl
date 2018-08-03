@@ -469,7 +469,7 @@
       <type>WRITE_TO_LOG</type>
       <logmessage>CURRENT STATUS - ${V_CURRENT_JOB_EXECUTION_STATUS}</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>${P_JOB_NAME} INTERRUPTED</logsubject>
+      <logsubject>*** INFO: MAIN JOB ${P_JOB_NAME} NOT ALLOWED TO START ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

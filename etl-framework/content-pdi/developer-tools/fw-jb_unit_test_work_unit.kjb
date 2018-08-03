@@ -14,21 +14,31 @@
     <parameter>
       <name>P_BUS_AREA</name>
       <default_value/>
-      <description/>
+      <description>Work Unit Business Area</description>
     </parameter>
     <parameter>
       <name>P_JOB_NAME</name>
       <default_value>FRAMEWORK_TESTE_UNIT</default_value>
-      <description/>
+      <description>Main job name</description>
+    </parameter>
+    <parameter>
+      <name>P_MAIN_JOB_PROJECT</name>
+      <default_value/>
+      <description>Main Job Project</description>
     </parameter>
     <parameter>
       <name>P_PROJECT_NAME</name>
       <default_value/>
-      <description/>
+      <description>Work Unit project</description>
     </parameter>
     <parameter>
       <name>P_SCALE_UP</name>
       <default_value>false</default_value>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>P_WORK_UNIT_INSTANCE</name>
+      <default_value/>
       <description/>
     </parameter>
     <parameter>
@@ -501,6 +511,11 @@
           <stream_name/>
           <value>${P_WORK_UNIT_TYPE}</value>
         </parameter>
+        <parameter>
+          <name>P_WORK_UNIT_INSTANCE</name>
+          <stream_name/>
+          <value>${P_WORK_UNIT_INSTANCE}</value>
+        </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
@@ -536,9 +551,9 @@
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
         <parameter>
-          <name>P_PROJECT_NAME</name>
+          <name>P_MAIN_JOB_PROJECT</name>
           <stream_name/>
-          <value>${P_PROJECT_NAME}</value>
+          <value>${P_MAIN_JOB_PROJECT}</value>
         </parameter>
         <parameter>
           <name>P_JOB_NAME</name>
@@ -594,15 +609,14 @@
       <name>wtl-test_unit_info</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>-----------------------------------
-P_SCALE_UP: ${P_SCALE_UP}
+      <logmessage>P_SCALE_UP: ${P_SCALE_UP}
 P_PROJECT_NAME: ${P_PROJECT_NAME}
 P_BUS_AREA: ${P_BUS_AREA}
 P_JOB_NAME: ${P_JOB_NAME}
 P_WORK_UNIT_NAME: ${P_WORK_UNIT_NAME}
 P_WORK_UNIT_TYPE: ${P_WORK_UNIT_TYPE}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** FRAMEWORK TEST UNIT INFO ***</logsubject>
+      <logsubject>***  NFO: FRAMEWORK UNIT TEST ON WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${V_JOB_NAME}  ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

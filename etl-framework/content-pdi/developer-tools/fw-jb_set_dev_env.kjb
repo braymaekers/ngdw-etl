@@ -22,13 +22,28 @@
       <description/>
     </parameter>
     <parameter>
-      <name>P_PROJECT_NAME</name>
+      <name>P_MAIN_JOB_PROJECT</name>
       <default_value/>
       <description/>
     </parameter>
     <parameter>
       <name>P_SCALE_UP</name>
       <default_value>false</default_value>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>P_WORK_UNIT_INSTANCE</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>P_WORK_UNIT_NAME</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>P_WORK_UNIT_PROJECT</name>
+      <default_value/>
       <description/>
     </parameter>
   </parameters>
@@ -450,7 +465,7 @@
       <description/>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
-      <filename>${CONFIG_DIR}/properties/${V_JOB_NAME}.properties</filename>
+      <filename>${CONFIG_DIR}/properties/${P_MAIN_JOB_PROJECT}/${P_JOB_NAME}.properties</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
       </fields>
@@ -478,6 +493,26 @@
           <variable_value>${P_SCALE_UP}</variable_value>
           <variable_type>JVM</variable_type>
         </field>
+        <field>
+          <variable_name>V_MAIN_JOB_PROJECT</variable_name>
+          <variable_value>${P_MAIN_JOB_PROJECT}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>V_WORK_UNIT_NAME</variable_name>
+          <variable_value>${P_WORK_UNIT_NAME}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>V_WORK_UNIT_INSTANCE</variable_name>
+          <variable_value>${P_WORK_UNIT_INSTANCE}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>V_WORK_UNIT_PROJECT</variable_name>
+          <variable_value>${P_WORK_UNIT_PROJECT}</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -489,7 +524,7 @@
       <name>fe-job</name>
       <description/>
       <type>FILE_EXISTS</type>
-      <filename>${CONFIG_DIR}/properties/${P_JOB_NAME}.properties</filename>
+      <filename>${CONFIG_DIR}/properties/${P_MAIN_JOB_PROJECT}/${P_JOB_NAME}.properties</filename>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -497,23 +532,13 @@
       <yloc>192</yloc>
     </entry>
     <entry>
-      <name>Success</name>
-      <description/>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1408</xloc>
-      <yloc>192</yloc>
-    </entry>
-    <entry>
       <name>wtl-load_develop_environment</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>*** ${P_JOB_NAME} on ${P_PROJECT_NAME} with scale_up ${P_SCALE_UP} ***
+      <logmessage>MAIN JOB ${P_JOB_NAME} on ${P_PROJECT_NAME} with scale_up ${P_SCALE_UP}
 </logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** LOAD DEV JOB ENVIRONMENT ***</logsubject>
+      <logsubject>*** INFO: WORK UNIT LOAD ENVIRONMENT FOR ${P_WORK_UNIT_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -539,9 +564,9 @@
       <name>wtl-missing_framework_properties</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>*** Missing Framework Properties file ***</logmessage>
+      <logmessage>Missing Framework Properties file</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** LOAD PROJECT ENVIRONMENT ***</logsubject>
+      <logsubject>*** ERROR: WORK UNIT LOAD ENVIRONMENT FOR ${P_WORK_UNIT_NAME}</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -553,7 +578,7 @@
       <description/>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
-      <filename>${CONFIG_DIR}/properties/${P_PROJECT_NAME}.properties</filename>
+      <filename>${CONFIG_DIR}/properties/${P_MAIN_JOB_PROJECT}.properties</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
       </fields>
@@ -567,9 +592,9 @@
       <name>wtl-missing_project_properties</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>*** Missing properties file for ${P_JOB_NAME} on ${P_PROJECT_NAME} ***</logmessage>
+      <logmessage>Missing project properties file for ${P_JOB_NAME} on ${P_MAIN_JOB_PROJECT}</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** LOAD PROJECT ENVIRONMENT ***</logsubject>
+      <logsubject>*** ERROR: WORK UNIT LOAD ENVIRONMENT FOR ${P_WORK_UNIT_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -606,10 +631,9 @@
       <name>wtl-common.properties not available</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>---------------
-common.properties not available</logmessage>
+      <logmessage>common.properties not available</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** WORK UNIT ENVIRONMENT FOR ${P_WORK_UNIT_NAME}</logsubject>
+      <logsubject>*** ERROR: WORK UNIT LOAD ENVIRONMENT FOR ${P_WORK_UNIT_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -633,14 +657,91 @@ common.properties not available</logmessage>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/${P_BUS_AREA}.properties</filename>
-      <file_variable_type>ROOT_JOB</file_variable_type>
+      <file_variable_type>JVM</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1248</xloc>
-      <yloc>320</yloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>fe-work_unit_with_instance</name>
+      <description/>
+      <type>FILE_EXISTS</type>
+      <filename>${CONFIG_DIR}/properties/${V_MAIN_JOB_PROJECT}/${V_JOB_NAME}/${V_WORK_UNIT_NAME}_${V_WORK_UNIT_INSTANCE}.properties</filename>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1248</xloc>
+      <yloc>576</yloc>
+    </entry>
+    <entry>
+      <name>sv-work_unit_instance</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>${CONFIG_DIR}/properties/${V_MAIN_JOB_PROJECT}/${V_JOB_NAME}/${V_WORK_UNIT_NAME}_${V_WORK_UNIT_INSTANCE}.properties</filename>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1484</xloc>
+      <yloc>575</yloc>
+    </entry>
+    <entry>
+      <name>fe-work_unit_with_no_instance</name>
+      <description/>
+      <type>FILE_EXISTS</type>
+      <filename>${CONFIG_DIR}/properties/${V_MAIN_JOB_PROJECT}/${V_JOB_NAME}/${V_WORK_UNIT_NAME}.properties</filename>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1248</xloc>
+      <yloc>448</yloc>
+    </entry>
+    <entry>
+      <name>sv-work_unit_no_instance</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>${CONFIG_DIR}/properties/${V_MAIN_JOB_PROJECT}/${V_JOB_NAME}/${V_WORK_UNIT_NAME}.properties</filename>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>448</yloc>
+    </entry>
+    <entry>
+      <name>wtl-environment_finished</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>P_PROJECT_NAME: ${P_PROJECT_NAME}
+P_BUS_AREA: ${P_BUS_AREA}
+V_WORK_UNIT_INSTANCE: ${V_WORK_UNIT_INSTANCE}</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>*** INFO: WORK UNIT LOAD ENVIRONMENT FOR ${P_WORK_UNIT_NAME} FINISHED ***</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1024</xloc>
+      <yloc>576</yloc>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>768</xloc>
+      <yloc>576</yloc>
     </entry>
   </entries>
   <hops>
@@ -754,16 +855,61 @@ common.properties not available</logmessage>
     </hop>
     <hop>
       <from>fe-business_area</from>
-      <to>Success</to>
+      <to>sv-business_area</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>fe-business_area</from>
-      <to>sv-business_area</to>
+      <to>fe-work_unit_with_no_instance</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fe-work_unit_with_no_instance</from>
+      <to>sv-work_unit_no_instance</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fe-work_unit_with_no_instance</from>
+      <to>fe-work_unit_with_instance</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fe-work_unit_with_instance</from>
+      <to>wtl-environment_finished</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fe-work_unit_with_instance</from>
+      <to>sv-work_unit_instance</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-environment_finished</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

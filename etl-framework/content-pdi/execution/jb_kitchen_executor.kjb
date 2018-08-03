@@ -522,7 +522,7 @@
       <name>ab-kitchen_job_execution_env_error</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: Unable to Load Job Environment - P_PROJECT_NAME: ${P_PROJECT_NAME} - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <message>*** ERROR: Unable to Load Job Environment on kitchen - P_PROJECT_NAME: ${P_PROJECT_NAME} - P_JOB_NAME: ${P_JOB_NAME}  ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -533,7 +533,7 @@
       <name>ab-kitchen_job_execution_failed</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <message>*** ERROR: Unable to Execute main job on kitchen:  P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME}  ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -557,7 +557,7 @@
       <logmessage>P_PROJECT_NAME - ${P_PROJECT_NAME}
 P_JOB_NAME - ${P_JOB_NAME}</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** STARTING JOB ON KITCHEN</logsubject>
+      <logsubject>*** INFO: STARTING MAIN JOB ON KITCHEN ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

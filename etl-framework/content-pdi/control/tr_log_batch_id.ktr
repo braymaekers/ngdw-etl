@@ -438,7 +438,7 @@
       <note>Framework element - makes batch_id, ip and hostname available as variables to the framework</note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>509</width>
+      <width>584</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -627,7 +627,7 @@
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>----------------- JOB RUN DETAILS: -----------------</logmessage>
+    <logmessage>*** INFO: MAIN JOB CONTROL INFORMATION ***</logmessage>
     <fields>
       <field>
         <name>batch_id</name>

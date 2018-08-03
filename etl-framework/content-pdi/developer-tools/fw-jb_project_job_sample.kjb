@@ -499,7 +499,7 @@
       <name>ab-job_not_allowed_to_start</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: ${V_JOB_NAME} NOT ALLOWED TO START</message>
+      <message>*** ERROR: MAIN JOB ${V_JOB_NAME} NOT ALLOWED TO START ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -569,7 +569,7 @@
       <name>ab-work_unit_error</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: ${V_JOB_NAME}, WORK UNIT &lt;change_to_work_unit> TERMINATED WITH ERRORS.</message>
+      <message>*** ERROR: MAIN JOB ${V_JOB_NAME}, WORK UNIT &lt;change_to_work_unit> TERMINATED WITH ERRORS ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

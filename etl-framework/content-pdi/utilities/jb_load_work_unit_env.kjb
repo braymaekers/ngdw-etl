@@ -449,13 +449,12 @@
       <name>wtl-work_unit_environment</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>---------------
-P_PROJECT_NAME: ${P_PROJECT_NAME}
+      <logmessage>P_PROJECT_NAME: ${P_PROJECT_NAME}
 P_BUS_AREA: ${P_BUS_AREA}
 P_WORK_UNIT_NAME: ${P_WORK_UNIT_NAME}
 P_WORK_UNIT_INSTANCE: ${P_WORK_UNIT_INSTANCE}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO - WORK UNIT ENVIRONMENT FOR ${P_WORK_UNIT_NAME} STARTED ***</logsubject>
+      <logsubject>*** INFO: WORK UNIT LOAD ENVIRONMENT FOR ${P_WORK_UNIT_NAME} STARTED ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -544,10 +543,9 @@ P_WORK_UNIT_INSTANCE: ${P_WORK_UNIT_INSTANCE}</logmessage>
       <name>wtl-common.properties not available</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>---------------
-common.properties not available</logmessage>
+      <logmessage>common.properties not available</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** WORK UNIT ENVIRONMENT FOR ${P_WORK_UNIT_NAME}</logsubject>
+      <logsubject>*** INFO: WORK UNIT ENVIRONMENT FOR ${P_WORK_UNIT_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -647,15 +645,14 @@ common.properties not available</logmessage>
       <yloc>704</yloc>
     </entry>
     <entry>
-      <name>wtl-environment_finished_instance</name>
+      <name>wtl-environment_finished</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>---------------
-P_PROJECT_NAME: ${P_PROJECT_NAME}
+      <logmessage>P_PROJECT_NAME: ${P_PROJECT_NAME}
 P_BUS_AREA: ${P_BUS_AREA}
 V_WORK_UNIT_INSTANCE: ${V_WORK_UNIT_INSTANCE}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO - WORK UNIT ENVIRONMENT FOR ${P_WORK_UNIT_NAME} WITH INSTANCE FNISHED ***</logsubject>
+      <logsubject>*** INFO: WORK UNIT ENVIRONMENT FOR ${P_WORK_UNIT_NAME} FNISHED ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -764,7 +761,7 @@ V_WORK_UNIT_INSTANCE: ${V_WORK_UNIT_INSTANCE}</logmessage>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>wtl-environment_finished_instance</from>
+      <from>wtl-environment_finished</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -792,7 +789,7 @@ V_WORK_UNIT_INSTANCE: ${V_WORK_UNIT_INSTANCE}</logmessage>
     </hop>
     <hop>
       <from>fe-work_unit_with_instance</from>
-      <to>wtl-environment_finished_instance</to>
+      <to>wtl-environment_finished</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

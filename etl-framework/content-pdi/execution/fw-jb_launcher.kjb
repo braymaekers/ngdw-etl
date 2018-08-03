@@ -691,7 +691,7 @@
 P_JOB_NAME: ${P_JOB_NAME}
 P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** LAUNCHER INFO ***</logsubject>
+      <logsubject>*** INFO: LAUNCHER STARTING PARAMETERS ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -762,7 +762,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <name>ab-server_job_execution_failed</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <message>*** ERROR: Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -832,7 +832,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <name>ab-server_job_execution_env_error</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: Unable to Load Project Job Environment - P_PROJECT_NAME: ${P_PROJECT_NAME} - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <message>*** ERROR: Unable to Load Project Job Environment - P_PROJECT_NAME: ${P_PROJECT_NAME} - P_JOB_NAME: ${P_JOB_NAME} ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -858,9 +858,9 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <name>wtl-missing_framework_properties</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>*** Missing Framework Properties file when scale up</logmessage>
+      <logmessage>Missing Framework Properties file when scale up</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** INFO - LOAD FRAMEWORK PROPERTIES</logsubject>
+      <logsubject>*** INFO: LOAD FRAMEWORK PROPERTIES ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -871,7 +871,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <name>ab-scale_up_failed</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <message>*** ERROR: Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -904,7 +904,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <name>ab-server_job_execution_failed_scale_up_file</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <message>*** ERROR: Unable to Execute scale-up on file mode - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -945,7 +945,7 @@ P_SCALE_UP: ${P_SCALE_UP}</logmessage>
       <name>ab-server_job_execution_failed_scale_up_ba_server</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: Unable to Execute - P_SCALE_UP: ${P_SCALE_UP} - P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} </message>
+      <message>*** ERROR: Unable to scale-up on Server mode: P_PROJECT_NAME: ${P_PROJECT_NAME}  - P_JOB_NAME: ${P_JOB_NAME} ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

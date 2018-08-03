@@ -499,9 +499,9 @@
       <name>wtl-load_project_environment</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>*** ${P_JOB_NAME} on ${P_PROJECT_NAME} with scale_up ${P_SCALE_UP} ***</logmessage>
+      <logmessage>${P_JOB_NAME} on ${P_PROJECT_NAME} with scale_up ${P_SCALE_UP}</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** LOAD PROJECT JOB ENVIRONMENT ***</logsubject>
+      <logsubject>*** INFO: LOAD PROJECT MAIN JOB ENVIRONMENT START INFORMATION ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -512,9 +512,9 @@
       <name>wtl-missing_project_properties</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>*** Missing properties file for ${P_JOB_NAME} on ${P_PROJECT_NAME} ***</logmessage>
+      <logmessage>Missing properties file for ${P_JOB_NAME} on ${P_PROJECT_NAME}</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** LOAD PROJECT ENVIRONMENT ***</logsubject>
+      <logsubject>*** ERROR: LOAD PROJECT ENVIRONMENT ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -566,9 +566,9 @@
       <name>wtl-missing_framework_properties</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>*** Missing Framework Properties file ***</logmessage>
+      <logmessage>Missing Framework Properties file</logmessage>
       <loglevel>Minimal</loglevel>
-      <logsubject>*** LOAD PROJECT ENVIRONMENT ***</logsubject>
+      <logsubject>*** ERROR: LOAD PROJECT ENVIRONMENT ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

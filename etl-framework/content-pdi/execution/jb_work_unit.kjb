@@ -805,7 +805,7 @@ P_WORK_UNIT_NAME - ${P_WORK_UNIT_NAME}
 P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}
 P_CHECK_START: ${P_CHECK_START}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** JOBNAME: ${V_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME}</logsubject>
+      <logsubject>*** INFO: STARTING INFORMATION ON WORK UNIT ${P_WORK_UNIT_NAME} IN MAIN JOB ${V_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -879,9 +879,9 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <name>wrt-start-execution_check</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>EXECUTION STARTED - CHECK ON START</logmessage>
+      <logmessage>EXECUTION STARTED WITH CHECK ON START</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO: JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME} ***</logsubject>
+      <logsubject>*** INFO: INFORMATION ABOUT CHECK ON START FOR WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -894,7 +894,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <type>WRITE_TO_LOG</type>
       <logmessage>EXECUTION SKIPPED</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO: JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME} ***</logsubject>
+      <logsubject>*** INFO: INFORMATION ABOUT CHECK ON START FOR WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -905,9 +905,9 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <name>wrt-job-execution-finished</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>JOB FINISHED</logmessage>
+      <logmessage>MAIN JOB FINISHED BY EXECUTING THE LAST WORK UNIT</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO: JOBNAME: ${V_JOB_NAME} ***</logsubject>
+      <logsubject>*** INFO: INFORMATION EXECUTION OF WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1070,7 +1070,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <name>ab-work_unit_failed_updating_work_unit_on_JOB_CONTROL</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: WORK UNIT ${P_WORK_UNIT_NAME} FROM ${P_JOB_NAME} FINISHED WITH ERRORS</message>
+      <message>*** ERROR: WORK UNIT ${P_WORK_UNIT_NAME} FROM MAIN JOB ${P_JOB_NAME} FINISHED WITH ERRORS ON UPDATING WORK UNITS TO FINISH</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1081,7 +1081,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <name>ab-work_unit_failed_updating_main_job_on_JOB_CONTROL</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: WORK UNIT ${P_WORK_UNIT_NAME} FROM ${P_JOB_NAME} FINISHED WITH ERRORS</message>
+      <message>*** ERROR: WORK UNIT ${P_WORK_UNIT_NAME} FROM MAIN JOB ${P_JOB_NAME} FINISHED WITH ERRORS ON UPDATING CONTROL TO FINISH MAIN JOB</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1114,9 +1114,14 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <name>wrt-start-execution_no_check</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>EXECUTION STARTED - NO CHECK ON START</logmessage>
+      <logmessage>EXECUTION STARTED WITH NO CHECK ON START
+
+PROJECT_NAME: ${PROJECT_NAME}
+CONTENT_HOME: ${CONTENT_HOME}
+V_PREVIOUS_JOB_EXECUTION_STATUS: ${V_PREVIOUS_JOB_EXECUTION_STATUS}
+V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO: JOBNAME: ${P_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME} ***</logsubject>
+      <logsubject>*** INFO: INFORMATION ABOUT CHECK ON START FOR WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -1416,8 +1421,8 @@ Work Unit Parameters
 P_CHECK_START: - if Work Unit check on start should be performed
 P_PROJECT_NAME - the main directory name (core, acquisition or service)
 P_BUS_AREA - directory name inside content-pdi
-P_JOB_NAME - the current wrapper job name (must be unique)
 P_WORK_UNIT_NAME - the work unit name 
+P_WORK_UNIT_INSTANCE - the instance role this work unit performs on the current main job
 P_WORK_UNIT_TYPE - the work unit type, either transformation or job
 P_IS_LAST_UNIT - is current unit is the last on the current job</note>
       <xloc>832</xloc>
@@ -1465,7 +1470,7 @@ P_IS_LAST_UNIT - is current unit is the last on the current job</note>
       <xloc>448</xloc>
       <yloc>928</yloc>
       <width>254</width>
-      <heigth>26</heigth>
+      <heigth>24</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>
@@ -1473,9 +1478,30 @@ P_IS_LAST_UNIT - is current unit is the last on the current job</note>
       <fontcolorred>0</fontcolorred>
       <fontcolorgreen>0</fontcolorgreen>
       <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
+      <backgroundcolorred>111</backgroundcolorred>
+      <backgroundcolorgreen>176</backgroundcolorgreen>
+      <backgroundcolorblue>239</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Calling the work unit</note>
+      <xloc>1024</xloc>
+      <yloc>448</yloc>
+      <width>135</width>
+      <heigth>24</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>111</backgroundcolorred>
+      <backgroundcolorgreen>176</backgroundcolorgreen>
+      <backgroundcolorblue>239</backgroundcolorblue>
       <bordercolorred>100</bordercolorred>
       <bordercolorgreen>100</bordercolorgreen>
       <bordercolorblue>100</bordercolorblue>

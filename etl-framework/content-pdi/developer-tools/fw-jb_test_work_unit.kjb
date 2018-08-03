@@ -22,6 +22,11 @@
       <description>acquisition|core|service</description>
     </parameter>
     <parameter>
+      <name>P_WORK_UNIT_INSTANCE</name>
+      <default_value/>
+      <description>The instance role that this work unit performs on a particular main job</description>
+    </parameter>
+    <parameter>
       <name>P_WORK_UNIT_NAME</name>
       <default_value/>
       <description>File name of the transformation or job to be executed</description>
@@ -558,7 +563,7 @@ P_BUS_AREA - ${P_BUS_AREA}
 P_WORK_UNIT_NAME - ${P_WORK_UNIT_NAME}
 P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** JOBNAME: ${V_JOB_NAME} | WORK UNIT:  ${P_WORK_UNIT_NAME}</logsubject>
+      <logsubject>*** INFO: UNIT TEST ON WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${V_JOB_NAME} STARTING WITH ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -569,7 +574,7 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <name>ab-work_unit_failed</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: WORK UNIT ${P_WORK_UNIT_NAME} FROM ${P_JOB_NAME} FINISHED WITH ERRORS</message>
+      <message>*** ERROR: UNIT TEST ON WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${V_JOB_NAME}  FINISHED WITH ERRORS ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -621,6 +626,11 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
           <name>P_WORK_UNIT_NAME</name>
           <stream_name/>
           <value>${P_WORK_UNIT_NAME}</value>
+        </parameter>
+        <parameter>
+          <name>P_WORK_UNIT_INSTANCE</name>
+          <stream_name/>
+          <value>${P_WORK_UNIT_INSTANCE}</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>

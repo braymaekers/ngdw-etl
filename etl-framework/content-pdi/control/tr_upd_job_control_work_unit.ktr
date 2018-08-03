@@ -1357,7 +1357,7 @@ key: project-jobname-checkpoint</note>
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE JOB_CONTROL TABLE ***</logmessage>
+    <logmessage>*** ERROR - NOT POSSIBLE TO INSERT/UPDATE ${P_WORK_UNIT_CHECKPOINT} (MAIN JOB ${V_JOB_NAME}) JOB_CONTROL TABLE ***</logmessage>
     <fields>
       </fields>
     <cluster_schema/>
@@ -1388,7 +1388,7 @@ key: project-jobname-checkpoint</note>
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE JOB_CONTROL TABLE ***</logmessage>
+    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE ${P_WORK_UNIT_CHECKPOINT} (MAIN JOB ${V_JOB_NAME}) JOB_CONTROL TABLE ***</logmessage>
     <fields>
       </fields>
     <cluster_schema/>

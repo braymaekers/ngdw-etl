@@ -1027,7 +1027,7 @@
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** INFO</logmessage>
+    <logmessage>*** INFO: TO BE REMOVED IN PRODUCTION ***</logmessage>
     <fields>
       <field>
         <name>project_encryption_method</name>
@@ -1110,7 +1110,7 @@
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** INFO</logmessage>
+    <logmessage>*** INFO: UNLOCK ***</logmessage>
     <fields>
       <field>
         <name>project_encryption_method</name>
@@ -1135,7 +1135,7 @@
   <step_error_handling>
     <error>
       <source_step>udje-decrypted_password      </source_step>
-      <target_step>Abort</target_step>
+      <target_step/>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>
