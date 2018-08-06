@@ -1021,7 +1021,7 @@ WHERE main_job_project = '${V_MAIN_JOB_PROJECT}'
 	and main_job_name = '${V_JOB_NAME}'
 	and work_unit_project = '${V_WORK_UNIT_PROJECT}'
 	and work_unit = '${P_WORK_UNIT_NAME}'
-	and work_unit_instance = '${P_WORK_UNIT_INSTANCE}';</sql>
+	and work_unit_instance = '${P_WORK_UNIT_INSTANCE}'</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

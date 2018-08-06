@@ -607,7 +607,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ti-check_status</from>
+      <from>ti-main_job_check_status</from>
       <to>dtempty-job_start_check</to>
       <enabled>Y</enabled>
     </hop>
@@ -657,7 +657,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ti-check_status</from>
+      <from>ti-main_job_check_status</from>
       <to>sc-status</to>
       <enabled>Y</enabled>
     </hop>
@@ -1134,7 +1134,7 @@
     </GUI>
   </step>
   <step>
-    <name>ti-check_status</name>
+    <name>ti-main_job_check_status</name>
     <type>TableInput</type>
     <description/>
     <distribute>N</distribute>
@@ -1147,7 +1147,7 @@
     <connection>pdi_control</connection>
     <sql>SELECT BATCH_ID, status, PID, NULL AS RUNTIME
 FROM ${PDI_CONTROL.SCHEMA}.JOB_CONTROL 
-WHERE main_job_project = '${V_MAIN_JOB_PROJECT}' and main_job_name = '${V_JOB_NAME}' and work_unit = 'job-checkpoint';</sql>
+WHERE main_job_project = '${V_MAIN_JOB_PROJECT}' and main_job_name = '${V_JOB_NAME}' and work_unit = 'job-checkpoint'</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
