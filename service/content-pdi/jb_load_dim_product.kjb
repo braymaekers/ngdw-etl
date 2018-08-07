@@ -635,7 +635,7 @@
         <parameter>
           <name>P_BUS_AREA</name>
           <stream_name/>
-          <value>main</value>
+          <value>test_material</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
