@@ -474,10 +474,10 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>96</xloc>
-      <yloc>288</yloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
-      <name>sv-set_V_FILENAME</name>
+      <name>sv-set_V_DATA_SET_and_V_BASE_FILE_PATH_and_V_TARGET_TABLE</name>
       <description/>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
@@ -485,8 +485,8 @@
       <file_variable_type>CURRENT_JOB</file_variable_type>
       <fields>
         <field>
-          <variable_name>V_FILENAME</variable_name>
-          <variable_value>${P_FILENAME}</variable_value>
+          <variable_name>V_DATA_SET</variable_name>
+          <variable_value>${P_DATA_SET}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
         <field>
@@ -494,12 +494,17 @@
           <variable_value>${P_BASE_FILE_PATH}</variable_value>
           <variable_type>CURRENT_JOB</variable_type>
         </field>
+        <field>
+          <variable_name>V_TARGET_TABLE</variable_name>
+          <variable_value>${P_TARGET_TABLE}</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>288</xloc>
-      <yloc>384</yloc>
+      <xloc>224</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>kjb-idl_load_file_data</name>
@@ -507,7 +512,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${COMMON_HOME}/idl/kjb-idl_load_file_data.kjb</filename>
+      <filename>${COMMON_HOME}/idl/utilities/kjb-idl_load_file_data.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -532,8 +537,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
-      <yloc>384</yloc>
+      <xloc>832</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -542,8 +547,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1408</xloc>
-      <yloc>672</yloc>
+      <xloc>1824</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>aj-error_loading_info_from_files</name>
@@ -553,8 +558,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
-      <yloc>128</yloc>
+      <xloc>832</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>ktr-get_idl_file_control_data</name>
@@ -562,7 +567,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/idl/ktr-get_idl_file_control_data.ktr</filename>
+      <filename>${COMMON_HOME}/idl/utilities/ktr-get_idl_file_control_data.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -589,8 +594,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>384</yloc>
+      <xloc>1152</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>se-check</name>
@@ -611,8 +616,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1408</xloc>
-      <yloc>384</yloc>
+      <xloc>1440</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>aj-error_on_validation_against_control_data</name>
@@ -622,8 +627,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1408</xloc>
-      <yloc>128</yloc>
+      <xloc>1440</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>aj-error_get_idl_file_control_data</name>
@@ -633,8 +638,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>128</yloc>
+      <xloc>1152</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>ktr-get_idl_file_control_next_date</name>
@@ -642,7 +647,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/idl/ktr-get_idl_file_control_next_date.ktr</filename>
+      <filename>${COMMON_HOME}/idl/utilities/ktr-get_idl_file_control_next_date.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -669,8 +674,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
-      <yloc>384</yloc>
+      <xloc>576</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_success</name>
@@ -678,7 +683,7 @@
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'success', status_description = 'nothing to report'
-where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -687,8 +692,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1408</xloc>
-      <yloc>512</yloc>
+      <xloc>1664</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>wtl-idl_start_ingestion</name>
@@ -700,7 +705,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
+      <xloc>224</xloc>
       <yloc>384</yloc>
     </entry>
     <entry>
@@ -711,8 +716,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
-      <yloc>256</yloc>
+      <xloc>576</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_on_loadding</name>
@@ -720,7 +725,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'error', status_description = '${V_ERROR_DESCRIPTION}'
-where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -729,8 +734,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
-      <yloc>256</yloc>
+      <xloc>832</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_validation_work</name>
@@ -738,7 +743,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'error', status_description = 'getting control data to check'
-where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -747,8 +752,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1120</xloc>
-      <yloc>256</yloc>
+      <xloc>1152</xloc>
+      <yloc>352</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_validation</name>
@@ -756,7 +761,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'error', status_description = 'control validation check failed'
-where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -765,8 +770,44 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1408</xloc>
-      <yloc>256</yloc>
+      <xloc>1440</xloc>
+      <yloc>352</yloc>
+    </entry>
+    <entry>
+      <name>ktr-test_dynamic_sql</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${COMMON_HOME}/idl/utilities/ktr-test_dynamic_sql.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1536</xloc>
+      <yloc>608</yloc>
     </entry>
   </entries>
   <hops>
@@ -789,7 +830,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>sv-set_V_FILENAME</from>
+      <from>sv-set_V_DATA_SET_and_V_BASE_FILE_PATH_and_V_TARGET_TABLE</from>
       <to>ktr-get_idl_file_control_next_date</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -800,15 +841,6 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
     <hop>
       <from>ktr-get_idl_file_control_next_date</from>
       <to>kjb-idl_load_file_data</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>se-check</from>
-      <to>sql-upd_file_control_table_success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -835,7 +867,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
     </hop>
     <hop>
       <from>wtl-idl_start_ingestion</from>
-      <to>sv-set_V_FILENAME</to>
+      <to>sv-set_V_DATA_SET_and_V_BASE_FILE_PATH_and_V_TARGET_TABLE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -905,6 +937,24 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>se-check</from>
+      <to>ktr-test_dynamic_sql</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>ktr-test_dynamic_sql</from>
+      <to>sql-upd_file_control_table_success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
@@ -912,22 +962,23 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
 
 PARAMETERS: 
 
-* P_FILENAME - filename to be used
+* P_DATA_SET - filename to be used
 
 VARIABLES MADE AVAILABLE:
 
-* V_FILENAME - current job
+* V_DATA_SET - current job
 * V_BASE_FILE_PATH - current job
+* V_TARGET_TABLE - current job
 
 VARIABLES USED
 
 * V_ERROR_DESCRIPTION
-* V_FILENAME
+* V_DATA_SET
 * V_FILE_DATE</note>
-      <xloc>0</xloc>
-      <yloc>0</yloc>
+      <xloc>64</xloc>
+      <yloc>32</yloc>
       <width>383</width>
-      <heigth>282</heigth>
+      <heigth>299</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

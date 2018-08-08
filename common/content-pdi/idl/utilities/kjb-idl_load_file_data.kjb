@@ -516,7 +516,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/idl//ktr-check_file_existence.ktr</filename>
+      <filename>${COMMON_HOME}/idl/utilities/ktr-check_file_existence.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -552,7 +552,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/idl/ktr-mdi_load_csv_file.ktr</filename>
+      <filename>${COMMON_HOME}/idl/utilities/ktr-mdi_load_csv_file.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -588,7 +588,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${COMMON_HOME}/idl/ktr-read_control_file.ktr</filename>
+      <filename>${COMMON_HOME}/idl/utilities/ktr-read_control_file.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -622,8 +622,8 @@
       <name>sql-update_file_control_table_row_count</name>
       <description/>
       <type>SQL</type>
-      <sql>update acquisition.idl_file_control set row_count = (select COUNT(1) from acquisition.${V_FILENAME})
-where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
+      <sql>update acquisition.idl_file_control set row_count = (select COUNT(1) from acquisition.${V_TARGET_TABLE})
+where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -668,7 +668,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <fields>
         <field>
           <variable_name> V_ERROR_DESCRIPTION</variable_name>
-          <variable_value>Folder ${V_FILE_DATE} is empty</variable_value>
+          <variable_value>Folder ${V_FILE_DATE} is empty for data set ${V_DATA_SET}</variable_value>
           <variable_type>PARENT_JOB</variable_type>
         </field>
       </fields>
@@ -721,7 +721,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <fields>
         <field>
           <variable_name> V_ERROR_DESCRIPTION</variable_name>
-          <variable_value>Folder ${V_FILE_DATE} missing file</variable_value>
+          <variable_value>Folder ${V_FILE_DATE} missing one file for data set ${V_DATA_SET}</variable_value>
           <variable_type>PARENT_JOB</variable_type>
         </field>
       </fields>
@@ -858,10 +858,11 @@ loads the information to &lt;filename>_temp and updates idl_file_control table
 
 VARIABLES USED:
 
-* V_FILENAME
+* V_DATA_SET
 * V_FILE_DATE
 * V_FOLDER_FILE_COUNT_CORRECT - to control if we have the two files
 * V_BASE_FILE_PATH
+* V_TARGET_TABLE
 
 VARIABLES MADE AVAILABLE
 
@@ -869,7 +870,7 @@ VARIABLES MADE AVAILABLE
       <xloc>32</xloc>
       <yloc>32</yloc>
       <width>531</width>
-      <heigth>231</heigth>
+      <heigth>248</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

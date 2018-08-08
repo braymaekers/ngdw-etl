@@ -507,7 +507,7 @@
       <yloc>320</yloc>
     </entry>
     <entry>
-      <name>fw_jb_load_work_unit</name>
+      <name>fw_jb_load_CSPARTM</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -571,10 +571,10 @@
       <yloc>192</yloc>
     </entry>
     <entry>
-      <name>ab-work_unit_error</name>
+      <name>ab-work_unit_error_CSPARTM</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: MAIN JOB ${V_JOB_NAME}, WORK UNIT &lt;change_to_work_unit> TERMINATED WITH ERRORS ***</message>
+      <message>*** ERROR: MAIN JOB ${V_JOB_NAME}, WORK UNIT jb_load_CSPARTM TERMINATED WITH ERRORS ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -622,7 +622,7 @@
     </hop>
     <hop>
       <from>fw-jb_job_start_actions</from>
-      <to>fw_jb_load_work_unit</to>
+      <to>fw_jb_load_CSPARTM</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -630,8 +630,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw_jb_load_work_unit</from>
-      <to>ab-work_unit_error</to>
+      <from>fw_jb_load_CSPARTM</from>
+      <to>ab-work_unit_error_CSPARTM</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -639,7 +639,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw_jb_load_work_unit</from>
+      <from>fw_jb_load_CSPARTM</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -728,27 +728,6 @@
       <backgroundcolorred>111</backgroundcolorred>
       <backgroundcolorgreen>176</backgroundcolorgreen>
       <backgroundcolorblue>239</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
-      <note>Change the error output accordingly</note>
-      <xloc>640</xloc>
-      <yloc>384</yloc>
-      <width>232</width>
-      <heigth>24</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>255</backgroundcolorgreen>
-      <backgroundcolorblue>0</backgroundcolorblue>
       <bordercolorred>100</bordercolorred>
       <bordercolorgreen>100</bordercolorgreen>
       <bordercolorblue>100</bordercolorblue>

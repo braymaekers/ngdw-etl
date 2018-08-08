@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ktr-read_control_file</name>
+    <name>ktr-check_file_existence</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -428,26 +428,29 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/07/31 15:48:25.417</created_date>
+    <created_date>2018/08/07 03:55:55.922</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/07/31 15:48:25.417</modified_date>
+    <modified_date>2018/08/07 03:55:55.922</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
     <notepad>
-      <note>PURPOSE: read the control data and update the idl_file_control table with
-the expected counted records
+      <note>PURPOSE: to check if the two files are available before executing the csv loading
 
 VARIABLES USED:
 
-* V_FILENAME
-* V_FILE_DATA
-* V_BASE_FILE_PATH - all used to fetch data from the control file and to update correctly the idl_control_table</note>
-      <xloc>32</xloc>
+* V_DATA_SET
+* V_FILE_DATE
+* V_BASE_FILE_PATH
+
+VARIABLES MADE AVAILABLE:
+
+* V_FOLDER_FILE_COUNT_CORRECT</note>
+      <xloc>48</xloc>
       <yloc>32</yloc>
-      <width>754</width>
-      <heigth>146</heigth>
+      <width>556</width>
+      <heigth>197</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -464,57 +467,6 @@ VARIABLES USED:
       <drawshadow>Y</drawshadow>
     </notepad>
   </notepads>
-  <connection>
-    <name>acquisition</name>
-    <server>${ACQUISITION.HOST}</server>
-    <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>${ACQUISITION.DB}</database>
-    <port>${ACQUISITION.PORT}</port>
-    <username>${ACQUISITION.USER}</username>
-    <password>${ACQUISITION.PASS}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>${ACQUISITION.PORT}</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
   <connection>
     <name>pdi_logging</name>
     <server>${PDI_LOGGING.HOST}</server>
@@ -568,63 +520,53 @@ VARIABLES USED:
   </connection>
   <order>
     <hop>
-      <from>tfi-control_file_info</from>
-      <to>sw-key</to>
+      <from>gfilenames-check_folder_content</from>
+      <to>demptystream-no_files</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sw-key</from>
-      <to>d-info_line</to>
+      <from>demptystream-no_files</from>
+      <to>wtl-check_file_existence_no_files</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sw-key</from>
-      <to>d-count_line</to>
+      <from>wtl-check_file_existence_no_files</from>
+      <to>ab-no_files_on_folder</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>d-count_line</from>
-      <to>calc-new_field_original_n_records</to>
+      <from>gfilenames-check_folder_content</from>
+      <to>mgroupby-count_number_of_recordes</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>calc-new_field_original_n_records</from>
-      <to>sv-count_fields</to>
+      <from>fr-to_create_variable</from>
+      <to>ac-folder_file_count_correct_n</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>sv-count_fields</from>
-      <to>mjoin-join_control_rows_after_calcs</to>
+      <from>fr-to_create_variable</from>
+      <to>ac-folder_file_count_correct_y</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>d-info_line</from>
-      <to>mjoin-join_control_rows_after_calcs</to>
+      <from>mgroupby-count_number_of_recordes</from>
+      <to>fr-to_create_variable</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>mjoin-join_control_rows_after_calcs</from>
-      <to>gv-V_FILENAME_and_V_FILE_DATE</to>
+      <from>ac-folder_file_count_correct_n</from>
+      <to>sv-folder_file_count_incorrect</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>gv-V_FILENAME_and_V_FILE_DATE</from>
-      <to>exsqlscript-update_idl_file_control</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>demptystream-no_data_on_control_file</from>
-      <to>ab-no_data_on_control_file</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>tfi-control_file_info</from>
-      <to>demptystream-no_data_on_control_file</to>
+      <from>ac-folder_file_count_correct_y</from>
+      <to>sv-folder_file_count</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>ab-no_data_on_control_file</name>
+    <name>ab-no_files_on_folder</name>
     <type>Abort</type>
     <description/>
     <distribute>Y</distribute>
@@ -635,7 +577,7 @@ VARIABLES USED:
       <schema_name/>
     </partitioning>
     <row_threshold>0</row_threshold>
-    <message>*** ERROR: NO DATA ON CONTROL FILE FOR ${V_FILENAME} ***</message>
+    <message>*** ERROR: NO FILES ON ${V_BASE_FILE_PATH}/${V_FILE_DATE}/ ***</message>
     <always_log_rows>Y</always_log_rows>
     <abort_with_error>Y</abort_with_error>
     <cluster_schema/>
@@ -646,14 +588,14 @@ VARIABLES USED:
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>544</yloc>
+      <xloc>832</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>calc-new_field_original_n_records</name>
-    <type>Calculator</type>
+    <name>ac-folder_file_count_correct_n</name>
+    <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -662,21 +604,20 @@ VARIABLES USED:
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <calculation>
-      <field_name>to_change_n_records</field_name>
-      <calc_type>COPY_FIELD</calc_type>
-      <field_a>file_date</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>String</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
+    <fields>
+      <field>
+        <name>folder_file_count_correct</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>N</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -685,14 +626,14 @@ VARIABLES USED:
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>400</yloc>
+      <xloc>864</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>d-count_line</name>
-    <type>Dummy</type>
+    <name>ac-folder_file_count_correct_y</name>
+    <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -701,6 +642,20 @@ VARIABLES USED:
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <fields>
+      <field>
+        <name>folder_file_count_correct</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Y</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -709,37 +664,13 @@ VARIABLES USED:
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>400</yloc>
+      <xloc>864</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>d-info_line</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>demptystream-no_data_on_control_file</name>
+    <name>demptystream-no_files</name>
     <type>DetectEmptyStream</type>
     <description/>
     <distribute>Y</distribute>
@@ -758,13 +689,13 @@ VARIABLES USED:
     </remotesteps>
     <GUI>
       <xloc>144</xloc>
-      <yloc>544</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>exsqlscript-update_idl_file_control</name>
-    <type>ExecSQL</type>
+    <name>fr-to_create_variable</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -773,28 +704,25 @@ VARIABLES USED:
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>acquisition</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>Y</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>update acquisition.idl_file_control set control_row_count = ? where filename = '?' and file_date = ?</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-      <argument>
-        <name>n_records</name>
-      </argument>
-      <argument>
-        <name>v_filename</name>
-      </argument>
-      <argument>
-        <name>v_file_date</name>
-      </argument>
-    </arguments>
+    <send_true_to>ac-folder_file_count_correct_y</send_true_to>
+    <send_false_to>ac-folder_file_count_correct_n</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>files_count</leftvalue>
+        <function>=</function>
+        <rightvalue/>
+        <value>
+          <name>constant</name>
+          <type>Integer</type>
+          <text>2</text>
+          <length>-1</length>
+          <precision>0</precision>
+          <isnull>N</isnull>
+          <mask>####0;-####0</mask>
+        </value>
+      </condition>
+    </compare>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -803,187 +731,14 @@ VARIABLES USED:
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>640</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>gv-V_FILENAME_and_V_FILE_DATE</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>v_filename</name>
-        <variable>${V_FILENAME}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>v_file_date</name>
-        <variable>${V_FILE_DATE}</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1072</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>mjoin-join_control_rows_after_calcs</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>FULL OUTER</join_type>
-    <step1>d-info_line</step1>
-    <step2>sv-count_fields</step2>
-    <keys_1>
-    </keys_1>
-    <keys_2>
-    </keys_2>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>800</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>sv-count_fields</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>file_date</name>
-        <rename>original_n_records</rename>
-      </field>
-      <field>
-        <name>to_change_n_records</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>to_change_n_records</name>
-        <rename>n_records</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>800</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>sw-key</name>
-    <type>SwitchCase</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fieldname>key</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>String</case_value_type>
-    <case_value_format/>
-    <case_value_decimal/>
-    <case_value_group/>
-    <default_target_step>d-info_line</default_target_step>
-    <cases>
-      <case>
-        <value>1</value>
-        <target_step>d-info_line</target_step>
-      </case>
-      <case>
-        <value>2</value>
-        <target_step>d-count_line</target_step>
-      </case>
-    </cases>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>tfi-control_file_info</name>
-    <type>TextFileInput</type>
+    <name>gfilenames-check_folder_content</name>
+    <type>GetFileNames</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -992,146 +747,31 @@ VARIABLES USED:
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <accept_filenames>N</accept_filenames>
-    <passing_through_fields>N</passing_through_fields>
-    <accept_field/>
-    <accept_stepname/>
-    <separator>;</separator>
-    <enclosure/>
-    <enclosure_breaks>N</enclosure_breaks>
-    <escapechar/>
-    <header>Y</header>
-    <nr_headerlines>1</nr_headerlines>
-    <footer>N</footer>
-    <nr_footerlines>1</nr_footerlines>
-    <line_wrapped>N</line_wrapped>
-    <nr_wraps>1</nr_wraps>
-    <layout_paged>N</layout_paged>
-    <nr_lines_per_page>80</nr_lines_per_page>
-    <nr_lines_doc_header>0</nr_lines_doc_header>
-    <noempty>Y</noempty>
-    <include>N</include>
-    <include_field/>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
     <rownum>N</rownum>
-    <rownumByFile>N</rownumByFile>
+    <isaddresult>Y</isaddresult>
+    <filefield>N</filefield>
     <rownum_field/>
-    <format>mixed</format>
-    <encoding/>
-    <length>Characters</length>
-    <add_to_result_filenames>N</add_to_result_filenames>
+    <filename_Field/>
+    <wildcard_Field/>
+    <exclude_wildcard_Field/>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <limit>0</limit>
     <file>
-      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/${V_FILENAME}_${V_FILE_DATE}.cntl</name>
+      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/F${V_DATA_SET}_${V_FILE_DATE}.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
-      <type>CSV</type>
-      <compression>None</compression>
+      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/F${V_DATA_SET}_${V_FILE_DATE}.cntl</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
     </file>
-    <filters>
-    </filters>
-    <fields>
-      <field>
-        <name>key</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>1</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>file_date</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>8</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>type</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>17</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>bk_date</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>8</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>code</name>
-        <type>String</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <error_ignored>N</error_ignored>
-    <skip_bad_files>N</skip_bad_files>
-    <file_error_field/>
-    <file_error_message_field/>
-    <error_line_skipped>N</error_line_skipped>
-    <error_count_field/>
-    <error_fields_field/>
-    <error_text_field/>
-    <bad_line_files_destination_directory/>
-    <bad_line_files_extension>warning</bad_line_files_extension>
-    <error_line_files_destination_directory/>
-    <error_line_files_extension>error</error_line_files_extension>
-    <line_number_files_destination_directory/>
-    <line_number_files_extension>line</line_number_files_extension>
-    <date_format_lenient>Y</date_format_lenient>
-    <date_format_locale>en_US</date_format_locale>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -1141,7 +781,142 @@ VARIABLES USED:
     </remotesteps>
     <GUI>
       <xloc>144</xloc>
-      <yloc>336</yloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>mgroupby-count_number_of_recordes</name>
+    <type>MemoryGroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>path</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>files_count</aggregate>
+        <subject>path</subject>
+        <type>COUNT_ALL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv-folder_file_count</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>folder_file_count_correct</field_name>
+        <variable_name>V_FOLDER_FILE_COUNT_CORRECT</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1120</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv-folder_file_count_incorrect</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>folder_file_count_correct</field_name>
+        <variable_name>V_FOLDER_FILE_COUNT_CORRECT</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1120</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>wtl-check_file_existence_no_files</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>*** ERROR: NO FILES ON THE FOLDER ***</logmessage>
+    <fields>
+      </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

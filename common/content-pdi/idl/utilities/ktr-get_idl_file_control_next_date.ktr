@@ -439,7 +439,7 @@
 
 VARIABLES USED
 
-* V_FILENAME
+* V_DATA_SET
 
 VARIABLES MADE AVAILABLE
 
@@ -623,7 +623,7 @@ FETCH FIRST 20 ROWS ONLY;</note>
       <schema_name/>
     </partitioning>
     <row_threshold>0</row_threshold>
-    <message>*** ERROR: NO FILE DATE TO PROCESS FOR ${V_FILENAME} ***</message>
+    <message>*** ERROR: NO FILE DATE TO PROCESS FOR ${V_DATA_SET} ***</message>
     <always_log_rows>Y</always_log_rows>
     <abort_with_error>Y</abort_with_error>
     <cluster_schema/>
@@ -710,7 +710,7 @@ FETCH FIRST 20 ROWS ONLY;</note>
     <connection>acquisition</connection>
     <sql>select file_date
 from acquisition.idl_file_control
-where filename = '${V_FILENAME}' and status != 'success' or status is null
+where data_set = '${V_DATA_SET}' and status != 'success' or status is null
 order by file_date
 limit 1</sql>
     <limit>0</limit>

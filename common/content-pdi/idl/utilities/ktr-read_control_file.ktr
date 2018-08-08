@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>ktr-mdi_load_csv_file</name>
+    <name>ktr-read_control_file</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -428,23 +428,26 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/08/06 11:42:29.651</created_date>
+    <created_date>2018/07/31 15:48:25.417</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/08/06 11:42:29.651</modified_date>
+    <modified_date>2018/07/31 15:48:25.417</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
     <notepad>
-      <note>PURPOSE: injects metadata to the template ktr that loads data from .csv to target table
+      <note>PURPOSE: read the control data and update the idl_file_control table with
+the expected counted records
 
 VARIABLES USED:
 
-* V_FILENAME - to find the metadata for the file and table</note>
+* V_DATA_SET
+* V_FILE_DATA
+* V_BASE_FILE_PATH - all used to fetch data from the control file and to update correctly the idl_control_table</note>
       <xloc>32</xloc>
-      <yloc>64</yloc>
-      <width>603</width>
-      <heigth>95</heigth>
+      <yloc>32</yloc>
+      <width>754</width>
+      <heigth>146</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -565,23 +568,248 @@ VARIABLES USED:
   </connection>
   <order>
     <hop>
-      <from>ti-file_metadata</from>
-      <to>mdi-template_load_csv</to>
+      <from>tfi-control_file_info</from>
+      <to>sw-key</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>ti-table_metadata</from>
-      <to>mdi-template_load_csv</to>
+      <from>sw-key</from>
+      <to>d-info_line</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>gv-V_FILENAME</from>
-      <to>mdi-template_load_csv</to>
+      <from>sw-key</from>
+      <to>d-count_line</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>d-count_line</from>
+      <to>calc-new_field_original_n_records</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>calc-new_field_original_n_records</from>
+      <to>sv-count_fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>sv-count_fields</from>
+      <to>mjoin-join_control_rows_after_calcs</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>d-info_line</from>
+      <to>mjoin-join_control_rows_after_calcs</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>mjoin-join_control_rows_after_calcs</from>
+      <to>gv-V_DATA_SET_and_V_FILE_DATE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>gv-V_DATA_SET_and_V_FILE_DATE</from>
+      <to>exsqlscript-update_idl_file_control</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>demptystream-no_data_on_control_file</from>
+      <to>ab-no_data_on_control_file</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>tfi-control_file_info</from>
+      <to>demptystream-no_data_on_control_file</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>gv-V_FILENAME</name>
+    <name>ab-no_data_on_control_file</name>
+    <type>Abort</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <row_threshold>0</row_threshold>
+    <message>*** ERROR: NO DATA ON CONTROL FILE FOR ${V_DATA_SET} ***</message>
+    <always_log_rows>Y</always_log_rows>
+    <abort_with_error>Y</abort_with_error>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>calc-new_field_original_n_records</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <calculation>
+      <field_name>to_change_n_records</field_name>
+      <calc_type>COPY_FIELD</calc_type>
+      <field_a>file_date</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>d-count_line</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>d-info_line</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>demptystream-no_data_on_control_file</name>
+    <type>DetectEmptyStream</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>exsqlscript-update_idl_file_control</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>acquisition</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update acquisition.idl_file_control set control_row_count = ? where data_set = '?' and file_date = ?</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+      <argument>
+        <name>n_records</name>
+      </argument>
+      <argument>
+        <name>v_data_set</name>
+      </argument>
+      <argument>
+        <name>v_file_date</name>
+      </argument>
+    </arguments>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1312</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>gv-V_DATA_SET_and_V_FILE_DATE</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -593,9 +821,21 @@ VARIABLES USED:
     </partitioning>
     <fields>
       <field>
-        <name>target_table</name>
-        <variable>${V_FILENAME}</variable>
+        <name>v_data_set</name>
+        <variable>${V_DATA_SET}</variable>
         <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>v_file_date</name>
+        <variable>${V_FILE_DATE}</variable>
+        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
@@ -613,14 +853,14 @@ VARIABLES USED:
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>240</yloc>
+      <xloc>1072</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>mdi-template_load_csv</name>
-    <type>MetaInject</type>
+    <name>mjoin-join_control_rows_after_calcs</name>
+    <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -629,68 +869,13 @@ VARIABLES USED:
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <specification_method>filename</specification_method>
-    <trans_object_id/>
-    <trans_name/>
-    <filename>${Internal.Entry.Current.Directory}/ktr-template_load_csv_file.ktr</filename>
-    <directory_path/>
-    <source_step>to-acq_role</source_step>
-    <source_output_fields>    </source_output_fields>
-    <target_file/>
-    <no_execution>N</no_execution>
-    <stream_source_step/>
-    <stream_target_step/>
-    <mappings>
-      <mapping>
-        <target_step_name>tfi-read_data_from_csv</target_step_name>
-        <target_attribute_key>FIELD_TRIM_TYPE</target_attribute_key>
-        <target_detail>Y</target_detail>
-        <source_step/>
-        <source_field>both</source_field>
-      </mapping>
-      <mapping>
-        <target_step_name>to-acq_role</target_step_name>
-        <target_attribute_key>TARGET_TABLE</target_attribute_key>
-        <target_detail>N</target_detail>
-        <source_step>gv-V_FILENAME</source_step>
-        <source_field>target_table</source_field>
-      </mapping>
-      <mapping>
-        <target_step_name>to-acq_role</target_step_name>
-        <target_attribute_key>STREAM_FIELDNAME</target_attribute_key>
-        <target_detail>Y</target_detail>
-        <source_step>ti-file_metadata</source_step>
-        <source_field>field</source_field>
-      </mapping>
-      <mapping>
-        <target_step_name>tfi-read_data_from_csv</target_step_name>
-        <target_attribute_key>FIELD_NAME</target_attribute_key>
-        <target_detail>Y</target_detail>
-        <source_step>ti-file_metadata</source_step>
-        <source_field>field</source_field>
-      </mapping>
-      <mapping>
-        <target_step_name>to-acq_role</target_step_name>
-        <target_attribute_key>DATABASE_FIELDNAME</target_attribute_key>
-        <target_detail>Y</target_detail>
-        <source_step>ti-table_metadata</source_step>
-        <source_field>field</source_field>
-      </mapping>
-      <mapping>
-        <target_step_name>tfi-read_data_from_csv</target_step_name>
-        <target_attribute_key>FIELD_FORMAT</target_attribute_key>
-        <target_detail>Y</target_detail>
-        <source_step>ti-file_metadata</source_step>
-        <source_field>format</source_field>
-      </mapping>
-      <mapping>
-        <target_step_name>tfi-read_data_from_csv</target_step_name>
-        <target_attribute_key>FIELD_TYPE</target_attribute_key>
-        <target_detail>Y</target_detail>
-        <source_step>ti-file_metadata</source_step>
-        <source_field>data_type</source_field>
-      </mapping>
-    </mappings>
+    <join_type>FULL OUTER</join_type>
+    <step1>d-info_line</step1>
+    <step2>sv-count_fields</step2>
+    <keys_1>
+    </keys_1>
+    <keys_2>
+    </keys_2>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -699,14 +884,14 @@ VARIABLES USED:
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>368</yloc>
+      <xloc>800</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>ti-file_metadata</name>
-    <type>TableInput</type>
+    <name>sv-count_fields</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -715,15 +900,238 @@ VARIABLES USED:
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>acquisition</connection>
-    <sql>select field, data_type, format
-from acquisition.idl_file_metadata
-where filename = '${V_FILENAME}'</sql>
+    <fields>
+      <field>
+        <name>file_date</name>
+        <rename>original_n_records</rename>
+      </field>
+      <field>
+        <name>to_change_n_records</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>to_change_n_records</name>
+        <rename>n_records</rename>
+        <type>Integer</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sw-key</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fieldname>key</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>String</case_value_type>
+    <case_value_format/>
+    <case_value_decimal/>
+    <case_value_group/>
+    <default_target_step>d-info_line</default_target_step>
+    <cases>
+      <case>
+        <value>1</value>
+        <target_step>d-info_line</target_step>
+      </case>
+      <case>
+        <value>2</value>
+        <target_step>d-count_line</target_step>
+      </case>
+    </cases>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>tfi-control_file_info</name>
+    <type>TextFileInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <accept_filenames>N</accept_filenames>
+    <passing_through_fields>N</passing_through_fields>
+    <accept_field/>
+    <accept_stepname/>
+    <separator>;</separator>
+    <enclosure/>
+    <enclosure_breaks>N</enclosure_breaks>
+    <escapechar/>
+    <header>Y</header>
+    <nr_headerlines>1</nr_headerlines>
+    <footer>N</footer>
+    <nr_footerlines>1</nr_footerlines>
+    <line_wrapped>N</line_wrapped>
+    <nr_wraps>1</nr_wraps>
+    <layout_paged>N</layout_paged>
+    <nr_lines_per_page>80</nr_lines_per_page>
+    <nr_lines_doc_header>0</nr_lines_doc_header>
+    <noempty>Y</noempty>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <rownumByFile>N</rownumByFile>
+    <rownum_field/>
+    <format>mixed</format>
+    <encoding/>
+    <length>Characters</length>
+    <add_to_result_filenames>N</add_to_result_filenames>
+    <file>
+      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/F${V_DATA_SET}_${V_FILE_DATE}.cntl</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <type>CSV</type>
+      <compression>None</compression>
+    </file>
+    <filters>
+    </filters>
+    <fields>
+      <field>
+        <name>key</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>1</length>
+        <precision>0</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>file_date</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>8</length>
+        <precision>0</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>type</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>17</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>bk_date</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>8</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>code</name>
+        <type>String</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
     <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <error_ignored>N</error_ignored>
+    <skip_bad_files>N</skip_bad_files>
+    <file_error_field/>
+    <file_error_message_field/>
+    <error_line_skipped>N</error_line_skipped>
+    <error_count_field/>
+    <error_fields_field/>
+    <error_text_field/>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <date_format_lenient>Y</date_format_lenient>
+    <date_format_locale>en_US</date_format_locale>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -732,41 +1140,8 @@ where filename = '${V_FILENAME}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>ti-table_metadata</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>acquisition</connection>
-    <sql>select field
-from acquisition.idl_table_metadata
-where target_table = '${V_FILENAME}'</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>240</yloc>
+      <xloc>144</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -778,6 +1153,10 @@ where target_table = '${V_FILENAME}'</sql>
   <attributes>
     <group>
       <name>explorerState</name>
+      <attribute>
+        <key>gv-V_DATA_SET_and_V_FILE_DATE</key>
+        <value/>
+      </attribute>
     </group>
   </attributes>
 </transformation>
