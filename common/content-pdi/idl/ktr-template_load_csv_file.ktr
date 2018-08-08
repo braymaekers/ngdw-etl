@@ -441,11 +441,12 @@
 VARIABLES USED:
 
 * V_FILE_DATE
-* V_FILENAME - both are used to find the file path</note>
+* V_FILENAME
+* V_BASE_FILE_PATH  - all used to create the complete file path</note>
       <xloc>32</xloc>
       <yloc>48</yloc>
-      <width>388</width>
-      <heigth>112</heigth>
+      <width>435</width>
+      <heigth>129</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

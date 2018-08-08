@@ -579,7 +579,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
+      <xloc>1024</xloc>
       <yloc>352</yloc>
     </entry>
     <entry>
@@ -616,7 +616,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1024</xloc>
-      <yloc>560</yloc>
+      <yloc>544</yloc>
     </entry>
     <entry>
       <name>sql-update_file_control_table_row_count</name>
@@ -632,7 +632,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
+      <xloc>1184</xloc>
       <yloc>448</yloc>
     </entry>
     <entry>
@@ -645,7 +645,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>Y</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
+      <xloc>864</xloc>
       <yloc>480</yloc>
     </entry>
     <entry>
@@ -655,7 +655,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1296</xloc>
+      <xloc>1376</xloc>
       <yloc>448</yloc>
     </entry>
     <entry>
@@ -697,7 +697,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
+      <xloc>672</xloc>
       <yloc>480</yloc>
     </entry>
     <entry>
@@ -708,7 +708,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
+      <xloc>672</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -728,7 +728,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
+      <xloc>672</xloc>
       <yloc>352</yloc>
     </entry>
   </entries>
@@ -861,6 +861,7 @@ VARIABLES USED:
 * V_FILENAME
 * V_FILE_DATE
 * V_FOLDER_FILE_COUNT_CORRECT - to control if we have the two files
+* V_BASE_FILE_PATH
 
 VARIABLES MADE AVAILABLE
 
@@ -868,7 +869,7 @@ VARIABLES MADE AVAILABLE
       <xloc>32</xloc>
       <yloc>32</yloc>
       <width>531</width>
-      <heigth>214</heigth>
+      <heigth>231</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

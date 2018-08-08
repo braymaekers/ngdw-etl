@@ -442,11 +442,11 @@ the expected counted records
 VARIABLES USED:
 
 * V_FILENAME
-* V_FILE_DATA - both used to fetch data from the control file and to 
-update correctly the idl_control_table</note>
+* V_FILE_DATA
+* V_BASE_FILE_PATH - all used to fetch data from the control file and to update correctly the idl_control_table</note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>512</width>
+      <width>754</width>
       <heigth>146</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
@@ -803,7 +803,7 @@ update correctly the idl_control_table</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
+      <xloc>1312</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>

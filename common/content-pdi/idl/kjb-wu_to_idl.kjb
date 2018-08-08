@@ -719,7 +719,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <description/>
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
-set status = 'error', status_description = '${ V_ERROR_DESCRIPTION}'
+set status = 'error', status_description = '${V_ERROR_DESCRIPTION}'
 where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
@@ -917,11 +917,17 @@ PARAMETERS:
 VARIABLES MADE AVAILABLE:
 
 * V_FILENAME - current job
-* V_BASE_FILE_PATH - current job</note>
+* V_BASE_FILE_PATH - current job
+
+VARIABLES USED
+
+* V_ERROR_DESCRIPTION
+* V_FILENAME
+* V_FILE_DATE</note>
       <xloc>32</xloc>
-      <yloc>16</yloc>
+      <yloc>416</yloc>
       <width>383</width>
-      <heigth>180</heigth>
+      <heigth>282</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

@@ -441,6 +441,7 @@ and assign value to variable being used by parent job
 VARIABLES USED:
 
 * V_FILENAME
+* V_FILE_DATE
 
 VARIABLES MADE AVAILABLE:
 
@@ -448,7 +449,7 @@ VARIABLES MADE AVAILABLE:
       <xloc>48</xloc>
       <yloc>32</yloc>
       <width>370</width>
-      <heigth>180</heigth>
+      <heigth>197</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>

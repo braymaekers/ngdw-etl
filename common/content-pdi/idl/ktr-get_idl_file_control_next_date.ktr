@@ -437,13 +437,17 @@
     <notepad>
       <note>PURPOSE: get from idl_file_control the next file_date to execute
 
+VARIABLES USED
+
+* V_FILENAME
+
 VARIABLES MADE AVAILABLE
 
 * V_FILE_DATE - current job</note>
       <xloc>16</xloc>
       <yloc>32</yloc>
       <width>447</width>
-      <heigth>95</heigth>
+      <heigth>163</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -463,8 +467,8 @@ VARIABLES MADE AVAILABLE
       <note>The query needs to be updated to DB2
 
 FETCH FIRST 20 ROWS ONLY;</note>
-      <xloc>48</xloc>
-      <yloc>192</yloc>
+      <xloc>64</xloc>
+      <yloc>224</yloc>
       <width>270</width>
       <heigth>61</heigth>
       <fontname>Ubuntu</fontname>
@@ -630,8 +634,8 @@ FETCH FIRST 20 ROWS ONLY;</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>416</yloc>
+      <xloc>416</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -655,7 +659,7 @@ FETCH FIRST 20 ROWS ONLY;</note>
     </remotesteps>
     <GUI>
       <xloc>160</xloc>
-      <yloc>416</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -687,8 +691,8 @@ FETCH FIRST 20 ROWS ONLY;</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>272</yloc>
+      <xloc>672</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -723,7 +727,7 @@ limit 1</sql>
     </remotesteps>
     <GUI>
       <xloc>160</xloc>
-      <yloc>272</yloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -754,7 +758,7 @@ limit 1</sql>
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>272</yloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -440,15 +440,17 @@
 
 VARIABLES USED:
 
+* V_FILENAME
 * V_FILE_DATE
+* V_BASE_FILE_PATH
 
 VARIABLES MADE AVAILABLE:
 
-* V_FOLDER_FILE_COUNT</note>
+* V_FOLDER_FILE_COUNT_CORRECT</note>
       <xloc>48</xloc>
       <yloc>32</yloc>
       <width>556</width>
-      <heigth>163</heigth>
+      <heigth>197</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
@@ -538,18 +540,18 @@ VARIABLES MADE AVAILABLE:
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
+      <from>fr-to_create_variable</from>
       <to>ac-folder_file_count_correct_n</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
+      <from>fr-to_create_variable</from>
       <to>ac-folder_file_count_correct_y</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>mgroupby-count_number_of_recordes</from>
-      <to>Filter rows</to>
+      <to>fr-to_create_variable</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -575,7 +577,7 @@ VARIABLES MADE AVAILABLE:
       <schema_name/>
     </partitioning>
     <row_threshold>0</row_threshold>
-    <message>*** ERROR: NO FILES ON ${Internal.Entry.Current.Directory}/${P_FILE_DATE}/ ***</message>
+    <message>*** ERROR: NO FILES ON ${V_BASE_FILE_PATH}/${V_FILE_DATE}/ ***</message>
     <always_log_rows>Y</always_log_rows>
     <abort_with_error>Y</abort_with_error>
     <cluster_schema/>
@@ -588,191 +590,6 @@ VARIABLES MADE AVAILABLE:
     <GUI>
       <xloc>832</xloc>
       <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>demptystream-no_files</name>
-    <type>DetectEmptyStream</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>gfilenames-check_folder_content</name>
-    <type>GetFileNames</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filter>
-      <filterfiletype>all_files</filterfiletype>
-    </filter>
-    <doNotFailIfNoFile>N</doNotFailIfNoFile>
-    <rownum>N</rownum>
-    <isaddresult>Y</isaddresult>
-    <filefield>N</filefield>
-    <rownum_field/>
-    <filename_Field/>
-    <wildcard_Field/>
-    <exclude_wildcard_Field/>
-    <dynamic_include_subfolders>N</dynamic_include_subfolders>
-    <limit>0</limit>
-    <file>
-      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/</name>
-      <filemask>.+_${V_FILE_DATE}\.csv</filemask>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/</name>
-      <filemask>.+_${V_FILE_DATE}\.cntl</filemask>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>mgroupby-count_number_of_recordes</name>
-    <type>MemoryGroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <give_back_row>N</give_back_row>
-    <group>
-      <field>
-        <name>path</name>
-      </field>
-    </group>
-    <fields>
-      <field>
-        <aggregate>files_count</aggregate>
-        <subject>path</subject>
-        <type>COUNT_ALL</type>
-        <valuefield/>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>wtl-check_file_existence_no_files</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR: NO FILES ON THE FOLDER ***</logmessage>
-    <fields>
-      </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>ac-folder_file_count_correct_y</send_true_to>
-    <send_false_to>ac-folder_file_count_correct_n</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>files_count</leftvalue>
-        <function>=</function>
-        <rightvalue/>
-        <value>
-          <name>constant</name>
-          <type>Integer</type>
-          <text>2</text>
-          <length>-1</length>
-          <precision>0</precision>
-          <isnull>N</isnull>
-          <mask>####0;-####0</mask>
-        </value>
-      </condition>
-    </compare>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -853,6 +670,160 @@ VARIABLES MADE AVAILABLE:
     </GUI>
   </step>
   <step>
+    <name>demptystream-no_files</name>
+    <type>DetectEmptyStream</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>fr-to_create_variable</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>ac-folder_file_count_correct_y</send_true_to>
+    <send_false_to>ac-folder_file_count_correct_n</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>files_count</leftvalue>
+        <function>=</function>
+        <rightvalue/>
+        <value>
+          <name>constant</name>
+          <type>Integer</type>
+          <text>2</text>
+          <length>-1</length>
+          <precision>0</precision>
+          <isnull>N</isnull>
+          <mask>####0;-####0</mask>
+        </value>
+      </condition>
+    </compare>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>gfilenames-check_folder_content</name>
+    <type>GetFileNames</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
+    <rownum>N</rownum>
+    <isaddresult>Y</isaddresult>
+    <filefield>N</filefield>
+    <rownum_field/>
+    <filename_Field/>
+    <wildcard_Field/>
+    <exclude_wildcard_Field/>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <limit>0</limit>
+    <file>
+      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/${V_FILENAME}_${V_FILE_DATE}.csv</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/${V_FILENAME}_${V_FILE_DATE}.cntl</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>mgroupby-count_number_of_recordes</name>
+    <type>MemoryGroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>path</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>files_count</aggregate>
+        <subject>path</subject>
+        <type>COUNT_ALL</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>sv-folder_file_count</name>
     <type>SetVariable</type>
     <description/>
@@ -915,6 +886,37 @@ VARIABLES MADE AVAILABLE:
     <GUI>
       <xloc>1120</xloc>
       <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>wtl-check_file_existence_no_files</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>*** ERROR: NO FILES ON THE FOLDER ***</logmessage>
+    <fields>
+      </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
