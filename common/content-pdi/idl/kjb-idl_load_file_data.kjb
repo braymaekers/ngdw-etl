@@ -484,31 +484,31 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>64</xloc>
-      <yloc>464</yloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>aj-folder_content_not_ok</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: THE FOLDER IS EMPTY ${Internal.Entry.Current.Directory}/${P_FILE_DATE}/* IS NOT AVAILABLE ***</message>
+      <message>*** ERROR: THE FOLDER IS EMPTY ${V_BASE_FILE_PATH}/${P_FILE_DATE}/* IS NOT AVAILABLE ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>256</yloc>
+      <xloc>256</xloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>wtl-file_is_available</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>FILE_COUNT: ${V_FOLDER_FILE_COUNT}</logmessage>
+      <logmessage>V_FOLDER_FILE_COUNT_CORRECT: ${V_FOLDER_FILE_COUNT_CORRECT}</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>*** INFO: INITIAL LOADING THE FILE IS AVAILABLE ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>448</xloc>
-      <yloc>464</yloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>ktr-check_file_existence</name>
@@ -543,8 +543,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>464</yloc>
+      <xloc>256</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>ktr-mdi_load_csv_file</name>
@@ -581,39 +581,6 @@
       <nr>0</nr>
       <xloc>1008</xloc>
       <yloc>352</yloc>
-    </entry>
-    <entry>
-      <name>se-folder_file_count</name>
-      <description/>
-      <type>SIMPLE_EVAL</type>
-      <valuetype>variable</valuetype>
-      <fieldname/>
-      <variablename>${V_FOLDER_FILE_COUNT}</variablename>
-      <fieldtype>string</fieldtype>
-      <mask/>
-      <comparevalue>2</comparevalue>
-      <minvalue/>
-      <maxvalue/>
-      <successcondition>equal</successcondition>
-      <successnumbercondition>smaller</successnumbercondition>
-      <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>464</yloc>
-    </entry>
-    <entry>
-      <name>aj-folder_content_missing_file</name>
-      <description/>
-      <type>ABORT</type>
-      <message>*** ERROR: ONE FILE MISSING ON ${Internal.Entry.Current.Directory}/${P_FILE_DATE}/ ***</message>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>240</yloc>
     </entry>
     <entry>
       <name>ktr-read_control_file</name>
@@ -672,14 +639,14 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <name>wtl-control_validation_ok</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>V_FOLDER_FILE_COUNT: ${V_FOLDER_FILE_COUNT}</logmessage>
+      <logmessage>V_FOLDER_FILE_COUNT_CORRECT: ${V_FOLDER_FILE_COUNT_CORRECT}</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>*** INFO: LOAD FILE VALIDATION CONTROL OK ***</logsubject>
       <parallel>Y</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>864</xloc>
-      <yloc>464</yloc>
+      <xloc>832</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -708,8 +675,41 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
-      <yloc>352</yloc>
+      <xloc>256</xloc>
+      <yloc>384</yloc>
+    </entry>
+    <entry>
+      <name>se-folder_file_count_correct</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${V_FOLDER_FILE_COUNT_CORRECT}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>Y</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>smaller</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>640</xloc>
+      <yloc>480</yloc>
+    </entry>
+    <entry>
+      <name>aj-folder_content_missing_file</name>
+      <description/>
+      <type>ABORT</type>
+      <message>*** ERROR: ONE FILE MISSING ON ${V_BASE_FILE_PATH}/${V_FILE_DATE}/ ***</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>640</xloc>
+      <yloc>224</yloc>
     </entry>
     <entry>
       <name>sv-set_ V_ERROR_DESCRIPTION_folder_missing_file</name>
@@ -728,7 +728,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>672</xloc>
+      <xloc>640</xloc>
       <yloc>352</yloc>
     </entry>
   </entries>
@@ -736,15 +736,6 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
     <hop>
       <from>ktr-check_file_existence</from>
       <to>wtl-file_is_available</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>wtl-file_is_available</from>
-      <to>se-folder_file_count</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -763,15 +754,6 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
     <hop>
       <from>ktr-read_control_file</from>
       <to>sql-update_file_control_table_row_count</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>se-folder_file_count</from>
-      <to>wtl-control_validation_ok</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -833,7 +815,16 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>se-folder_file_count</from>
+      <from>sv-set_ V_ERROR_DESCRIPTION_folder_missing_file</from>
+      <to>aj-folder_content_missing_file</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-folder_file_count_correct</from>
       <to>sv-set_ V_ERROR_DESCRIPTION_folder_missing_file</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -842,8 +833,17 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>sv-set_ V_ERROR_DESCRIPTION_folder_missing_file</from>
-      <to>aj-folder_content_missing_file</to>
+      <from>wtl-file_is_available</from>
+      <to>se-folder_file_count_correct</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-folder_file_count_correct</from>
+      <to>wtl-control_validation_ok</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -858,16 +858,17 @@ loads the information to &lt;filename>_temp and updates idl_file_control table
 
 VARIABLES USED:
 
-* V_FILENAME - current job
-* V_FILE_DATE - current job
+* V_FILENAME
+* V_FILE_DATE
+* V_FOLDER_FILE_COUNT_CORRECT - to control if we have the two files
 
 VARIABLES MADE AVAILABLE
 
-* V_ERROR_DESCRIPTION</note>
-      <xloc>48</xloc>
+* V_ERROR_DESCRIPTION - valid on the parent job</note>
+      <xloc>32</xloc>
       <yloc>32</yloc>
       <width>531</width>
-      <heigth>197</heigth>
+      <heigth>214</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
