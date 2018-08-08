@@ -473,8 +473,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>64</xloc>
-      <yloc>224</yloc>
+      <xloc>96</xloc>
+      <yloc>288</yloc>
     </entry>
     <entry>
       <name>sv-set_V_FILENAME</name>
@@ -498,8 +498,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
-      <yloc>320</yloc>
+      <xloc>288</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>kjb-idl_load_file_data</name>
@@ -533,7 +533,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>800</xloc>
-      <yloc>320</yloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -542,8 +542,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1456</xloc>
-      <yloc>608</yloc>
+      <xloc>1408</xloc>
+      <yloc>672</yloc>
     </entry>
     <entry>
       <name>aj-error_loading_info_from_files</name>
@@ -554,7 +554,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>800</xloc>
-      <yloc>64</yloc>
+      <yloc>128</yloc>
     </entry>
     <entry>
       <name>ktr-get_idl_file_control_data</name>
@@ -589,8 +589,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>320</yloc>
+      <xloc>1120</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>se-check</name>
@@ -611,8 +611,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1488</xloc>
-      <yloc>320</yloc>
+      <xloc>1408</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>aj-error_on_validation_against_control_data</name>
@@ -622,8 +622,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1488</xloc>
-      <yloc>64</yloc>
+      <xloc>1408</xloc>
+      <yloc>128</yloc>
     </entry>
     <entry>
       <name>aj-error_get_idl_file_control_data</name>
@@ -633,8 +633,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>64</yloc>
+      <xloc>1120</xloc>
+      <yloc>128</yloc>
     </entry>
     <entry>
       <name>ktr-get_idl_file_control_next_date</name>
@@ -670,7 +670,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>512</xloc>
-      <yloc>320</yloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_success</name>
@@ -687,8 +687,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1248</xloc>
-      <yloc>608</yloc>
+      <xloc>1408</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>wtl-idl_start_ingestion</name>
@@ -700,8 +700,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>64</xloc>
-      <yloc>320</yloc>
+      <xloc>96</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>aj-error_no_file_date_to_process</name>
@@ -712,7 +712,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>512</xloc>
-      <yloc>192</yloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_on_loadding</name>
@@ -730,7 +730,7 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>800</xloc>
-      <yloc>192</yloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_validation_work</name>
@@ -747,8 +747,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>192</yloc>
+      <xloc>1120</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_validation</name>
@@ -765,8 +765,8 @@ where filename = '${V_FILENAME}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1488</xloc>
-      <yloc>192</yloc>
+      <xloc>1408</xloc>
+      <yloc>256</yloc>
     </entry>
   </entries>
   <hops>
@@ -924,8 +924,8 @@ VARIABLES USED
 * V_ERROR_DESCRIPTION
 * V_FILENAME
 * V_FILE_DATE</note>
-      <xloc>32</xloc>
-      <yloc>416</yloc>
+      <xloc>0</xloc>
+      <yloc>0</yloc>
       <width>383</width>
       <heigth>282</heigth>
       <fontname>Ubuntu</fontname>
