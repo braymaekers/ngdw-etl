@@ -42,7 +42,7 @@ WITH (
 
 
 INSERT INTO acquisition.idl_table_metadata (target_table,field) VALUES 
-('role','id'), ('role','name'), ('role','age'), ('role','role');
+('role','id'), ('role','name'), ('role','age'), ('role','role'), ('role','date_role');;
 
 CREATE TABLE acquisition."role" (
 	id int4 NULL,
