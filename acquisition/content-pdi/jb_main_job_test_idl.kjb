@@ -507,7 +507,7 @@
       <yloc>320</yloc>
     </entry>
     <entry>
-      <name>fw_jb_load_CSPARTM</name>
+      <name>jb_main_job_load_CSPARTM</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -560,7 +560,7 @@
         <parameter>
           <name>P_WORK_UNIT_INSTANCE</name>
           <stream_name/>
-          <value>role</value>
+          <value>cspartm</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
@@ -622,7 +622,7 @@
     </hop>
     <hop>
       <from>fw-jb_job_start_actions</from>
-      <to>fw_jb_load_CSPARTM</to>
+      <to>jb_main_job_load_CSPARTM</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -630,7 +630,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw_jb_load_CSPARTM</from>
+      <from>jb_main_job_load_CSPARTM</from>
       <to>ab-work_unit_error_CSPARTM</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -639,7 +639,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw_jb_load_CSPARTM</from>
+      <from>jb_main_job_load_CSPARTM</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
