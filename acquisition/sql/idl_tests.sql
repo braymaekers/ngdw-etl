@@ -30,7 +30,7 @@ WITH (
 
 INSERT INTO acquisition.idl_file_metadata (data_set,field,data_type,format) VALUES 
 ('CSPARTM','id','integer',NULL), ('CSPARTM','name','string',NULL), ('CSPARTM','age','integer',NULL)
-,('CSPARTM','CSPARTM','string',NULL), ('CSPARTM','date_role','date','yyyyMMdd');
+,('CSPARTM','role','string',NULL), ('CSPARTM','date_role','date','yyyyMMdd');
 
 CREATE TABLE acquisition.idl_table_metadata (
 	target_table varchar(64) NULL,
@@ -42,15 +42,17 @@ WITH (
 
 
 INSERT INTO acquisition.idl_table_metadata (target_table,field) VALUES 
-('cspartm_stg','id'), ('cspartm_stg','name'), ('cspartm_stg','age'), ('cspartm_stg','role'), ('cspartm_stg','date_role');;
+('cspartm_stg','id'), ('cspartm_stg','name'), ('cspartm_stg','age'), ('cspartm_stg','role'), ('cspartm_stg','date_role');
 
-CREATE TABLE acquisition."cspartm_stg" (
+CREATE TABLE acquisition.tcspartm_stg (
 	id int4 NULL,
-	"name" text NULL,
+	"name" varchar(64) NULL,
 	age int4 NULL,
-	"role" text NULL,
-	date_role timestamp NULL
+	"role" varchar(64) NULL,
+	date_role timestamp NULL,
+	flag varchar(4) NULL
 )
 WITH (
 	OIDS=FALSE
 ) ;
+
