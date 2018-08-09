@@ -34,7 +34,7 @@ INSERT INTO acquisition.idl_file_metadata (data_set,field,data_type,format) VALU
 
 CREATE TABLE acquisition.idl_table_metadata (
 	target_table varchar(64) NULL,
-	field varchar NULL
+	field varchar(16) NULL
 )
 WITH (
 	OIDS=FALSE
@@ -46,10 +46,11 @@ INSERT INTO acquisition.idl_table_metadata (target_table,field) VALUES
 
 CREATE TABLE acquisition."cspartm_stg" (
 	id int4 NULL,
-	"name" text NULL,
+	"name" varchar(64) NULL,
 	age int4 NULL,
-	"role" text NULL,
-	date_role timestamp NULL
+	"role" varchar(64) NULL,
+	date_role timestamp NULL,
+	flag varchar(4) NULL
 )
 WITH (
 	OIDS=FALSE

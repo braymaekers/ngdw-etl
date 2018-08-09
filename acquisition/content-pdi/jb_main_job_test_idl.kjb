@@ -560,7 +560,7 @@
         <parameter>
           <name>P_WORK_UNIT_INSTANCE</name>
           <stream_name/>
-          <value>role</value>
+          <value>cspartm</value>
         </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
