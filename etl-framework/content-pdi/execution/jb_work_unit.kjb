@@ -29,7 +29,7 @@
     <parameter>
       <name>P_PROJECT_NAME</name>
       <default_value/>
-      <description>acquisition|core|service</description>
+      <description>Work Unit Project Name: common|acquisition|core|service</description>
     </parameter>
     <parameter>
       <name>P_WORK_UNIT_INSTANCE</name>
@@ -569,11 +569,6 @@
           <stream_name/>
           <value>success</value>
         </parameter>
-        <parameter>
-          <name>P_FLOW_STATUS</name>
-          <stream_name/>
-          <value>success</value>
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -642,16 +637,6 @@
           <stream_name/>
           <value>error</value>
         </parameter>
-        <parameter>
-          <name>P_PROJECT_NAME</name>
-          <stream_name/>
-          <value>${P_PROJECT_NAME}</value>
-        </parameter>
-        <parameter>
-          <name>P_FLOW_STATUS</name>
-          <stream_name/>
-          <value>error</value>
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -697,11 +682,6 @@
           <name>P_STATUS</name>
           <stream_name/>
           <value>running</value>
-        </parameter>
-        <parameter>
-          <name>P_FLOW_STATUS</name>
-          <stream_name/>
-          <value>start</value>
         </parameter>
       </parameters>
       <parallel>N</parallel>
@@ -768,11 +748,6 @@
         </parameter>
         <parameter>
           <name>P_STATUS</name>
-          <stream_name/>
-          <value>finished</value>
-        </parameter>
-        <parameter>
-          <name>P_FLOW_STATUS</name>
           <stream_name/>
           <value>finished</value>
         </parameter>

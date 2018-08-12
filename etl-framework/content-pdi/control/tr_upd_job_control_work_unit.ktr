@@ -10,11 +10,6 @@
     <directory>/</directory>
     <parameters>
       <parameter>
-        <name>P_PROJECT_NAME</name>
-        <default_value/>
-        <description/>
-      </parameter>
-      <parameter>
         <name>P_STATUS</name>
         <default_value/>
         <description/>
@@ -765,6 +760,30 @@ key: project-jobname-checkpoint</note>
     </hop>
   </order>
   <step>
+    <name>Success</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>ac-framework_checkpoint</name>
     <type>Constant</type>
     <description/>
@@ -803,6 +822,30 @@ key: project-jobname-checkpoint</note>
     </GUI>
   </step>
   <step>
+    <name>error</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>finished</name>
     <type>Dummy</type>
     <description/>
@@ -823,6 +866,36 @@ key: project-jobname-checkpoint</note>
     <GUI>
       <xloc>608</xloc>
       <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>getSystemData-get_logtime</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>logtime</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1111,36 +1184,6 @@ key: project-jobname-checkpoint</note>
     </GUI>
   </step>
   <step>
-    <name>getSystemData-get_logtime</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>logtime</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>start</name>
     <type>Dummy</type>
     <description/>
@@ -1161,30 +1204,6 @@ key: project-jobname-checkpoint</note>
     <GUI>
       <xloc>608</xloc>
       <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>error</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1230,62 +1249,6 @@ key: project-jobname-checkpoint</note>
     <GUI>
       <xloc>448</xloc>
       <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>upd-work_unit_finish</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>pdi_control</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>${PDI_CONTROL.SCHEMA}</schema>
-      <table>${PDI_CONTROL.TABLE}</table>
-      <key>
-        <name> main_job_project</name>
-        <field>main_job_project</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>main_job_name</name>
-        <field>main_job_name</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>framework-checkpoint</name>
-        <field>work_unit</field>
-        <condition>&lt;></condition>
-        <name2/>
-      </key>
-      <value>
-        <name>status</name>
-        <rename>status</rename>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>928</xloc>
-      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1362,8 +1325,8 @@ key: project-jobname-checkpoint</note>
     </GUI>
   </step>
   <step>
-    <name>wrt-fw_upd_job_control_work_unit</name>
-    <type>WriteToLog</type>
+    <name>upd-work_unit_finish</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1372,44 +1335,38 @@ key: project-jobname-checkpoint</note>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR - NOT POSSIBLE TO INSERT/UPDATE ${P_WORK_UNIT_CHECKPOINT} (MAIN JOB ${V_JOB_NAME}) JOB_CONTROL TABLE ***</logmessage>
-    <fields>
-      </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>wrt-fw_upd_job_control_work_unit_framework_generic</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE ${P_WORK_UNIT_CHECKPOINT} (MAIN JOB ${V_JOB_NAME}) JOB_CONTROL TABLE ***</logmessage>
-    <fields>
-      </fields>
+    <connection>pdi_control</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>${PDI_CONTROL.SCHEMA}</schema>
+      <table>${PDI_CONTROL.TABLE}</table>
+      <key>
+        <name> main_job_project</name>
+        <field>main_job_project</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>main_job_name</name>
+        <field>main_job_name</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>framework-checkpoint</name>
+        <field>work_unit</field>
+        <condition>&lt;></condition>
+        <name2/>
+      </key>
+      <value>
+        <name>status</name>
+        <rename>status</rename>
+      </value>
+    </lookup>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -1419,31 +1376,7 @@ key: project-jobname-checkpoint</note>
     </remotesteps>
     <GUI>
       <xloc>928</xloc>
-      <yloc>576</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Success</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>352</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1523,6 +1456,68 @@ key: project-jobname-checkpoint</note>
       <draw>Y</draw>
     </GUI>
   </step>
+  <step>
+    <name>wrt-fw_upd_job_control_work_unit</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>*** ERROR - NOT POSSIBLE TO INSERT/UPDATE ${P_WORK_UNIT_CHECKPOINT} (MAIN JOB ${V_JOB_NAME}) JOB_CONTROL TABLE ***</logmessage>
+    <fields>
+      </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>wrt-fw_upd_job_control_work_unit_framework_generic</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE ${P_WORK_UNIT_CHECKPOINT} (MAIN JOB ${V_JOB_NAME}) JOB_CONTROL TABLE ***</logmessage>
+    <fields>
+      </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
     <error>
       <source_step>iu-start_work_unit_control</source_step>
@@ -1537,8 +1532,8 @@ key: project-jobname-checkpoint</note>
       <min_pct_rows/>
     </error>
     <error>
-      <source_step>upd-work_unit_finish</source_step>
-      <target_step>wrt-fw_upd_job_control_work_unit_framework_generic</target_step>
+      <source_step>upd-work_unit_error</source_step>
+      <target_step>wrt-fw_upd_job_control_work_unit</target_step>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>
@@ -1549,8 +1544,8 @@ key: project-jobname-checkpoint</note>
       <min_pct_rows/>
     </error>
     <error>
-      <source_step>upd-work_unit_error</source_step>
-      <target_step>wrt-fw_upd_job_control_work_unit</target_step>
+      <source_step>upd-work_unit_finish</source_step>
+      <target_step>wrt-fw_upd_job_control_work_unit_framework_generic</target_step>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>
@@ -1579,30 +1574,6 @@ key: project-jobname-checkpoint</note>
   <attributes>
     <group>
       <name>explorerState</name>
-      <attribute>
-        <key>upd-work_unit_success</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>getSystemData-get_logtime</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>iu-start_work_unit_control</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>error</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>Success</key>
-        <value/>
-      </attribute>
-      <attribute>
-        <key>upd-work_unit_error</key>
-        <value/>
-      </attribute>
     </group>
   </attributes>
 </transformation>
