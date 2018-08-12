@@ -490,7 +490,7 @@
       <name>aj-folder_content_not_ok</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: THE FOLDER IS EMPTY ${V_BASE_FILE_PATH}/${P_FILE_DATE}/* IS NOT AVAILABLE ***</message>
+      <message>*** ERROR: THE FOLDER IS EMPTY ${P_BASE_FILE_PATH}/${V_FILE_DATE}/* IS NOT AVAILABLE ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -622,8 +622,8 @@
       <name>sql-update_file_control_table_row_count</name>
       <description/>
       <type>SQL</type>
-      <sql>update acquisition.idl_file_control set row_count = (select COUNT(1) from acquisition.${V_TARGET_TABLE})
-where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
+      <sql>update acquisition.idl_file_control set row_count = (select COUNT(1) from acquisition.${P_TARGET_TABLE})
+where data_set = '${P_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -668,7 +668,7 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <fields>
         <field>
           <variable_name> V_ERROR_DESCRIPTION</variable_name>
-          <variable_value>Folder ${V_FILE_DATE} is empty for data set ${V_DATA_SET}</variable_value>
+          <variable_value>Folder ${V_FILE_DATE} is empty for data set ${P_DATA_SET}</variable_value>
           <variable_type>PARENT_JOB</variable_type>
         </field>
       </fields>
@@ -704,7 +704,7 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <name>aj-folder_content_missing_file</name>
       <description/>
       <type>ABORT</type>
-      <message>*** ERROR: ONE FILE MISSING ON ${V_BASE_FILE_PATH}/${V_FILE_DATE}/ ***</message>
+      <message>*** ERROR: ONE FILE MISSING ON ${P_BASE_FILE_PATH}/${V_FILE_DATE}/ ***</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -721,7 +721,7 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <fields>
         <field>
           <variable_name> V_ERROR_DESCRIPTION</variable_name>
-          <variable_value>Folder ${V_FILE_DATE} missing one file for data set ${V_DATA_SET}</variable_value>
+          <variable_value>Folder ${V_FILE_DATE} missing one file for data set ${P_DATA_SET}</variable_value>
           <variable_type>PARENT_JOB</variable_type>
         </field>
       </fields>
@@ -858,17 +858,17 @@ loads the information to &lt;filename>_temp and updates idl_file_control table
 
 VARIABLES USED:
 
-* V_DATA_SET
+* P_DATA_SET
 * V_FILE_DATE
 * V_FOLDER_FILE_COUNT_CORRECT - to control if we have the two files
-* V_BASE_FILE_PATH
-* V_TARGET_TABLE
+* P_BASE_FILE_PATH
+* P_TARGET_TABLE
 
 VARIABLES MADE AVAILABLE
 
 * V_ERROR_DESCRIPTION - valid on the parent job</note>
       <xloc>32</xloc>
-      <yloc>32</yloc>
+      <yloc>0</yloc>
       <width>531</width>
       <heigth>248</heigth>
       <fontname>Ubuntu</fontname>

@@ -440,7 +440,7 @@ and assign value to variable being used by parent job
 
 VARIABLES USED:
 
-* V_DATA_SET
+* P_DATA_SET
 * V_FILE_DATE
 
 VARIABLES MADE AVAILABLE:
@@ -627,7 +627,7 @@ VARIABLES MADE AVAILABLE:
     <connection>acquisition</connection>
     <sql>select control_row_count, row_count, (case when control_row_count = row_count then 1 else 0 end ) as control_check
 from acquisition.idl_file_control
-where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE};</sql>
+where data_set = '${P_DATA_SET}' and file_date = ${V_FILE_DATE};</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

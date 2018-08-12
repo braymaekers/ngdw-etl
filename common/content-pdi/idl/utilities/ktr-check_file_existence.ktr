@@ -440,9 +440,9 @@
 
 VARIABLES USED:
 
-* V_DATA_SET
+* P_DATA_SET
 * V_FILE_DATE
-* V_BASE_FILE_PATH
+* P_BASE_FILE_PATH
 
 VARIABLES MADE AVAILABLE:
 
@@ -577,7 +577,7 @@ VARIABLES MADE AVAILABLE:
       <schema_name/>
     </partitioning>
     <row_threshold>0</row_threshold>
-    <message>*** ERROR: NO FILES ON ${V_BASE_FILE_PATH}/${V_FILE_DATE}/ ***</message>
+    <message>*** ERROR: NO FILES ON ${P_BASE_FILE_PATH}/${V_FILE_DATE}/ ***</message>
     <always_log_rows>Y</always_log_rows>
     <abort_with_error>Y</abort_with_error>
     <cluster_schema/>
@@ -761,12 +761,12 @@ VARIABLES MADE AVAILABLE:
     <dynamic_include_subfolders>N</dynamic_include_subfolders>
     <limit>0</limit>
     <file>
-      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/F${V_DATA_SET}_${V_FILE_DATE}.csv</name>
+      <name>${P_BASE_FILE_PATH}/${V_FILE_DATE}/F${P_DATA_SET}_${V_FILE_DATE}.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
-      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/F${V_DATA_SET}_${V_FILE_DATE}.cntl</name>
+      <name>${P_BASE_FILE_PATH}/${V_FILE_DATE}/F${P_DATA_SET}_${V_FILE_DATE}.cntl</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>

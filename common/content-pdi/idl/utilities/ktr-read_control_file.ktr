@@ -441,12 +441,12 @@ the expected counted records
 
 VARIABLES USED:
 
-* V_DATA_SET
-* V_FILE_DATA
-* V_BASE_FILE_PATH - all used to fetch data from the control file and to update correctly the idl_control_table</note>
+* P_DATA_SET
+* V_FILE_DATE
+* P_BASE_FILE_PATH - all used to fetch data from the control file and to update correctly the idl_control_table</note>
       <xloc>32</xloc>
       <yloc>32</yloc>
-      <width>754</width>
+      <width>753</width>
       <heigth>146</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
@@ -635,7 +635,7 @@ VARIABLES USED:
       <schema_name/>
     </partitioning>
     <row_threshold>0</row_threshold>
-    <message>*** ERROR: NO DATA ON CONTROL FILE FOR ${V_DATA_SET} ***</message>
+    <message>*** ERROR: NO DATA ON CONTROL FILE FOR ${P_DATA_SET} ***</message>
     <always_log_rows>Y</always_log_rows>
     <abort_with_error>Y</abort_with_error>
     <cluster_schema/>
@@ -822,7 +822,7 @@ VARIABLES USED:
     <fields>
       <field>
         <name>v_data_set</name>
-        <variable>${V_DATA_SET}</variable>
+        <variable>${P_DATA_SET}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -1020,7 +1020,7 @@ VARIABLES USED:
     <length>Characters</length>
     <add_to_result_filenames>N</add_to_result_filenames>
     <file>
-      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/F${V_DATA_SET}_${V_FILE_DATE}.cntl</name>
+      <name>${P_BASE_FILE_PATH}/${V_FILE_DATE}/F${P_DATA_SET}_${V_FILE_DATE}.cntl</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -1153,10 +1153,6 @@ VARIABLES USED:
   <attributes>
     <group>
       <name>explorerState</name>
-      <attribute>
-        <key>gv-V_DATA_SET_and_V_FILE_DATE</key>
-        <value/>
-      </attribute>
     </group>
   </attributes>
 </transformation>

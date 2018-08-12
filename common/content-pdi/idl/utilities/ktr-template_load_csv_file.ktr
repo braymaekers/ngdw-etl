@@ -611,7 +611,7 @@ VARIABLES USED:
     <length>Characters</length>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>${V_BASE_FILE_PATH}/${V_FILE_DATE}/F${V_DATA_SET}_${V_FILE_DATE}.csv</name>
+      <name>${P_BASE_FILE_PATH}/${V_FILE_DATE}/F${P_DATA_SET}_${V_FILE_DATE}.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>

@@ -440,8 +440,8 @@
 
 VARIABLES USED:
 
-* V_DATA_SET - to find the metadata for the file and table
-* V_TARGET_TABLE - to know where to write and the get the correct metadata</note>
+* P_DATA_SET - to find the metadata for the file and table
+* P_TARGET_TABLE - to know where to write and the get the correct metadata</note>
       <xloc>32</xloc>
       <yloc>64</yloc>
       <width>603</width>
@@ -576,13 +576,13 @@ VARIABLES USED:
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>gv-V_FILENAME</from>
+      <from>gv-get_target_table</from>
       <to>mdi-template_load_csv</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>gv-V_FILENAME</name>
+    <name>gv-get_target_table</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -595,7 +595,7 @@ VARIABLES USED:
     <fields>
       <field>
         <name>target_table</name>
-        <variable>${V_TARGET_TABLE}</variable>
+        <variable>${P_TARGET_TABLE}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -653,7 +653,7 @@ VARIABLES USED:
         <target_step_name>to-acq_role</target_step_name>
         <target_attribute_key>TARGET_TABLE</target_attribute_key>
         <target_detail>N</target_detail>
-        <source_step>gv-V_FILENAME</source_step>
+        <source_step>gv-get_target_table</source_step>
         <source_field>target_table</source_field>
       </mapping>
       <mapping>
@@ -719,7 +719,7 @@ VARIABLES USED:
     <connection>acquisition</connection>
     <sql>select field, data_type, format
 from acquisition.idl_file_metadata
-where data_set = '${V_DATA_SET}'</sql>
+where data_set = '${P_DATA_SET}'</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -752,7 +752,7 @@ where data_set = '${V_DATA_SET}'</sql>
     <connection>acquisition</connection>
     <sql>select field
 from acquisition.idl_table_metadata
-where target_table = '${V_TARGET_TABLE}'</sql>
+where target_table = '${P_TARGET_TABLE}'</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -779,6 +779,10 @@ where target_table = '${V_TARGET_TABLE}'</sql>
   <attributes>
     <group>
       <name>explorerState</name>
+      <attribute>
+        <key>gv-get_target_table</key>
+        <value/>
+      </attribute>
     </group>
   </attributes>
 </transformation>
