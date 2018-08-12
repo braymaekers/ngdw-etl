@@ -10,7 +10,8 @@ CREATE TABLE job_control (
 	work_unit_instance varchar(124) NULL,
 	status varchar(32) NULL,
 	starttime timestamp NULL,
-	logtime timestamp NULL,
+	endtime timestamp NULL,
+	last_successful_execution_date timestamp NULL,
 	ip_address text NULL,
 	hostname text NULL,
 	pid int4 NULL

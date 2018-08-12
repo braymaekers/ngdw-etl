@@ -492,7 +492,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1184</xloc>
-      <yloc>512</yloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>tr-execute-transformation</name>
@@ -528,7 +528,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>736</xloc>
-      <yloc>512</yloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>fw-tr_upd_job_control_work_unit_success</name>
@@ -579,7 +579,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>832</yloc>
+      <yloc>896</yloc>
     </entry>
     <entry>
       <name>se-is-job?</name>
@@ -601,7 +601,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>448</yloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>fw-tr_upd_job_control_work_unit_error</name>
@@ -657,7 +657,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>512</yloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>fw-tr-tr_upd_job_control_work_unit_running</name>
@@ -708,7 +708,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>352</yloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>se_is_last_unit</name>
@@ -730,7 +730,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>768</xloc>
-      <yloc>832</yloc>
+      <yloc>896</yloc>
     </entry>
     <entry>
       <name>tr-tr_upd_job_control_work_unit_finished</name>
@@ -791,7 +791,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>320</xloc>
-      <yloc>832</yloc>
+      <yloc>896</yloc>
     </entry>
     <entry>
       <name>wtl_work_unit_conditions</name>
@@ -841,17 +841,12 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
-        <parameter>
-          <name>P_WORK_UNIT_NAME</name>
-          <stream_name/>
-          <value>${P_WORK_UNIT_NAME}</value>
-        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>352</yloc>
+      <xloc>576</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>se-start</name>
@@ -873,20 +868,21 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>320</xloc>
-      <yloc>352</yloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>wrt-start-execution_check</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>EXECUTION STARTED WITH CHECK ON START</logmessage>
+      <logmessage>-----------------------------------------
+EXECUTION STARTED WITH CHECK ON START</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>*** INFO: INFORMATION ABOUT CHECK ON START FOR WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>544</xloc>
-      <yloc>352</yloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>wrt-skip-execution</name>
@@ -899,7 +895,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>320</xloc>
-      <yloc>512</yloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>wrt-job-execution-finished</name>
@@ -970,7 +966,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>384</xloc>
       <yloc>160</yloc>
     </entry>
     <entry>
@@ -982,7 +978,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>704</yloc>
+      <yloc>768</yloc>
     </entry>
     <entry>
       <name>fw-tr_upd_job_control_job_error</name>
@@ -1023,7 +1019,7 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>608</yloc>
+      <yloc>672</yloc>
     </entry>
     <entry>
       <name>fw-tr_upd_job_control_finished</name>
@@ -1107,8 +1103,8 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>256</yloc>
+      <xloc>320</xloc>
+      <yloc>320</yloc>
     </entry>
     <entry>
       <name>wrt-start-execution_no_check</name>
@@ -1116,16 +1112,34 @@ P_CHECK_START: ${P_CHECK_START}</logmessage>
       <type>WRITE_TO_LOG</type>
       <logmessage>EXECUTION STARTED WITH NO CHECK ON START
 
-PROJECT_NAME: ${PROJECT_NAME}
-CONTENT_HOME: ${CONTENT_HOME}
-V_PREVIOUS_JOB_EXECUTION_STATUS: ${V_PREVIOUS_JOB_EXECUTION_STATUS}
-V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}</logmessage>
+</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>*** INFO: INFORMATION ABOUT CHECK ON START FOR WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
+      <xloc>960</xloc>
+      <yloc>320</yloc>
+    </entry>
+    <entry>
+      <name>wrt-work_unit_start_execution_info</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>-----------------------------------
+
+V_WORK_UNIT_START_FLAG - ${V_WORK_UNIT_START_FLAG}
+V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS - ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}
+V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE: ${V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE}
+
+-----------------------------------
+
+</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>*** INFO: INFORMATION ON START FOR WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>576</xloc>
       <yloc>256</yloc>
     </entry>
   </entries>
@@ -1201,15 +1215,6 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>fw-tr_work_unit_start_check</from>
-      <to>se-start</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>wrt-start-execution_check</from>
@@ -1338,24 +1343,6 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw-jb_load_work_unit_env</from>
-      <to>se-check_start?</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>se-check_start?</from>
-      <to>fw-tr_work_unit_start_check</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>se-check_start?</from>
       <to>wrt-start-execution_no_check</to>
       <from_nr>0</from_nr>
@@ -1376,6 +1363,42 @@ V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS: ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}<
     <hop>
       <from>tr-execute-transformation</from>
       <to>fw-tr_upd_job_control_work_unit_success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fw-jb_load_work_unit_env</from>
+      <to>fw-tr_work_unit_start_check</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-check_start?</from>
+      <to>se-start</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fw-tr_work_unit_start_check</from>
+      <to>wrt-work_unit_start_execution_info</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wrt-work_unit_start_execution_info</from>
+      <to>se-check_start?</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1489,7 +1512,7 @@ P_IS_LAST_UNIT - is current unit is the last on the current job</note>
     <notepad>
       <note>Calling the work unit</note>
       <xloc>1024</xloc>
-      <yloc>448</yloc>
+      <yloc>512</yloc>
       <width>135</width>
       <heigth>24</heigth>
       <fontname>Segoe UI</fontname>

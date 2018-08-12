@@ -17,19 +17,19 @@
       <description>The project business area</description>
     </parameter>
     <parameter>
-      <name>P_PROJECT_NAME</name>
-      <default_value/>
-      <description>acquisition|core|service</description>
-    </parameter>
-    <parameter>
       <name>P_WORK_UNIT_INSTANCE</name>
-      <default_value/>
+      <default_value>not-applicable</default_value>
       <description>The instance role that this work unit performs on a particular main job</description>
     </parameter>
     <parameter>
       <name>P_WORK_UNIT_NAME</name>
       <default_value/>
       <description>File name of the transformation or job to be executed</description>
+    </parameter>
+    <parameter>
+      <name>P_WORK_UNIT_PROJECT</name>
+      <default_value/>
+      <description>acquisition|core|service</description>
     </parameter>
     <parameter>
       <name>P_WORK_UNIT_TYPE</name>
@@ -447,7 +447,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>32</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
@@ -481,8 +481,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
-      <yloc>416</yloc>
+      <xloc>928</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>tr-execute-transformation</name>
@@ -517,8 +517,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>512</xloc>
-      <yloc>416</yloc>
+      <xloc>480</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>se-is-job?</name>
@@ -539,8 +539,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>320</yloc>
+      <xloc>704</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -549,25 +549,26 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>512</yloc>
+      <xloc>704</xloc>
+      <yloc>576</yloc>
     </entry>
     <entry>
       <name>wtl_work_unit_conditions</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage>V_JOB_NAME: ${V_JOB_NAME}
-P_IS_LAST_UNIT - ${P_IS_LAST_UNIT}
-P_PROJECT_NAME - ${P_PROJECT_NAME}
+      <logmessage>V_MAIN_JOB_PROJECT: ${V_MAIN_JOB_PROJECT}
+V_JOB_NAME: ${V_JOB_NAME}
+P_WORK_UNIT_PROJECT - ${P_WORK_UNIT_PROJECT}
 P_BUS_AREA - ${P_BUS_AREA}
 P_WORK_UNIT_NAME - ${P_WORK_UNIT_NAME}
+P_WORK_UNIT_INSTANCE - ${P_WORK_UNIT_INSTANCE}
 P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <loglevel>Basic</loglevel>
       <logsubject>*** INFO: UNIT TEST ON WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${V_JOB_NAME} STARTING WITH ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>480</xloc>
+      <xloc>192</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
@@ -578,8 +579,8 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>416</yloc>
+      <xloc>704</xloc>
+      <yloc>480</yloc>
     </entry>
     <entry>
       <name>fw-jb_load_work_unit_env</name>
@@ -608,14 +609,9 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
         <parameter>
-          <name>P_JOB_NAME</name>
-          <stream_name/>
-          <value>${P_JOB_NAME}</value>
-        </parameter>
-        <parameter>
           <name>P_PROJECT_NAME</name>
           <stream_name/>
-          <value>${P_PROJECT_NAME}</value>
+          <value>${P_WORK_UNIT_PROJECT}</value>
         </parameter>
         <parameter>
           <name>P_BUS_AREA</name>
@@ -637,8 +633,65 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
+      <xloc>448</xloc>
       <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>fw-tr_work_unit_start_check</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${ETL_FRAMEWORK_HOME}/control/tr_work_unit_start_check.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>wrt-work_unit_start_execution_info</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>-----------------------------------
+
+V_WORK_UNIT_START_FLAG - ${V_WORK_UNIT_START_FLAG}
+V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS - ${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}
+V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE: ${V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE}
+
+-----------------------------------
+
+</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>*** INFO: INFORMATION ON START FOR WORK UNIT  ${P_WORK_UNIT_NAME} IN MAIN JOB ${P_JOB_NAME} ***</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>288</yloc>
     </entry>
   </entries>
   <hops>
@@ -706,8 +759,8 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw-jb_load_work_unit_env</from>
-      <to>se-is-job?</to>
+      <from>tr-execute-transformation</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -715,8 +768,26 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>tr-execute-transformation</from>
-      <to>Success</to>
+      <from>fw-jb_load_work_unit_env</from>
+      <to>fw-tr_work_unit_start_check</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fw-tr_work_unit_start_check</from>
+      <to>wrt-work_unit_start_execution_info</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wrt-work_unit_start_execution_info</from>
+      <to>se-is-job?</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -727,7 +798,7 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
   <notepads>
     <notepad>
       <note>Loading Work Unit Environment Variables</note>
-      <xloc>608</xloc>
+      <xloc>320</xloc>
       <yloc>160</yloc>
       <width>260</width>
       <heigth>26</heigth>

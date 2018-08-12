@@ -644,7 +644,7 @@
       <name>fe-business_area</name>
       <description/>
       <type>FILE_EXISTS</type>
-      <filename>${CONFIG_DIR}/properties/${P_WORK_UNIT_PROJECT}/${P_BUS_AREA}.properties</filename>
+      <filename>${CONFIG_DIR}/properties/${P_WORK_UNIT_PROJECT}/business_area/${P_BUS_AREA}.properties</filename>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -656,7 +656,7 @@
       <description/>
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
-      <filename>${CONFIG_DIR}/properties/${P_WORK_UNIT_PROJECT}/${P_BUS_AREA}.properties</filename>
+      <filename>${CONFIG_DIR}/properties/${P_WORK_UNIT_PROJECT}/business_area/${P_BUS_AREA}.properties</filename>
       <file_variable_type>JVM</file_variable_type>
       <fields>
       </fields>
@@ -920,14 +920,18 @@ V_WORK_UNIT_INSTANCE: ${V_WORK_UNIT_INSTANCE}</logmessage>
   <notepads>
     <notepad>
       <note>Example values for running
-P_PROJECT_NAME=acquisition
+P_SCALE_UP=false
+P_MAIN_JOB_PROJECT=common
+P_JOB_NAME=jb_main_job_testing_new_stuff
 P_BUS_AREA_NAME=product-instrument
-P_JOB_NAME=jb_extraction
-P_SCALE_UP=false</note>
-      <xloc>768</xloc>
+P_WORK_UNIT_PROJECT=common
+P_WORK_UNIT_NAME=tr_test_parameters
+P_WORK_UNIT_INSTANCE=first
+</note>
+      <xloc>864</xloc>
       <yloc>32</yloc>
-      <width>256</width>
-      <heigth>80</heigth>
+      <width>278</width>
+      <heigth>136</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>

@@ -460,7 +460,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>608</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -473,7 +473,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>608</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -484,7 +484,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>608</xloc>
       <yloc>320</yloc>
     </entry>
     <entry>
@@ -525,7 +525,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
+      <xloc>800</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -555,7 +555,24 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>960</xloc>
+      <yloc>128</yloc>
+    </entry>
+    <entry>
+      <name>wtl-last_successfull_execution_date</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>--------------------------------------------
+
+V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTION_DATE - ${V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTION_DATE}
+
+--------------------------------------------</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>*** INFO: MAIN JOB ${V_JOB_NAME} LAST SUCCESSFUL EXECUTION DATE ***</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>416</xloc>
       <yloc>128</yloc>
     </entry>
   </entries>
@@ -568,15 +585,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>fw-tr-job_start_check</from>
-      <to>se-job_can_start</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>se-job_can_start</from>
@@ -608,6 +616,24 @@
     <hop>
       <from>fw-tr_upd_job_control_job_running</from>
       <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fw-tr-job_start_check</from>
+      <to>wtl-last_successfull_execution_date</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-last_successfull_execution_date</from>
+      <to>se-job_can_start</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

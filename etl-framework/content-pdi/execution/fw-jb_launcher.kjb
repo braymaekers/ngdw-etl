@@ -13,12 +13,12 @@
   <parameters>
     <parameter>
       <name>P_JOB_NAME</name>
-      <default_value>jb_main_job_test_idl</default_value>
+      <default_value>jb_main_job_load_product_instrument</default_value>
       <description/>
     </parameter>
     <parameter>
       <name>P_PROJECT_NAME</name>
-      <default_value>acquisition</default_value>
+      <default_value>core</default_value>
       <description/>
     </parameter>
     <parameter>

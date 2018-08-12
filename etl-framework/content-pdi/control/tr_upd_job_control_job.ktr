@@ -464,7 +464,7 @@
     <notepad>
       <note>updates ALL fields
 including starttime</note>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>64</yloc>
       <width>125</width>
       <heigth>42</heigth>
@@ -486,8 +486,8 @@ including starttime</note>
     <notepad>
       <note>updates status and logtime
 no update to starttime</note>
-      <xloc>1024</xloc>
-      <yloc>320</yloc>
+      <xloc>1216</xloc>
+      <yloc>352</yloc>
       <width>176</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
@@ -611,11 +611,11 @@ no update to starttime</note>
   <order>
     <hop>
       <from>gv-execution-variables</from>
-      <to>logtime</to>
+      <to>getSystemData-get_logtime</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>logtime</from>
+      <from>getSystemData-get_logtime</from>
       <to>ac-job_control_checkpoint_and_project_name</to>
       <enabled>Y</enabled>
     </hop>
@@ -660,8 +660,18 @@ no update to starttime</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>iu-job_control</from>
+      <to>wrt-fw_upd_job_control_job</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>u-job_control_finished</from>
+      <to>wrt-fw_upd_job_control_job</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>error</from>
-      <to>u-job_control_finished</to>
+      <to>u-job_control_error</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -670,12 +680,7 @@ no update to starttime</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>iu-job_control</from>
-      <to>wrt-fw_upd_job_control_job</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>u-job_control_finished</from>
+      <from>u-job_control_error</from>
       <to>wrt-fw_upd_job_control_job</to>
       <enabled>Y</enabled>
     </hop>
@@ -715,8 +720,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>384</yloc>
+      <xloc>1056</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -777,7 +782,7 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>512</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -801,8 +806,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>384</yloc>
+      <xloc>896</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -844,8 +849,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>384</yloc>
+      <xloc>896</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -868,8 +873,38 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>896</xloc>
       <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>getSystemData-get_logtime</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>logtime</name>
+        <type>system date (fixed)</type>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1098,7 +1133,7 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
+      <xloc>64</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1149,11 +1184,6 @@ no update to starttime</note>
         <update>N</update>
       </value>
       <value>
-        <name>starttime</name>
-        <rename>logtime</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>batch_id</name>
         <rename>batch_id</rename>
         <update>Y</update>
@@ -1174,7 +1204,12 @@ no update to starttime</note>
         <update>N</update>
       </value>
       <value>
-        <name>logtime</name>
+        <name>starttime</name>
+        <rename>logtime</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>endtime</name>
         <rename>logtime</rename>
         <update>Y</update>
       </value>
@@ -1212,7 +1247,7 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>1056</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1310,38 +1345,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1248</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>logtime</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>logtime</name>
-        <type>system date (fixed)</type>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>224</xloc>
-      <yloc>128</yloc>
+      <xloc>1216</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1364,7 +1369,7 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>896</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1409,8 +1414,68 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>736</xloc>
       <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>u-job_control_error</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>pdi_control</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>${PDI_CONTROL.SCHEMA}</schema>
+      <table>${PDI_CONTROL.TABLE}</table>
+      <key>
+        <name>main_job_project</name>
+        <field>main_job_project</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>jobname</name>
+        <field>main_job_name</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>work_unit</name>
+        <field>work_unit</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>status</name>
+        <rename>status</rename>
+      </value>
+      <value>
+        <name>endtime</name>
+        <rename>logtime</rename>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1056</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1457,7 +1522,11 @@ no update to starttime</note>
         <rename>status</rename>
       </value>
       <value>
-        <name>logtime</name>
+        <name>endtime</name>
+        <rename>logtime</rename>
+      </value>
+      <value>
+        <name>last_successful_execution_date</name>
         <rename>logtime</rename>
       </value>
     </lookup>
@@ -1469,7 +1538,7 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>1056</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1500,14 +1569,26 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>192</yloc>
+      <xloc>1280</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
     <error>
       <source_step>iu-job_control</source_step>
+      <target_step>wrt-fw_upd_job_control_job</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
+    <error>
+      <source_step>u-job_control_error</source_step>
       <target_step>wrt-fw_upd_job_control_job</target_step>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
