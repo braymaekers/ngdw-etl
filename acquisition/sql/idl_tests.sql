@@ -16,6 +16,8 @@ WITH (
 
 INSERT INTO acquisition.idl_file_control (file_date,data_set,control_row_count,row_count,status,status_description) VALUES 
 (20160102,'CSPARTM',NULL,NULL,NULL,NULL), (20160101,'CSPARTM',NULL,NULL,NULL,NULL);
+INSERT INTO acquisition.idl_file_control (file_date,data_set,control_row_count,row_count,status,status_description) VALUES 
+(20160101,'vendas',NULL,NULL,NULL,NULL);
 
 
 CREATE TABLE acquisition.idl_file_metadata (
@@ -31,6 +33,8 @@ WITH (
 INSERT INTO acquisition.idl_file_metadata (data_set,field,data_type,format) VALUES 
 ('CSPARTM','id','integer',NULL), ('CSPARTM','name','string',NULL), ('CSPARTM','age','integer',NULL)
 ,('CSPARTM','role','string',NULL), ('CSPARTM','date_role','date','yyyyMMdd');
+INSERT INTO acquisition.idl_file_metadata (data_set,field,data_type,format) VALUES 
+('vendas','category','string',NULL), ('vendas','unit_price','number','#.#');
 
 CREATE TABLE acquisition.idl_table_metadata (
 	target_table varchar(64) NULL,
@@ -43,6 +47,8 @@ WITH (
 
 INSERT INTO acquisition.idl_table_metadata (target_table,field) VALUES 
 ('cspartm_stg','id'), ('cspartm_stg','name'), ('cspartm_stg','age'), ('cspartm_stg','role'), ('cspartm_stg','date_role');
+INSERT INTO acquisition.idl_table_metadata (target_table,field) VALUES 
+('vendas','category'), ('vendas','unit_price');
 
 CREATE TABLE acquisition.tcspartm_stg (
 	id int4 NULL,
