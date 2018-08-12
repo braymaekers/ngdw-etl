@@ -473,38 +473,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>384</yloc>
-    </entry>
-    <entry>
-      <name>sv-set_V_DATA_SET_and_V_BASE_FILE_PATH_and_V_TARGET_TABLE</name>
-      <description/>
-      <type>SET_VARIABLES</type>
-      <replacevars>Y</replacevars>
-      <filename/>
-      <file_variable_type>CURRENT_JOB</file_variable_type>
-      <fields>
-        <field>
-          <variable_name>V_DATA_SET</variable_name>
-          <variable_value>${P_DATA_SET}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>V_BASE_FILE_PATH</variable_name>
-          <variable_value>${P_BASE_FILE_PATH}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-        <field>
-          <variable_name>V_TARGET_TABLE</variable_name>
-          <variable_value>${P_TARGET_TABLE}</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
-        </field>
-      </fields>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>480</yloc>
+      <xloc>64</xloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>kjb-idl_load_file_data</name>
@@ -537,8 +507,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>480</yloc>
+      <xloc>576</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -547,8 +517,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1824</xloc>
-      <yloc>480</yloc>
+      <xloc>1536</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>aj-error_loading_info_from_files</name>
@@ -558,8 +528,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>224</yloc>
+      <xloc>576</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>ktr-get_idl_file_control_data</name>
@@ -594,8 +564,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>480</yloc>
+      <xloc>896</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>se-check</name>
@@ -616,8 +586,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>480</yloc>
+      <xloc>1184</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>aj-error_on_validation_against_control_data</name>
@@ -627,8 +597,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>224</yloc>
+      <xloc>1184</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>aj-error_get_idl_file_control_data</name>
@@ -638,8 +608,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>224</yloc>
+      <xloc>896</xloc>
+      <yloc>256</yloc>
     </entry>
     <entry>
       <name>ktr-get_idl_file_control_next_date</name>
@@ -674,8 +644,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>480</yloc>
+      <xloc>320</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_success</name>
@@ -683,7 +653,7 @@
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'success', status_description = 'nothing to report'
-where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${P_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -692,21 +662,22 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1664</xloc>
-      <yloc>480</yloc>
+      <xloc>1376</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>wtl-idl_start_ingestion</name>
       <description/>
       <type>WRITE_TO_LOG</type>
-      <logmessage/>
+      <logmessage>P_BASE_FILE_PATH: ${P_BASE_FILE_PATH}
+P_TARGET_TABLE: ${P_TARGET_TABLE}</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO: STARTING IDL FOR ${P_FILENAME}</logsubject>
+      <logsubject>*** INFO: STARTING IDL FOR ${P_DATA_SET} ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>384</yloc>
+      <xloc>64</xloc>
+      <yloc>512</yloc>
     </entry>
     <entry>
       <name>aj-error_no_file_date_to_process</name>
@@ -716,8 +687,8 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>352</yloc>
+      <xloc>320</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_on_loadding</name>
@@ -725,7 +696,7 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'error', status_description = '${V_ERROR_DESCRIPTION}'
-where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${P_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -734,8 +705,8 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>352</yloc>
+      <xloc>576</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_validation_work</name>
@@ -743,7 +714,7 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'error', status_description = 'getting control data to check'
-where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${P_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -752,8 +723,8 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1152</xloc>
-      <yloc>352</yloc>
+      <xloc>896</xloc>
+      <yloc>384</yloc>
     </entry>
     <entry>
       <name>sql-upd_file_control_table_error_validation</name>
@@ -761,7 +732,7 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <type>SQL</type>
       <sql>update acquisition.idl_file_control 
 set status = 'error', status_description = 'control validation check failed'
-where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
+where data_set = '${P_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -770,44 +741,8 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1440</xloc>
-      <yloc>352</yloc>
-    </entry>
-    <entry>
-      <name>ktr-test_dynamic_sql</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>${COMMON_HOME}/idl/utilities/ktr-test_dynamic_sql.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1536</xloc>
-      <yloc>608</yloc>
+      <xloc>1184</xloc>
+      <yloc>384</yloc>
     </entry>
   </entries>
   <hops>
@@ -823,15 +758,6 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
     <hop>
       <from>ktr-get_idl_file_control_data</from>
       <to>se-check</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>sv-set_V_DATA_SET_and_V_BASE_FILE_PATH_and_V_TARGET_TABLE</from>
-      <to>ktr-get_idl_file_control_next_date</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -864,15 +790,6 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>wtl-idl_start_ingestion</from>
-      <to>sv-set_V_DATA_SET_and_V_BASE_FILE_PATH_and_V_TARGET_TABLE</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>ktr-get_idl_file_control_next_date</from>
@@ -939,7 +856,7 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
     </hop>
     <hop>
       <from>se-check</from>
-      <to>ktr-test_dynamic_sql</to>
+      <to>sql-upd_file_control_table_success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -947,8 +864,8 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>ktr-test_dynamic_sql</from>
-      <to>sql-upd_file_control_table_success</to>
+      <from>wtl-idl_start_ingestion</from>
+      <to>ktr-get_idl_file_control_next_date</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -960,25 +877,19 @@ where data_set = '${V_DATA_SET}' and file_date = ${V_FILE_DATE}</sql>
     <notepad>
       <note>PURPOSE: orchestrate the IDL for a particular filename
 
-PARAMETERS: 
+PARAMETERS 
 
 * P_DATA_SET - filename to be used
-
-VARIABLES MADE AVAILABLE:
-
-* V_DATA_SET - current job
-* V_BASE_FILE_PATH - current job
-* V_TARGET_TABLE - current job
 
 VARIABLES USED
 
 * V_ERROR_DESCRIPTION
-* V_DATA_SET
+* P_DATA_SET
 * V_FILE_DATE</note>
       <xloc>64</xloc>
       <yloc>32</yloc>
       <width>383</width>
-      <heigth>299</heigth>
+      <heigth>197</heigth>
       <fontname>Ubuntu</fontname>
       <fontsize>11</fontsize>
       <fontbold>N</fontbold>
