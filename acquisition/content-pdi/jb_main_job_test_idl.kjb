@@ -550,7 +550,7 @@
         <parameter>
           <name>P_IS_LAST_UNIT</name>
           <stream_name/>
-          <value>Y</value>
+          <value>N</value>
         </parameter>
         <parameter>
           <name>P_BUS_AREA</name>
@@ -588,8 +588,83 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>928</xloc>
+      <xloc>1152</xloc>
       <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>jb_main_job_load_vendas</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>${ETL_FRAMEWORK_HOME}/execution/jb_work_unit.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>P_PROJECT_NAME</name>
+          <stream_name/>
+          <value>common</value>
+        </parameter>
+        <parameter>
+          <name>P_WORK_UNIT_NAME</name>
+          <stream_name/>
+          <value>kjb-wu_to_idl</value>
+        </parameter>
+        <parameter>
+          <name>P_WORK_UNIT_TYPE</name>
+          <stream_name/>
+          <value>job</value>
+        </parameter>
+        <parameter>
+          <name>P_IS_LAST_UNIT</name>
+          <stream_name/>
+          <value>Y</value>
+        </parameter>
+        <parameter>
+          <name>P_BUS_AREA</name>
+          <stream_name/>
+          <value>idl</value>
+        </parameter>
+        <parameter>
+          <name>P_WORK_UNIT_INSTANCE</name>
+          <stream_name/>
+          <value>vendas</value>
+        </parameter>
+      </parameters>
+      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>960</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>ab-work_unit_error_CSPARTM 2</name>
+      <description/>
+      <type>ABORT</type>
+      <message>*** ERROR: MAIN JOB ${V_JOB_NAME}, WORK UNIT jb_load_CSPARTM TERMINATED WITH ERRORS ***</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>960</xloc>
+      <yloc>320</yloc>
     </entry>
   </entries>
   <hops>
@@ -640,11 +715,29 @@
     </hop>
     <hop>
       <from>jb_main_job_load_CSPARTM</from>
+      <to>jb_main_job_load_vendas</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb_main_job_load_vendas</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>jb_main_job_load_vendas</from>
+      <to>ab-work_unit_error_CSPARTM 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
@@ -713,10 +806,10 @@
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>Work Unit IDL</note>
-      <xloc>704</xloc>
+      <note>Work Unit csparm</note>
+      <xloc>672</xloc>
       <yloc>160</yloc>
-      <width>93</width>
+      <width>118</width>
       <heigth>24</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
