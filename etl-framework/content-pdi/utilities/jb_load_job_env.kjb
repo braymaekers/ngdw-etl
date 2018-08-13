@@ -461,17 +461,17 @@
         <field>
           <variable_name>V_JOB_NAME</variable_name>
           <variable_value>${P_JOB_NAME}</variable_value>
-          <variable_type>ROOT_JOB</variable_type>
+          <variable_type>PARENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>V_SCALE_UP</variable_name>
           <variable_value>${P_SCALE_UP}</variable_value>
-          <variable_type>ROOT_JOB</variable_type>
+          <variable_type>PARENT_JOB</variable_type>
         </field>
         <field>
           <variable_name>V_MAIN_JOB_PROJECT</variable_name>
           <variable_value>${P_PROJECT_NAME}</variable_value>
-          <variable_type>ROOT_JOB</variable_type>
+          <variable_type>PARENT_JOB</variable_type>
         </field>
       </fields>
       <parallel>N</parallel>
@@ -486,7 +486,7 @@
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/${P_PROJECT_NAME}.properties</filename>
-      <file_variable_type>ROOT_JOB</file_variable_type>
+      <file_variable_type>PARENT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
@@ -553,7 +553,7 @@
       <type>SET_VARIABLES</type>
       <replacevars>Y</replacevars>
       <filename>${CONFIG_DIR}/properties/framework.properties</filename>
-      <file_variable_type>ROOT_JOB</file_variable_type>
+      <file_variable_type>PARENT_JOB</file_variable_type>
       <fields>
       </fields>
       <parallel>N</parallel>
