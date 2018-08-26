@@ -481,7 +481,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>928</xloc>
+      <xloc>1184</xloc>
       <yloc>480</yloc>
     </entry>
     <entry>
@@ -517,7 +517,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>480</xloc>
+      <xloc>736</xloc>
       <yloc>480</yloc>
     </entry>
     <entry>
@@ -539,7 +539,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>960</xloc>
       <yloc>384</yloc>
     </entry>
     <entry>
@@ -549,7 +549,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>960</xloc>
       <yloc>576</yloc>
     </entry>
     <entry>
@@ -579,7 +579,7 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>960</xloc>
       <yloc>480</yloc>
     </entry>
     <entry>
@@ -633,7 +633,7 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
+      <xloc>704</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
@@ -669,7 +669,7 @@ P_WORK_UNIT_TYPE - ${P_WORK_UNIT_TYPE}</logmessage>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>960</xloc>
       <yloc>192</yloc>
     </entry>
     <entry>
@@ -690,8 +690,44 @@ V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE: ${V_WORK_UNIT_LAST_SUCCESSFUL_EXECUT
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>704</xloc>
+      <xloc>960</xloc>
       <yloc>288</yloc>
+    </entry>
+    <entry>
+      <name>fw_tr_set_main_job_range_dates</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${ETL_FRAMEWORK_HOME}/utilities/fw_tr_set_main_job_range_dates.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>416</xloc>
+      <yloc>192</yloc>
     </entry>
   </entries>
   <hops>
@@ -741,15 +777,6 @@ V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE: ${V_WORK_UNIT_LAST_SUCCESSFUL_EXECUT
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>wtl_work_unit_conditions</from>
-      <to>fw-jb_load_work_unit_env</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>jb-execute-job</from>
       <to>Success</to>
       <from_nr>0</from_nr>
@@ -794,11 +821,29 @@ V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE: ${V_WORK_UNIT_LAST_SUCCESSFUL_EXECUT
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
+    <hop>
+      <from>wtl_work_unit_conditions</from>
+      <to>fw_tr_set_main_job_range_dates</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fw_tr_set_main_job_range_dates</from>
+      <to>fw-jb_load_work_unit_env</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
   </hops>
   <notepads>
     <notepad>
       <note>Loading Work Unit Environment Variables</note>
-      <xloc>320</xloc>
+      <xloc>608</xloc>
       <yloc>160</yloc>
       <width>260</width>
       <heigth>26</heigth>
