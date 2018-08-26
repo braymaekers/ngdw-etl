@@ -460,7 +460,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>352</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -473,7 +473,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>352</xloc>
       <yloc>224</yloc>
     </entry>
     <entry>
@@ -484,7 +484,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>352</xloc>
       <yloc>320</yloc>
     </entry>
     <entry>
@@ -525,7 +525,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
+      <xloc>544</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
@@ -555,24 +555,61 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>1248</xloc>
       <yloc>128</yloc>
     </entry>
     <entry>
-      <name>wtl-last_successfull_execution_date</name>
+      <name>wtl-info_on_main_job_start</name>
       <description/>
       <type>WRITE_TO_LOG</type>
       <logmessage>--------------------------------------------
-
-V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTION_DATE - ${V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTION_DATE}
+V_MAIN_JOB_START_RANGE_DATE - ${V_MAIN_JOB_START_RANGE_DATE}
+V_MAIN_JOB_END_RANGE_DATE -  ${V_MAIN_JOB_END_RANGE_DATE}
+V_PREVIOUS_JOB_EXECUTION_STATUS - ${V_PREVIOUS_JOB_EXECUTION_STATUS}
 
 --------------------------------------------</logmessage>
       <loglevel>Basic</loglevel>
-      <logsubject>*** INFO: MAIN JOB ${V_JOB_NAME} LAST SUCCESSFUL EXECUTION DATE ***</logsubject>
+      <logsubject>*** INFO: MAIN JOB ${V_JOB_NAME}  STARTING ***</logsubject>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>1056</xloc>
+      <yloc>128</yloc>
+    </entry>
+    <entry>
+      <name>fw_tr_set_main_job_range_dates</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${ETL_FRAMEWORK_HOME}/utilities/fw_tr_set_main_job_range_dates.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
       <yloc>128</yloc>
     </entry>
   </entries>
@@ -614,7 +651,16 @@ V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTION_DATE - ${V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTI
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw-tr_upd_job_control_job_running</from>
+      <from>fw-tr-job_start_check</from>
+      <to>se-job_can_start</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-info_on_main_job_start</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -623,8 +669,8 @@ V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTION_DATE - ${V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTI
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw-tr-job_start_check</from>
-      <to>wtl-last_successfull_execution_date</to>
+      <from>fw-tr_upd_job_control_job_running</from>
+      <to>fw_tr_set_main_job_range_dates</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -632,8 +678,8 @@ V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTION_DATE - ${V_MAIN_JOB_LAST_SUCCESSFUL_EXECUTI
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>wtl-last_successfull_execution_date</from>
-      <to>se-job_can_start</to>
+      <from>fw_tr_set_main_job_range_dates</from>
+      <to>wtl-info_on_main_job_start</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

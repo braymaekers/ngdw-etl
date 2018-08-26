@@ -423,7 +423,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>96</xloc>
-      <yloc>288</yloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>fw-tr_log_batch_id</name>
@@ -459,7 +459,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>224</xloc>
-      <yloc>288</yloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>fw-jb_job_start_actions</name>
@@ -493,7 +493,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>480</xloc>
-      <yloc>288</yloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>ab-job_not_allowed_to_start</name>
@@ -504,7 +504,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>480</xloc>
-      <yloc>416</yloc>
+      <yloc>544</yloc>
     </entry>
     <entry>
       <name>fw_jb_load_work_unit_job_testing_first</name>
@@ -567,8 +567,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>288</yloc>
+      <xloc>704</xloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>ab-work_unit_error_first</name>
@@ -578,8 +578,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>416</yloc>
+      <xloc>704</xloc>
+      <yloc>544</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -588,8 +588,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1344</xloc>
-      <yloc>288</yloc>
+      <xloc>704</xloc>
+      <yloc>160</yloc>
     </entry>
     <entry>
       <name>fw_jb_load_work_unit_job_testing_second</name>
@@ -652,8 +652,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
-      <yloc>288</yloc>
+      <xloc>960</xloc>
+      <yloc>416</yloc>
     </entry>
     <entry>
       <name>ab-work_unit_error_second</name>
@@ -663,8 +663,80 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>960</xloc>
+      <yloc>544</yloc>
+    </entry>
+    <entry>
+      <name>tr_testing_update_executions</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${COMMON_HOME}/test_material/tr_testing_update_executions.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1248</xloc>
       <yloc>416</yloc>
+    </entry>
+    <entry>
+      <name>wtl-value_allowed_to_execute</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>*************************************************
+*** V_ALLOWED_TO_EXECUTE - ${V_ALLOWED_TO_EXECUTE}</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>*** INFO: VALUE OF VARIABLE ***</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1248</xloc>
+      <yloc>288</yloc>
+    </entry>
+    <entry>
+      <name>se-allowed_to_execute</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${V_ALLOWED_TO_EXECUTE}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>Y</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>288</yloc>
     </entry>
   </entries>
   <hops>
@@ -724,7 +796,16 @@
     </hop>
     <hop>
       <from>fw_jb_load_work_unit_job_testing_second</from>
-      <to>Success</to>
+      <to>ab-work_unit_error_second</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fw_jb_load_work_unit_job_testing_second</from>
+      <to>tr_testing_update_executions</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -732,12 +813,39 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fw_jb_load_work_unit_job_testing_second</from>
-      <to>ab-work_unit_error_second</to>
+      <from>tr_testing_update_executions</from>
+      <to>wtl-value_allowed_to_execute</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>wtl-value_allowed_to_execute</from>
+      <to>se-allowed_to_execute</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-allowed_to_execute</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>se-allowed_to_execute</from>
+      <to>fw_jb_load_work_unit_job_testing_first</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
@@ -766,7 +874,7 @@
     <notepad>
       <note>Create V_BATCH_ID</note>
       <xloc>160</xloc>
-      <yloc>256</yloc>
+      <yloc>384</yloc>
       <width>124</width>
       <heigth>24</heigth>
       <fontname>Segoe UI</fontname>
@@ -787,7 +895,7 @@
     <notepad>
       <note>Can be Executed?</note>
       <xloc>416</xloc>
-      <yloc>256</yloc>
+      <yloc>384</yloc>
       <width>119</width>
       <heigth>24</heigth>
       <fontname>Segoe UI</fontname>
@@ -807,8 +915,8 @@
     </notepad>
     <notepad>
       <note>load_work_unit_job_testing_first</note>
-      <xloc>704</xloc>
-      <yloc>256</yloc>
+      <xloc>640</xloc>
+      <yloc>384</yloc>
       <width>202</width>
       <heigth>24</heigth>
       <fontname>Segoe UI</fontname>

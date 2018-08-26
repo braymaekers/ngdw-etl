@@ -464,8 +464,8 @@
     <notepad>
       <note>updates ALL fields
 including starttime</note>
-      <xloc>1024</xloc>
-      <yloc>64</yloc>
+      <xloc>608</xloc>
+      <yloc>0</yloc>
       <width>125</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
@@ -486,8 +486,8 @@ including starttime</note>
     <notepad>
       <note>updates status and logtime
 no update to starttime</note>
-      <xloc>1216</xloc>
-      <yloc>352</yloc>
+      <xloc>768</xloc>
+      <yloc>512</yloc>
       <width>176</width>
       <heigth>42</heigth>
       <fontname>Segoe UI</fontname>
@@ -630,11 +630,6 @@ no update to starttime</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>running</from>
-      <to>iu-job_control</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>sw-status</from>
       <to>finished</to>
       <enabled>Y</enabled>
@@ -660,16 +655,6 @@ no update to starttime</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>iu-job_control</from>
-      <to>wrt-fw_upd_job_control_job</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>u-job_control_finished</from>
-      <to>wrt-fw_upd_job_control_job</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>error</from>
       <to>u-job_control_error</to>
       <enabled>Y</enabled>
@@ -680,8 +665,53 @@ no update to starttime</note>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>u-job_control_error</from>
-      <to>wrt-fw_upd_job_control_job</to>
+      <from>frows-new_main_job</from>
+      <to>d-null</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>frows-new_main_job</from>
+      <to>d-not-null</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>d-null</from>
+      <to>addConst-start_range_begin</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>d-not-null</from>
+      <to>previous_status_execution</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>previous_status_execution</from>
+      <to>d-finished</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>previous_status_execution</from>
+      <to>d-other</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>running</from>
+      <to>frows-new_main_job</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>addConst-start_range_begin</from>
+      <to>i-job_control</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>d-finished</from>
+      <to>execSQL-start_main_job_after_finished</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>d-other</from>
+      <to>execSQL-start_main_job_other_state</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -720,8 +750,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>544</yloc>
+      <xloc>640</xloc>
+      <yloc>800</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -768,7 +798,7 @@ no update to starttime</note>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>not_applicable</nullif>
+        <nullif>not-applicable</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -782,8 +812,142 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>128</yloc>
+      <xloc>128</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>addConst-start_range_begin</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>main_job_start_range_date</name>
+        <type>Timestamp</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1900-01-01 00:00:00.000</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>d-finished</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1312</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>d-not-null</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>d-null</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>d-other</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1312</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -806,8 +970,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>352</yloc>
+      <xloc>480</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -849,8 +1013,175 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>544</yloc>
+      <xloc>480</xloc>
+      <yloc>800</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>execSQL-start_main_job_after_finished</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>pdi_control</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update ${PDI_CONTROL.SCHEMA}.${PDI_CONTROL.TABLE} set 
+	batch_id = ?,
+	pid = ?,
+	ip_address = '?',
+	hostname = '?',
+	scale_up = '?',
+	status = '?',
+	starttime = '?',
+	endtime = '?',
+	main_job_start_range_date = main_job_end_range_date,
+	main_job_end_range_date = '?'
+where main_job_project = '?' 
+	and main_job_name = '?'  
+	and work_unit = '?'</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+      <argument>
+        <name>batch_id</name>
+      </argument>
+      <argument>
+        <name>pid</name>
+      </argument>
+      <argument>
+        <name>ip_address</name>
+      </argument>
+      <argument>
+        <name>hostname</name>
+      </argument>
+      <argument>
+        <name>scale_up</name>
+      </argument>
+      <argument>
+        <name>status</name>
+      </argument>
+      <argument>
+        <name>logtime</name>
+      </argument>
+      <argument>
+        <name>logtime</name>
+      </argument>
+      <argument>
+        <name>logtime</name>
+      </argument>
+      <argument>
+        <name>main_job_project</name>
+      </argument>
+      <argument>
+        <name>jobname</name>
+      </argument>
+      <argument>
+        <name>work_unit</name>
+      </argument>
+    </arguments>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1568</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>execSQL-start_main_job_other_state</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>pdi_control</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update ${PDI_CONTROL.SCHEMA}.${PDI_CONTROL.TABLE} set 
+	batch_id = ?,
+	pid = ?,
+	ip_address = '?',
+	hostname = '?',
+	scale_up = '?',
+	status = '?',
+	starttime = '?',
+	endtime = '?'
+where main_job_project = '?' 
+	and main_job_name = '?'  
+	and work_unit = '?'</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+      <argument>
+        <name>batch_id</name>
+      </argument>
+      <argument>
+        <name>pid</name>
+      </argument>
+      <argument>
+        <name>ip_address</name>
+      </argument>
+      <argument>
+        <name>hostname</name>
+      </argument>
+      <argument>
+        <name>scale_up</name>
+      </argument>
+      <argument>
+        <name>status</name>
+      </argument>
+      <argument>
+        <name>logtime</name>
+      </argument>
+      <argument>
+        <name>logtime</name>
+      </argument>
+      <argument>
+        <name>main_job_project</name>
+      </argument>
+      <argument>
+        <name>jobname</name>
+      </argument>
+      <argument>
+        <name>work_unit</name>
+      </argument>
+    </arguments>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1568</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -873,8 +1204,51 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>224</yloc>
+      <xloc>480</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>frows-new_main_job</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>d-null</send_true_to>
+    <send_false_to>d-not-null</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>previous_status</leftvalue>
+        <function>IS NULL</function>
+        <rightvalue/>
+        <value>
+          <name>constant</name>
+          <type>String</type>
+          <text>running</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask/>
+        </value>
+      </condition>
+    </compare>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -903,8 +1277,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>128</yloc>
+      <xloc>128</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -947,6 +1321,18 @@ no update to starttime</note>
       <field>
         <name>jobname</name>
         <variable>${V_JOB_NAME}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>previous_status</name>
+        <variable>${V_PREVIOUS_JOB_EXECUTION_STATUS}</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -1133,13 +1519,13 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>128</yloc>
+      <xloc>128</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>iu-job_control</name>
+    <name>i-job_control</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -1151,7 +1537,7 @@ no update to starttime</note>
     </partitioning>
     <connection>pdi_control</connection>
     <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <update_bypassed>Y</update_bypassed>
     <lookup>
       <schema>${PDI_CONTROL.SCHEMA}</schema>
       <table>${PDI_CONTROL.TABLE}</table>
@@ -1238,6 +1624,16 @@ no update to starttime</note>
         <rename>work_unit_instance</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>main_job_start_range_date</name>
+        <rename>main_job_start_range_date</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>main_job_end_range_date</name>
+        <rename>logtime</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <cluster_schema/>
     <remotesteps>
@@ -1247,8 +1643,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>128</yloc>
+      <xloc>1312</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1345,8 +1741,51 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
-      <yloc>544</yloc>
+      <xloc>800</xloc>
+      <yloc>800</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>previous_status_execution</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>d-finished</send_true_to>
+    <send_false_to>d-other</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>previous_status</leftvalue>
+        <function>=</function>
+        <rightvalue/>
+        <value>
+          <name>constant</name>
+          <type>String</type>
+          <text>finished</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask>#.#</mask>
+        </value>
+      </condition>
+    </compare>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1369,7 +1808,7 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>480</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1414,8 +1853,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>128</yloc>
+      <xloc>320</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1474,8 +1913,8 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>352</yloc>
+      <xloc>704</xloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1525,10 +1964,6 @@ no update to starttime</note>
         <name>endtime</name>
         <rename>logtime</rename>
       </value>
-      <value>
-        <name>last_successful_execution_date</name>
-        <rename>logtime</rename>
-      </value>
     </lookup>
     <cluster_schema/>
     <remotesteps>
@@ -1538,47 +1973,16 @@ no update to starttime</note>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>wrt-fw_upd_job_control_job</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** ERROR - NOT POSSIBLE TO UPDATE ETL_CONTROL TABLE</logmessage>
-    <fields>
-      </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1280</xloc>
-      <yloc>224</yloc>
+      <xloc>704</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
     <error>
-      <source_step>iu-job_control</source_step>
-      <target_step>wrt-fw_upd_job_control_job</target_step>
-      <is_enabled>Y</is_enabled>
+      <source_step>execSQL-start_main_job_after_finished</source_step>
+      <target_step/>
+      <is_enabled>N</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>
       <fields_valuename/>
@@ -1589,7 +1993,7 @@ no update to starttime</note>
     </error>
     <error>
       <source_step>u-job_control_error</source_step>
-      <target_step>wrt-fw_upd_job_control_job</target_step>
+      <target_step/>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>
@@ -1601,7 +2005,7 @@ no update to starttime</note>
     </error>
     <error>
       <source_step>u-job_control_finished</source_step>
-      <target_step>wrt-fw_upd_job_control_job</target_step>
+      <target_step/>
       <is_enabled>Y</is_enabled>
       <nr_valuename/>
       <descriptions_valuename/>

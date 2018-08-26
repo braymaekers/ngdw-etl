@@ -11,7 +11,8 @@ CREATE TABLE job_control (
 	status varchar(32) NULL,
 	starttime timestamp NULL,
 	endtime timestamp NULL,
-	last_successful_execution_date timestamp NULL,
+	main_job_start_range_date timestamp NULL,
+	main_job_end_range_date timestamp NULL,
 	ip_address text NULL,
 	hostname text NULL,
 	pid int4 NULL

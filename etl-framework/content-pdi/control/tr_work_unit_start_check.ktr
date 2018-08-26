@@ -728,12 +728,6 @@
         <mask/>
         <set_empty_string>N</set_empty_string>
       </field>
-      <field>
-        <name>last_successful_execution_date</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -810,12 +804,6 @@
       <field>
         <field_name>status</field_name>
         <variable_name>V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS</variable_name>
-        <variable_type>ROOT_JOB</variable_type>
-        <default_value/>
-      </field>
-      <field>
-        <field_name>last_successful_execution_date</field_name>
-        <variable_name>V_WORK_UNIT_LAST_SUCCESSFUL_EXECUTION_DATE</variable_name>
         <variable_type>ROOT_JOB</variable_type>
         <default_value/>
       </field>
@@ -1022,7 +1010,7 @@
       <schema_name/>
     </partitioning>
     <connection>pdi_control</connection>
-    <sql>SELECT main_job_name, work_unit, STATUS, BATCH_ID, NULL AS RUNTIME, PID, last_successful_execution_date
+    <sql>SELECT main_job_name, work_unit, STATUS, BATCH_ID, NULL AS RUNTIME, PID
 FROM ${PDI_CONTROL.SCHEMA}.JOB_CONTROL 
 WHERE main_job_project = '${V_MAIN_JOB_PROJECT}' 
 	and main_job_name = '${V_JOB_NAME}'

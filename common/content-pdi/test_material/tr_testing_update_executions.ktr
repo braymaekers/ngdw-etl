@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>tr_test_parameters</name>
+    <name>tr_testing_update_executions</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,14 +427,65 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/08/01 05:01:18.775</created_date>
+    <created_date>2018/08/19 14:54:32.306</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/08/01 05:01:18.775</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2018/08/19 14:54:32.306</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>acquisition</name>
+    <server>${ACQUISITION.HOST}</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>${ACQUISITION.DB}</database>
+    <port>${ACQUISITION.PORT}</port>
+    <username>${ACQUISITION.USER}</username>
+    <password>${ACQUISITION.PASS}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${ACQUISITION.PORT}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <connection>
     <name>pdi_logging</name>
     <server>${PDI_LOGGING.HOST}</server>
@@ -488,14 +539,14 @@
   </connection>
   <order>
     <hop>
-      <from>gv-test_load_and_execution</from>
-      <to>wtl-test_variables</to>
+      <from>ti-get_permission_to_execute</from>
+      <to>sv-allowed_to_execute</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>gv-test_load_and_execution</name>
-    <type>GetVariable</type>
+    <name>ti-get_permission_to_execute</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -504,152 +555,14 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <name>V_WORK_UNIT_START_FLAG</name>
-        <variable>${V_WORK_UNIT_START_FLAG}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS</name>
-        <variable>${V_PREVIOUS_WORK_UNIT_EXECUTION_STATUS}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_MAIN_JOB_VARIABLE</name>
-        <variable>${V_MAIN_JOB_VARIABLE}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_WORK_UNIT</name>
-        <variable>${V_WORK_UNIT}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>P_SCALE_UP</name>
-        <variable>${P_SCALE_UP}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V__WORK_UNIT_PROJECT</name>
-        <variable>${V_WORK_UNIT_PROJECT}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_WORK_UNIT_INSTANCE</name>
-        <variable>${V_WORK_UNIT_INSTANCE}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_MAIN_JOB_PROJECT</name>
-        <variable>${V_MAIN_JOB_PROJECT}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_JOB_NAME</name>
-        <variable>${V_JOB_NAME}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_WORK_UNIT_NAME</name>
-        <variable>${V_WORK_UNIT_NAME}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_MAIN_JOB_START_RANGE_DATE</name>
-        <variable>${V_MAIN_JOB_START_RANGE_DATE}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>V_MAIN_JOB_END_RANGE_DATE</name>
-        <variable>${V_MAIN_JOB_END_RANGE_DATE}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
+    <connection>acquisition</connection>
+    <sql>select data_set, allowed_executions, current_executions, case when (allowed_executions > current_executions) then 'Y' else 'N' end as permission_to_continue 
+from acquisition.idl_data_set</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -658,14 +571,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>160</yloc>
+      <xloc>128</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>wtl-test_variables</name>
-    <type>WriteToLog</type>
+    <name>execSQL-update_current_executions</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -674,13 +587,19 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>*** INFO: TEST VARIABLES ***</logmessage>
-    <fields>
-      </fields>
+    <connection>acquisition</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update acquisition.idl_data_set set current_executions = current_executions + 1 where data_set = 'vendas';</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -689,8 +608,41 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
+      <xloc>128</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>sv-allowed_to_execute</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>permission_to_continue</field_name>
+        <variable_name>V_ALLOWED_TO_EXECUTE</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -702,6 +654,10 @@
   <attributes>
     <group>
       <name>explorerState</name>
+      <attribute>
+        <key>sv-allowed_to_execute</key>
+        <value/>
+      </attribute>
     </group>
   </attributes>
 </transformation>

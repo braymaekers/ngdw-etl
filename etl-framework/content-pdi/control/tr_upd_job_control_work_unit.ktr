@@ -1438,10 +1438,6 @@ key: project-jobname-checkpoint</note>
         <name>endtime</name>
         <rename>logtime</rename>
       </value>
-      <value>
-        <name>last_successful_execution_date</name>
-        <rename>logtime</rename>
-      </value>
     </lookup>
     <cluster_schema/>
     <remotesteps>
